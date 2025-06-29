@@ -1200,55 +1200,55 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <div class="form-group full-width">
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.cannabis" name="droguesActuellesCannabis">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.cannabis" name="droguesActuellesCannabis">
                         <span>Cannabis</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.opium" name="droguesActuellesOpium">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.opium" name="droguesActuellesOpium">
                         <span>Opium</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.morphiniques" name="droguesActuellesMorphiniques" (change)="onDroguesActuellesMorphiniquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.morphiniques" name="droguesActuellesMorphiniques" (change)="onDroguesActuellesMorphiniquesChange()">
                         <span>Les morphiniques de synthèse (Subutex...)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.heroine" name="droguesActuellesHeroine">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.heroine" name="droguesActuellesHeroine">
                         <span>Héroïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.cocaine" name="droguesActuellesCocaine">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.cocaine" name="droguesActuellesCocaine">
                         <span>Cocaïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.hypnotiques" name="droguesActuellesHypnotiques" (change)="onDroguesActuellesHypnotiquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.hypnotiques" name="droguesActuellesHypnotiques" (change)="onDroguesActuellesHypnotiquesChange()">
                         <span>Hypnotiques & sédatifs</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.amphetamines" name="droguesActuellesAmphetamines">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.amphetamines" name="droguesActuellesAmphetamines">
                         <span>Amphétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.ecstasy" name="droguesActuellesEcstasy">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.ecstasy" name="droguesActuellesEcstasy">
                         <span>Ecstasy</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.produitsInhaler" name="droguesActuellesProduitsInhaler">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.produitsInhaler" name="droguesActuellesProduitsInhaler">
                         <span>Produits à inhaler (colle, solvants)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.pregabaline" name="droguesActuellesPregabaline">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.pregabaline" name="droguesActuellesPregabaline">
                         <span>Prégabaline</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.ketamines" name="droguesActuellesKetamines">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.ketamines" name="droguesActuellesKetamines">
                         <span>Kétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.lsd" name="droguesActuellesLsd">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.lsd" name="droguesActuellesLsd">
                         <span>LSD</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.autre" name="droguesActuellesAutre" (change)="onDroguesActuellesAutreChange()">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.autre" name="droguesActuellesAutre" (change)="onDroguesActuellesAutreChange()">
                         <span>Autre</span>
                       </label>
                     </div>
