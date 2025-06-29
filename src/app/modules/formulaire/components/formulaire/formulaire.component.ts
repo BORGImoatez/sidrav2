@@ -1123,11 +1123,11 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                         <span>Prégabaline</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.ketamines" name="typeSpaEntourageKetamines">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.ketamines" name="typeSpaEntourageKetamines">
                         <span>Kétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.lsd" name="typeSpaEntourageLsd">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.lsd" name="typeSpaEntourageLsd">
                         <span>LSD</span>
                       </label>
                       <label class="checkbox-option">
@@ -2401,6 +2401,7 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
     }
 
     .navigation-buttons {
+      
       display: flex;
       justify-content: space-between;
       align-items: center;
