@@ -89,12 +89,12 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     <option value="">Sélectionner un secteur</option>
                     <option value="PUBLIC">Public</option>
                     <option value="PRIVE">Privé</option>
-                    <option value="ONG">Société civile (ONG)</option>
+                    <option value="SOCIETE_CIVILE_ONG">Société civile (ONG)</option>
                   </select>
                 </div>
 
                 <!-- Précision ONG -->
-                <div class="form-group" *ngIf="formData.secteur === 'ONG'">
+                <div class="form-group" *ngIf="formData.secteur === 'SOCIETE_CIVILE_ONG'">
                   <label class="form-label required">Préciser l'ONG</label>
                   <select class="form-select" [(ngModel)]="formData.ongPrecision" name="ongPrecision" required>
                     <option value="">Sélectionner une ONG</option>
@@ -2625,7 +2625,7 @@ export class FormulaireComponent implements OnInit {
     if (this.currentUser?.structure) {
       this.formData.structure = this.currentUser.structure.nom;
       this.formData.secteur = this.currentUser.structure.type === 'PUBLIQUE' ? 'PUBLIC' :
-          this.currentUser.structure.type === 'PRIVEE' ? 'PRIVE' : 'ONG';
+          this.currentUser.structure.type === 'PRIVEE' ? 'PRIVE' : 'SOCIETE_CIVILE_ONG';
 
       if (this.currentUser.structure.gouvernorat) {
         this.formData.gouvernoratStructure = this.currentUser.structure.gouvernorat.nom;
@@ -2703,7 +2703,7 @@ export class FormulaireComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.formData.secteur === 'ONG' && !this.formData.ongPrecision) {
+    if (this.formData.secteur === 'SOCIETE_CIVILE_ONG' && !this.formData.ongPrecision) {
       this.addValidationError('ongPrecision', 'La précision de l\'ONG est obligatoire');
       isValid = false;
     }
@@ -3206,7 +3206,7 @@ export class FormulaireComponent implements OnInit {
 
   // Gestionnaires d'événements pour les champs conditionnels
   onSecteurChange(): void {
-    if (this.formData.secteur !== 'ONG') {
+    if (this.formData.secteur !== 'SOCIETE_CIVILE_ONG') {
       this.formData.ongPrecision = undefined;
     }
     if (this.formData.secteur !== 'PUBLIC') {
