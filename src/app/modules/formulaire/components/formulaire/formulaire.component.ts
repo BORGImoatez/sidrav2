@@ -968,23 +968,23 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       <label class="form-label required">Type d'alcool consommé</label>
                       <div class="checkbox-grid">
                         <label class="checkbox-option">
-                          <input type="checkbox" [(ngModel)]="formData.typeAlcool?.biere" name="typeAlcoolBiere">
+                          <input type="checkbox" [(ngModel)]="formData.typeAlcool.biere" name="typeAlcoolBiere">
                           <span>Bière</span>
                         </label>
                         <label class="checkbox-option">
-                          <input type="checkbox" [(ngModel)]="formData.typeAlcool?.liqueurs" name="typeAlcoolLiqueurs">
+                          <input type="checkbox" [(ngModel)]="formData.typeAlcool.liqueurs" name="typeAlcoolLiqueurs">
                           <span>Liqueurs</span>
                         </label>
                         <label class="checkbox-option">
-                          <input type="checkbox" [(ngModel)]="formData.typeAlcool?.alcoolBruler" name="typeAlcoolBruler">
+                          <input type="checkbox" [(ngModel)]="formData.typeAlcool.alcoolBruler" name="typeAlcoolBruler">
                           <span>Alcool à brûler</span>
                         </label>
                         <label class="checkbox-option">
-                          <input type="checkbox" [(ngModel)]="formData.typeAlcool?.legmi" name="typeAlcoolLegmi">
+                          <input type="checkbox" [(ngModel)]="formData.typeAlcool.legmi" name="typeAlcoolLegmi">
                           <span>Legmi</span>
                         </label>
                         <label class="checkbox-option">
-                          <input type="checkbox" [(ngModel)]="formData.typeAlcool?.boukha" name="typeAlcoolBoukha">
+                          <input type="checkbox" [(ngModel)]="formData.typeAlcool.boukha" name="typeAlcoolBoukha">
                           <span>Boukha</span>
                         </label>
                       </div>
@@ -1028,38 +1028,38 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <div class="form-group full-width">
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.entourageSpa?.membresFamille" name="entourageMembresFamille">
+                        <input type="checkbox" [(ngModel)]="formData.entourageSpa.membresFamille" name="entourageMembresFamille">
                         <span>Membre(s) de la famille</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.entourageSpa?.amis" name="entourageAmis">
+                        <input type="checkbox" [(ngModel)]="formData.entourageSpa.amis" name="entourageAmis">
                         <span>Ami(e)s</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.entourageSpa?.milieuProfessionnel" name="entourageMilieuProfessionnel">
+                        <input type="checkbox" [(ngModel)]="formData.entourageSpa.milieuProfessionnel" name="entourageMilieuProfessionnel">
                         <span>Milieu professionnel</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.entourageSpa?.milieuSportif" name="entourageMilieuSportif">
+                        <input type="checkbox" [(ngModel)]="formData.entourageSpa.milieuSportif" name="entourageMilieuSportif">
                         <span>Milieu sportif</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.entourageSpa?.milieuScolaire" name="entourageMilieuScolaire">
+                        <input type="checkbox" [(ngModel)]="formData.entourageSpa.milieuScolaire" name="entourageMilieuScolaire">
                         <span>Milieu scolaire et universitaire</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.entourageSpa?.autre" name="entourageAutre" (change)="onEntourageAutreChange()">
+                        <input type="checkbox" [(ngModel)]="formData.entourageSpa.autre" name="entourageAutre" (change)="onEntourageAutreChange()">
                         <span>Autre</span>
                       </label>
                     </div>
 
                     <!-- Précision autre entourage -->
-                    <div class="form-group" *ngIf="formData.entourageSpa?.autre">
+                    <div class="form-group" *ngIf="formData.entourageSpa.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.entourageSpa?.autrePrecision"
+                        [(ngModel)]="formData.entourageSpa.autrePrecision"
                         name="entourageAutrePrecision"
                         placeholder="Préciser l'entourage"
                         required
@@ -1075,71 +1075,71 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <div class="form-group full-width">
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.tabac" name="typeSpaEntourageTabac">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.tabac" name="typeSpaEntourageTabac">
                         <span>Tabac</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.alcool" name="typeSpaEntourageAlcool">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.alcool" name="typeSpaEntourageAlcool">
                         <span>Alcool</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.cannabis" name="typeSpaEntourageCannabis">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.cannabis" name="typeSpaEntourageCannabis">
                         <span>Cannabis</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.opium" name="typeSpaEntourageOpium">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.opium" name="typeSpaEntourageOpium">
                         <span>Opium</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.morphiniques" name="typeSpaEntourageMorphiniques" (change)="onTypeSpaEntourageMorphiniquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.morphiniques" name="typeSpaEntourageMorphiniques" (change)="onTypeSpaEntourageMorphiniquesChange()">
                         <span>Les morphiniques de synthèse (Subutex...)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.heroine" name="typeSpaEntourageHeroine">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.heroine" name="typeSpaEntourageHeroine">
                         <span>Héroïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.cocaine" name="typeSpaEntourageCocaine">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.cocaine" name="typeSpaEntourageCocaine">
                         <span>Cocaïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.hypnotiques" name="typeSpaEntourageHypnotiques" (change)="onTypeSpaEntourageHypnotiquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.hypnotiques" name="typeSpaEntourageHypnotiques" (change)="onTypeSpaEntourageHypnotiquesChange()">
                         <span>Hypnotiques & sédatifs</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.amphetamines" name="typeSpaEntourageAmphetamines">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.amphetamines" name="typeSpaEntourageAmphetamines">
                         <span>Amphétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.ecstasy" name="typeSpaEntourageEcstasy">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.ecstasy" name="typeSpaEntourageEcstasy">
                         <span>Ecstasy</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.produitsInhaler" name="typeSpaEntourageProduitsInhaler">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.produitsInhaler" name="typeSpaEntourageProduitsInhaler">
                         <span>Produits à inhaler (colle, solvants)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.pregabaline" name="typeSpaEntouragePregabaline">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.pregabaline" name="typeSpaEntouragePregabaline">
                         <span>Prégabaline</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.ketamines" name="typeSpaEntourageKetamines">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.ketamines" name="typeSpaEntourageKetamines">
                         <span>Kétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.lsd" name="typeSpaEntourageLsd">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.lsd" name="typeSpaEntourageLsd">
                         <span>LSD</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage?.autre" name="typeSpaEntourageAutre" (change)="onTypeSpaEntourageAutreChange()">
+                        <input type="checkbox" [(ngModel)]="formData.typeSpaEntourage.autre" name="typeSpaEntourageAutre" (change)="onTypeSpaEntourageAutreChange()">
                         <span>Autre</span>
                       </label>
                     </div>
 
                     <!-- Précisions substances entourage -->
-                    <div class="form-group" *ngIf="formData.typeSpaEntourage?.morphiniques">
+                    <div class="form-group" *ngIf="formData.typeSpaEntourage.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.typeSpaEntourage?.morphiniquesPrecision" name="typeSpaEntourageMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.typeSpaEntourage.morphiniquesPrecision" name="typeSpaEntourageMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1149,24 +1149,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.typeSpaEntourage?.hypnotiques">
+                    <div class="form-group" *ngIf="formData.typeSpaEntourage.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.typeSpaEntourage?.hypnotiquesPrecision"
+                        [(ngModel)]="formData.typeSpaEntourage.hypnotiquesPrecision"
                         name="typeSpaEntourageHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.typeSpaEntourage?.autre">
+                    <div class="form-group" *ngIf="formData.typeSpaEntourage.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.typeSpaEntourage?.autrePrecision"
+                        [(ngModel)]="formData.typeSpaEntourage.autrePrecision"
                         name="typeSpaEntourageAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1200,63 +1200,63 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <div class="form-group full-width">
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.cannabis" name="droguesActuellesCannabis">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.cannabis" name="droguesActuellesCannabis">
                         <span>Cannabis</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.opium" name="droguesActuellesOpium">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.opium" name="droguesActuellesOpium">
                         <span>Opium</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.morphiniques" name="droguesActuellesMorphiniques" (change)="onDroguesActuellesMorphiniquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.morphiniques" name="droguesActuellesMorphiniques" (change)="onDroguesActuellesMorphiniquesChange()">
                         <span>Les morphiniques de synthèse (Subutex...)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.heroine" name="droguesActuellesHeroine">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.heroine" name="droguesActuellesHeroine">
                         <span>Héroïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.cocaine" name="droguesActuellesCocaine">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.cocaine" name="droguesActuellesCocaine">
                         <span>Cocaïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.hypnotiques" name="droguesActuellesHypnotiques" (change)="onDroguesActuellesHypnotiquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.hypnotiques" name="droguesActuellesHypnotiques" (change)="onDroguesActuellesHypnotiquesChange()">
                         <span>Hypnotiques & sédatifs</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.amphetamines" name="droguesActuellesAmphetamines">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.amphetamines" name="droguesActuellesAmphetamines">
                         <span>Amphétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.ecstasy" name="droguesActuellesEcstasy">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.ecstasy" name="droguesActuellesEcstasy">
                         <span>Ecstasy</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.produitsInhaler" name="droguesActuellesProduitsInhaler">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.produitsInhaler" name="droguesActuellesProduitsInhaler">
                         <span>Produits à inhaler (colle, solvants)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.pregabaline" name="droguesActuellesPregabaline">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.pregabaline" name="droguesActuellesPregabaline">
                         <span>Prégabaline</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.ketamines" name="droguesActuellesKetamines">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.ketamines" name="droguesActuellesKetamines">
                         <span>Kétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.lsd" name="droguesActuellesLsd">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.lsd" name="droguesActuellesLsd">
                         <span>LSD</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles?.autre" name="droguesActuellesAutre" (change)="onDroguesActuellesAutreChange()">
+                        <input type="checkbox" [(ngModel)]="formData.droguesActuelles.autre" name="droguesActuellesAutre" (change)="onDroguesActuellesAutreChange()">
                         <span>Autre</span>
                       </label>
                     </div>
 
                     <!-- Précisions drogues actuelles -->
-                    <div class="form-group" *ngIf="formData.droguesActuelles?.morphiniques">
+                    <div class="form-group" *ngIf="formData.droguesActuelles.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.droguesActuelles?.morphiniquesPrecision" name="droguesActuellesMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.droguesActuelles.morphiniquesPrecision" name="droguesActuellesMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1266,24 +1266,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.droguesActuelles?.hypnotiques">
+                    <div class="form-group" *ngIf="formData.droguesActuelles.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.droguesActuelles?.hypnotiquesPrecision"
+                        [(ngModel)]="formData.droguesActuelles.hypnotiquesPrecision"
                         name="droguesActuellesHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.droguesActuelles?.autre">
+                    <div class="form-group" *ngIf="formData.droguesActuelles.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.droguesActuelles?.autrePrecision"
+                        [(ngModel)]="formData.droguesActuelles.autrePrecision"
                         name="droguesActuellesAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1299,63 +1299,63 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <div class="form-group full-width">
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.cannabis" name="substanceInitiationCannabis">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.cannabis" name="substanceInitiationCannabis">
                         <span>Cannabis</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.opium" name="substanceInitiationOpium">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.opium" name="substanceInitiationOpium">
                         <span>Opium</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.morphiniques" name="substanceInitiationMorphiniques" (change)="onSubstanceInitiationMorphiniquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.morphiniques" name="substanceInitiationMorphiniques" (change)="onSubstanceInitiationMorphiniquesChange()">
                         <span>Les morphiniques de synthèse (Subutex...)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.heroine" name="substanceInitiationHeroine">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.heroine" name="substanceInitiationHeroine">
                         <span>Héroïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.cocaine" name="substanceInitiationCocaine">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.cocaine" name="substanceInitiationCocaine">
                         <span>Cocaïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.hypnotiques" name="substanceInitiationHypnotiques" (change)="onSubstanceInitiationHypnotiquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.hypnotiques" name="substanceInitiationHypnotiques" (change)="onSubstanceInitiationHypnotiquesChange()">
                         <span>Hypnotiques & sédatifs</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.amphetamines" name="substanceInitiationAmphetamines">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.amphetamines" name="substanceInitiationAmphetamines">
                         <span>Amphétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.ecstasy" name="substanceInitiationEcstasy">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.ecstasy" name="substanceInitiationEcstasy">
                         <span>Ecstasy</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.produitsInhaler" name="substanceInitiationProduitsInhaler">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.produitsInhaler" name="substanceInitiationProduitsInhaler">
                         <span>Produits à inhaler (colle, solvants)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.pregabaline" name="substanceInitiationPregabaline">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.pregabaline" name="substanceInitiationPregabaline">
                         <span>Prégabaline</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.ketamines" name="substanceInitiationKetamines">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.ketamines" name="substanceInitiationKetamines">
                         <span>Kétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.lsd" name="substanceInitiationLsd">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.lsd" name="substanceInitiationLsd">
                         <span>LSD</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation?.autre" name="substanceInitiationAutre" (change)="onSubstanceInitiationAutreChange()">
+                        <input type="checkbox" [(ngModel)]="formData.substanceInitiation.autre" name="substanceInitiationAutre" (change)="onSubstanceInitiationAutreChange()">
                         <span>Autre</span>
                       </label>
                     </div>
 
                     <!-- Précisions substance initiation -->
-                    <div class="form-group" *ngIf="formData.substanceInitiation?.morphiniques">
+                    <div class="form-group" *ngIf="formData.substanceInitiation.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.substanceInitiation?.morphiniquesPrecision" name="substanceInitiationMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.substanceInitiation.morphiniquesPrecision" name="substanceInitiationMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1365,24 +1365,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substanceInitiation?.hypnotiques">
+                    <div class="form-group" *ngIf="formData.substanceInitiation.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substanceInitiation?.hypnotiquesPrecision"
+                        [(ngModel)]="formData.substanceInitiation.hypnotiquesPrecision"
                         name="substanceInitiationHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substanceInitiation?.autre">
+                    <div class="form-group" *ngIf="formData.substanceInitiation.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substanceInitiation?.autrePrecision"
+                        [(ngModel)]="formData.substanceInitiation.autrePrecision"
                         name="substanceInitiationAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1411,63 +1411,63 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <div class="form-group full-width">
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.cannabis" name="substancePrincipaleCannabis">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.cannabis" name="substancePrincipaleCannabis">
                         <span>Cannabis</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.opium" name="substancePrincipaleOpium">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.opium" name="substancePrincipaleOpium">
                         <span>Opium</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.morphiniques" name="substancePrincipaleMorphiniques" (change)="onSubstancePrincipaleMorphiniquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.morphiniques" name="substancePrincipaleMorphiniques" (change)="onSubstancePrincipaleMorphiniquesChange()">
                         <span>Les morphiniques de synthèse (Subutex...)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.heroine" name="substancePrincipaleHeroine">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.heroine" name="substancePrincipaleHeroine">
                         <span>Héroïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.cocaine" name="substancePrincipaleCocaine">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.cocaine" name="substancePrincipaleCocaine">
                         <span>Cocaïne</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.hypnotiques" name="substancePrincipaleHypnotiques" (change)="onSubstancePrincipaleHypnotiquesChange()">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.hypnotiques" name="substancePrincipaleHypnotiques" (change)="onSubstancePrincipaleHypnotiquesChange()">
                         <span>Hypnotiques & sédatifs</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.amphetamines" name="substancePrincipaleAmphetamines">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.amphetamines" name="substancePrincipaleAmphetamines">
                         <span>Amphétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.ecstasy" name="substancePrincipaleEcstasy">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.ecstasy" name="substancePrincipaleEcstasy">
                         <span>Ecstasy</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.produitsInhaler" name="substancePrincipaleProduitsInhaler">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.produitsInhaler" name="substancePrincipaleProduitsInhaler">
                         <span>Produits à inhaler (colle, solvants)</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.pregabaline" name="substancePrincipalePregabaline">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.pregabaline" name="substancePrincipalePregabaline">
                         <span>Prégabaline</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.ketamines" name="substancePrincipaleKetamines">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.ketamines" name="substancePrincipaleKetamines">
                         <span>Kétamines</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.lsd" name="substancePrincipaleLsd">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.lsd" name="substancePrincipaleLsd">
                         <span>LSD</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale?.autre" name="substancePrincipaleAutre" (change)="onSubstancePrincipaleAutreChange()">
+                        <input type="checkbox" [(ngModel)]="formData.substancePrincipale.autre" name="substancePrincipaleAutre" (change)="onSubstancePrincipaleAutreChange()">
                         <span>Autre</span>
                       </label>
                     </div>
 
                     <!-- Précisions substance principale -->
-                    <div class="form-group" *ngIf="formData.substancePrincipale?.morphiniques">
+                    <div class="form-group" *ngIf="formData.substancePrincipale.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.substancePrincipale?.morphiniquesPrecision" name="substancePrincipaleMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.substancePrincipale.morphiniquesPrecision" name="substancePrincipaleMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1477,24 +1477,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substancePrincipale?.hypnotiques">
+                    <div class="form-group" *ngIf="formData.substancePrincipale.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substancePrincipale?.hypnotiquesPrecision"
+                        [(ngModel)]="formData.substancePrincipale.hypnotiquesPrecision"
                         name="substancePrincipaleHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substancePrincipale?.autre">
+                    <div class="form-group" *ngIf="formData.substancePrincipale.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substancePrincipale?.autrePrecision"
+                        [(ngModel)]="formData.substancePrincipale.autrePrecision"
                         name="substancePrincipaleAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1596,38 +1596,38 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                 <div class="form-group full-width">
                   <div class="checkbox-grid">
                     <label class="checkbox-option">
-                      <input type="checkbox" [(ngModel)]="formData.voieAdministration?.injectee" name="voieAdministrationInjectee">
+                      <input type="checkbox" [(ngModel)]="formData.voieAdministration.injectee" name="voieAdministrationInjectee">
                       <span>Injectée</span>
                     </label>
                     <label class="checkbox-option">
-                      <input type="checkbox" [(ngModel)]="formData.voieAdministration?.fumee" name="voieAdministrationFumee">
+                      <input type="checkbox" [(ngModel)]="formData.voieAdministration.fumee" name="voieAdministrationFumee">
                       <span>Fumée</span>
                     </label>
                     <label class="checkbox-option">
-                      <input type="checkbox" [(ngModel)]="formData.voieAdministration?.ingeree" name="voieAdministrationIngeree">
+                      <input type="checkbox" [(ngModel)]="formData.voieAdministration.ingeree" name="voieAdministrationIngeree">
                       <span>Ingérée/bue</span>
                     </label>
                     <label class="checkbox-option">
-                      <input type="checkbox" [(ngModel)]="formData.voieAdministration?.sniffee" name="voieAdministrationSniffee">
+                      <input type="checkbox" [(ngModel)]="formData.voieAdministration.sniffee" name="voieAdministrationSniffee">
                       <span>Sniffée</span>
                     </label>
                     <label class="checkbox-option">
-                      <input type="checkbox" [(ngModel)]="formData.voieAdministration?.inhalee" name="voieAdministrationInhalee">
+                      <input type="checkbox" [(ngModel)]="formData.voieAdministration.inhalee" name="voieAdministrationInhalee">
                       <span>Inhalée</span>
                     </label>
                     <label class="checkbox-option">
-                      <input type="checkbox" [(ngModel)]="formData.voieAdministration?.autre" name="voieAdministrationAutre" (change)="onVoieAdministrationAutreChange()">
+                      <input type="checkbox" [(ngModel)]="formData.voieAdministration.autre" name="voieAdministrationAutre" (change)="onVoieAdministrationAutreChange()">
                       <span>Autre</span>
                     </label>
                   </div>
 
                   <!-- Précision autre voie -->
-                  <div class="form-group" *ngIf="formData.voieAdministration?.autre">
+                  <div class="form-group" *ngIf="formData.voieAdministration.autre">
                     <label class="form-label required">Préciser</label>
                     <input
                       type="text"
                       class="form-input"
-                      [(ngModel)]="formData.voieAdministration?.autrePrecision"
+                      [(ngModel)]="formData.voieAdministration.autrePrecision"
                       name="voieAdministrationAutrePrecision"
                       placeholder="Préciser la voie d'administration"
                       required
@@ -1703,29 +1703,29 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <label class="form-label">Test VIH réalisé</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih?.realise" name="testVihRealise" [value]="true" (change)="onTestVihChange()">
+                      <input type="radio" [(ngModel)]="formData.testVih.realise" name="testVihRealise" [value]="true" (change)="onTestVihChange()">
                       <span>Oui</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih?.realise" name="testVihRealise" [value]="false" (change)="onTestVihChange()">
+                      <input type="radio" [(ngModel)]="formData.testVih.realise" name="testVihRealise" [value]="false" (change)="onTestVihChange()">
                       <span>Non</span>
                     </label>
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testVih?.realise === true">
+                <div class="form-group" *ngIf="formData.testVih.realise === true">
                   <label class="form-label required">Date du test VIH</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih?.periode" name="testVihPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVih.periode" name="testVihPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih?.periode" name="testVihPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVih.periode" name="testVihPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih?.periode" name="testVihPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testVih.periode" name="testVihPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1736,29 +1736,29 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <label class="form-label">Test VHC réalisé</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc?.realise" name="testVhcRealise" [value]="true" (change)="onTestVhcChange()">
+                      <input type="radio" [(ngModel)]="formData.testVhc.realise" name="testVhcRealise" [value]="true" (change)="onTestVhcChange()">
                       <span>Oui</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc?.realise" name="testVhcRealise" [value]="false" (change)="onTestVhcChange()">
+                      <input type="radio" [(ngModel)]="formData.testVhc.realise" name="testVhcRealise" [value]="false" (change)="onTestVhcChange()">
                       <span>Non</span>
                     </label>
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testVhc?.realise === true">
+                <div class="form-group" *ngIf="formData.testVhc.realise === true">
                   <label class="form-label required">Date du test VHC</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc?.periode" name="testVhcPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhc.periode" name="testVhcPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc?.periode" name="testVhcPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhc.periode" name="testVhcPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc?.periode" name="testVhcPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhc.periode" name="testVhcPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1769,29 +1769,29 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <label class="form-label">Test VHB réalisé</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb?.realise" name="testVhbRealise" [value]="true" (change)="onTestVhbChange()">
+                      <input type="radio" [(ngModel)]="formData.testVhb.realise" name="testVhbRealise" [value]="true" (change)="onTestVhbChange()">
                       <span>Oui</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb?.realise" name="testVhbRealise" [value]="false" (change)="onTestVhbChange()">
+                      <input type="radio" [(ngModel)]="formData.testVhb.realise" name="testVhbRealise" [value]="false" (change)="onTestVhbChange()">
                       <span>Non</span>
                     </label>
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testVhb?.realise === true">
+                <div class="form-group" *ngIf="formData.testVhb.realise === true">
                   <label class="form-label required">Date du test VHB</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb?.periode" name="testVhbPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhb.periode" name="testVhbPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb?.periode" name="testVhbPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhb.periode" name="testVhbPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb?.periode" name="testVhbPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhb.periode" name="testVhbPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1802,29 +1802,29 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   <label class="form-label">Test du Syphilis réalisé</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis?.realise" name="testSyphilisRealise" [value]="true" (change)="onTestSyphilisChange()">
+                      <input type="radio" [(ngModel)]="formData.testSyphilis.realise" name="testSyphilisRealise" [value]="true" (change)="onTestSyphilisChange()">
                       <span>Oui</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis?.realise" name="testSyphilisRealise" [value]="false" (change)="onTestSyphilisChange()">
+                      <input type="radio" [(ngModel)]="formData.testSyphilis.realise" name="testSyphilisRealise" [value]="false" (change)="onTestSyphilisChange()">
                       <span>Non</span>
                     </label>
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testSyphilis?.realise === true">
+                <div class="form-group" *ngIf="formData.testSyphilis.realise === true">
                   <label class="form-label required">Date du test Syphilis</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis?.periode" name="testSyphilisPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testSyphilis.periode" name="testSyphilisPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis?.periode" name="testSyphilisPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testSyphilis.periode" name="testSyphilisPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis?.periode" name="testSyphilisPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testSyphilis.periode" name="testSyphilisPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1878,34 +1878,34 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     <label class="form-label">Comment avez-vous tenté le sevrage ?</label>
                     <div class="checkbox-grid">
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails?.toutSeul" name="tentativeSevrageToutSeul">
+                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails.toutSeul" name="tentativeSevrageToutSeul">
                         <span>Tout seul</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails?.soutienFamille" name="tentativeSevrageSoutienFamille">
+                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails.soutienFamille" name="tentativeSevrageSoutienFamille">
                         <span>Avec le soutien de la famille</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails?.soutienAmi" name="tentativeSevrageSoutienAmi">
+                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails.soutienAmi" name="tentativeSevrageSoutienAmi">
                         <span>Avec le soutien d'un ami</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails?.soutienScolaire" name="tentativeSevrageSoutienScolaire">
+                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails.soutienScolaire" name="tentativeSevrageSoutienScolaire">
                         <span>Avec un soutien scolaire</span>
                       </label>
                       <label class="checkbox-option">
-                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails?.structureSante" name="tentativeSevrageStructureSante" (change)="onTentativeSevrageStructureSanteChange()">
+                        <input type="checkbox" [(ngModel)]="formData.tentativeSevrageDetails.structureSante" name="tentativeSevrageStructureSante" (change)="onTentativeSevrageStructureSanteChange()">
                         <span>Dans une structure de santé</span>
                       </label>
                     </div>
 
                     <!-- Précision structure de santé -->
-                    <div class="form-group" *ngIf="formData.tentativeSevrageDetails?.structureSante">
+                    <div class="form-group" *ngIf="formData.tentativeSevrageDetails.structureSante">
                       <label class="form-label required">Laquelle ?</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.tentativeSevrageDetails?.structureSantePrecision"
+                        [(ngModel)]="formData.tentativeSevrageDetails.structureSantePrecision"
                         name="tentativeSevrageStructureSantePrecision"
                         placeholder="Nom de la structure de santé"
                         required
