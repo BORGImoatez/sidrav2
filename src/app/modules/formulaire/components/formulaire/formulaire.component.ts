@@ -1054,12 +1054,12 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     </div>
 
                     <!-- Précision autre entourage -->
-                    <div class="form-group" *ngIf="formData.entourageSpa.autre">
+                    <div class="form-group" *ngIf="formData.entourageSpa?.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.entourageSpa.autrePrecision"
+                        [(ngModel)]="formData.entourageSpa?.autrePrecision"
                         name="entourageAutrePrecision"
                         placeholder="Préciser l'entourage"
                         required
@@ -1137,9 +1137,9 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     </div>
 
                     <!-- Précisions substances entourage -->
-                    <div class="form-group" *ngIf="formData.typeSpaEntourage.morphiniques">
+                    <div class="form-group" *ngIf="formData.typeSpaEntourage?.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.typeSpaEntourage.morphiniquesPrecision" name="typeSpaEntourageMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.typeSpaEntourage?.morphiniquesPrecision" name="typeSpaEntourageMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1149,24 +1149,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.typeSpaEntourage.hypnotiques">
+                    <div class="form-group" *ngIf="formData.typeSpaEntourage?.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.typeSpaEntourage.hypnotiquesPrecision"
+                        [(ngModel)]="formData.typeSpaEntourage?.hypnotiquesPrecision"
                         name="typeSpaEntourageHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.typeSpaEntourage.autre">
+                    <div class="form-group" *ngIf="formData.typeSpaEntourage?.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.typeSpaEntourage.autrePrecision"
+                        [(ngModel)]="formData.typeSpaEntourage?.autrePrecision"
                         name="typeSpaEntourageAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1254,9 +1254,9 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     </div>
 
                     <!-- Précisions drogues actuelles -->
-                    <div class="form-group" *ngIf="formData.droguesActuelles.morphiniques">
+                    <div class="form-group" *ngIf="formData.droguesActuelles?.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.droguesActuelles.morphiniquesPrecision" name="droguesActuellesMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.droguesActuelles?.morphiniquesPrecision" name="droguesActuellesMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1266,24 +1266,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.droguesActuelles.hypnotiques">
+                    <div class="form-group" *ngIf="formData.droguesActuelles?.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.droguesActuelles.hypnotiquesPrecision"
+                        [(ngModel)]="formData.droguesActuelles?.hypnotiquesPrecision"
                         name="droguesActuellesHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.droguesActuelles.autre">
+                    <div class="form-group" *ngIf="formData.droguesActuelles?.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.droguesActuelles.autrePrecision"
+                        [(ngModel)]="formData.droguesActuelles?.autrePrecision"
                         name="droguesActuellesAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1353,9 +1353,9 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     </div>
 
                     <!-- Précisions substance initiation -->
-                    <div class="form-group" *ngIf="formData.substanceInitiation.morphiniques">
+                    <div class="form-group" *ngIf="formData.substanceInitiation?.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.substanceInitiation.morphiniquesPrecision" name="substanceInitiationMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.substanceInitiation?.morphiniquesPrecision" name="substanceInitiationMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1365,24 +1365,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substanceInitiation.hypnotiques">
+                    <div class="form-group" *ngIf="formData.substanceInitiation?.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substanceInitiation.hypnotiquesPrecision"
+                        [(ngModel)]="formData.substanceInitiation?.hypnotiquesPrecision"
                         name="substanceInitiationHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substanceInitiation.autre">
+                    <div class="form-group" *ngIf="formData.substanceInitiation?.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substanceInitiation.autrePrecision"
+                        [(ngModel)]="formData.substanceInitiation?.autrePrecision"
                         name="substanceInitiationAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1465,9 +1465,9 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     </div>
 
                     <!-- Précisions substance principale -->
-                    <div class="form-group" *ngIf="formData.substancePrincipale.morphiniques">
+                    <div class="form-group" *ngIf="formData.substancePrincipale?.morphiniques">
                       <label class="form-label required">Préciser la substance morphinique</label>
-                      <select class="form-select" [(ngModel)]="formData.substancePrincipale.morphiniquesPrecision" name="substancePrincipaleMorphiniquesPrecision" required>
+                      <select class="form-select" [(ngModel)]="formData.substancePrincipale?.morphiniquesPrecision" name="substancePrincipaleMorphiniquesPrecision" required>
                         <option value="">Sélectionner</option>
                         <option value="SUBUTEX">Subutex</option>
                         <option value="METHADONE">Méthadone</option>
@@ -1477,24 +1477,24 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                       </select>
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substancePrincipale.hypnotiques">
+                    <div class="form-group" *ngIf="formData.substancePrincipale?.hypnotiques">
                       <label class="form-label required">Préciser l'hypnotique/sédatif</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substancePrincipale.hypnotiquesPrecision"
+                        [(ngModel)]="formData.substancePrincipale?.hypnotiquesPrecision"
                         name="substancePrincipaleHypnotiquesPrecision"
                         placeholder="Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
                         required
                       >
                     </div>
 
-                    <div class="form-group" *ngIf="formData.substancePrincipale.autre">
+                    <div class="form-group" *ngIf="formData.substancePrincipale?.autre">
                       <label class="form-label required">Préciser</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.substancePrincipale.autrePrecision"
+                        [(ngModel)]="formData.substancePrincipale?.autrePrecision"
                         name="substancePrincipaleAutrePrecision"
                         placeholder="Préciser la substance"
                         required
@@ -1622,12 +1622,12 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   </div>
 
                   <!-- Précision autre voie -->
-                  <div class="form-group" *ngIf="formData.voieAdministration.autre">
+                  <div class="form-group" *ngIf="formData.voieAdministration?.autre">
                     <label class="form-label required">Préciser</label>
                     <input
                       type="text"
                       class="form-input"
-                      [(ngModel)]="formData.voieAdministration.autrePrecision"
+                      [(ngModel)]="formData.voieAdministration?.autrePrecision"
                       name="voieAdministrationAutrePrecision"
                       placeholder="Préciser la voie d'administration"
                       required
@@ -1713,19 +1713,19 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testVih.realise === true">
+                <div class="form-group" *ngIf="formData.testVih?.realise === true">
                   <label class="form-label required">Date du test VIH</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih.periode" name="testVihPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVih?.periode" name="testVihPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih.periode" name="testVihPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVih?.periode" name="testVihPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVih.periode" name="testVihPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testVih?.periode" name="testVihPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1746,19 +1746,19 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testVhc.realise === true">
+                <div class="form-group" *ngIf="formData.testVhc?.realise === true">
                   <label class="form-label required">Date du test VHC</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc.periode" name="testVhcPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhc?.periode" name="testVhcPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc.periode" name="testVhcPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhc?.periode" name="testVhcPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhc.periode" name="testVhcPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhc?.periode" name="testVhcPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1779,19 +1779,19 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testVhb.realise === true">
+                <div class="form-group" *ngIf="formData.testVhb?.realise === true">
                   <label class="form-label required">Date du test VHB</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb.periode" name="testVhbPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhb?.periode" name="testVhbPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb.periode" name="testVhbPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhb?.periode" name="testVhbPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testVhb.periode" name="testVhbPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testVhb?.periode" name="testVhbPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1812,19 +1812,19 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                   </div>
                 </div>
 
-                <div class="form-group" *ngIf="formData.testSyphilis.realise === true">
+                <div class="form-group" *ngIf="formData.testSyphilis?.realise === true">
                   <label class="form-label required">Date du test Syphilis</label>
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis.periode" name="testSyphilisPeriode" value="3_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testSyphilis?.periode" name="testSyphilisPeriode" value="3_MOIS" required>
                       <span>3 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis.periode" name="testSyphilisPeriode" value="6_MOIS" required>
+                      <input type="radio" [(ngModel)]="formData.testSyphilis?.periode" name="testSyphilisPeriode" value="6_MOIS" required>
                       <span>6 mois</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" [(ngModel)]="formData.testSyphilis.periode" name="testSyphilisPeriode" value="12_MOIS_PLUS" required>
+                      <input type="radio" [(ngModel)]="formData.testSyphilis?.periode" name="testSyphilisPeriode" value="12_MOIS_PLUS" required>
                       <span>12 mois ou plus</span>
                     </label>
                   </div>
@@ -1900,12 +1900,12 @@ import { User, Structure, Gouvernorat } from '../../../../models/user.model';
                     </div>
 
                     <!-- Précision structure de santé -->
-                    <div class="form-group" *ngIf="formData.tentativeSevrageDetails.structureSante">
+                    <div class="form-group" *ngIf="formData.tentativeSevrageDetails?.structureSante">
                       <label class="form-label required">Laquelle ?</label>
                       <input
                         type="text"
                         class="form-input"
-                        [(ngModel)]="formData.tentativeSevrageDetails.structureSantePrecision"
+                        [(ngModel)]="formData.tentativeSevrageDetails?.structureSantePrecision"
                         name="tentativeSevrageStructureSantePrecision"
                         placeholder="Nom de la structure de santé"
                         required
