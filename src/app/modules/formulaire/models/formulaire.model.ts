@@ -1,99 +1,80 @@
 export interface FormulaireData {
-  // Partie 1: Informations sur la structure/centre de prise en charge & l'usager de SPA
-  iun?: string; // Généré automatiquement par la plateforme (réservé à l'INSP)
-  
-  // Secteur
-  secteur: 'PUBLIC' | 'PRIVE' | 'SOCIETE_CIVILE_ONG';
-  ongPrecision?: string; // Si ONG, préciser (LD: ATIOST, ATL Tunis, ATL Sfax, ATUPRET, ATP+, ATSR, STADD...)
-  
-  // Ministère
-  ministere?: string; // (LD)
-  
-  // Structure/Centre
-  structure: string; // (LD: Consultation d'Addictologie, Consultation de psychiatrie, Hôpital de jour, etc.)
-  gouvernoratStructure: string; // Gouvernorat de la Structure/Centre (LD)
-  
-  // Informations patient
+  // Partie 1: Informations structure/centre & usager SPA
+  iun?: string; // Généré automatiquement
+  secteur: 'PUBLIC' | 'PRIVE' | 'ONG' | 'SOCIETE_CIVILE_ONG';
+  ongPrecision?: string;
+  ministere?: string;
+  structure: string;
+  gouvernoratStructure: string;
   nom: string;
   prenom: string;
   codePatient: string;
-  dateConsultation: Date; // Date de la consultation/entretien
+  dateConsultation: Date;
   genre: 'HOMME' | 'FEMME';
-  dateNaissance: Date; // Date de naissance complète
-  nationalite: string; // (LD)
-  
-  // Résidence
+  dateNaissance: Date;
+  nationalite: string;
   residence: 'TUNISIE' | 'ETRANGER';
-  gouvernoratResidence?: string; // Si en Tunisie (LD)
-  delegationResidence?: string; // Si en Tunisie (LD)
-  paysResidence?: string; // Si à l'étranger (LD)
+  gouvernoratResidence?: string;
+  delegationResidence?: string;
+  paysResidence?: string;
   
-  // Cadre de la consultation/entretien (choix multiples)
+  // Cadre de consultation (multiple)
   cadreConsultation: {
     addictologie?: boolean;
-    addictologieType?: 'SEVRAGE' | 'GESTION_ADDICTION' | 'RISQUE_RECHUTE'; // 1a, 1b, 1c
-    psychiatrie?: boolean; // Troubles mentaux
-    psychologique?: boolean; // Consultation psychologique
-    medecineGenerale?: boolean; // Médecine générale, médecine interne
-    neurologique?: boolean; // Troubles neurologiques
-    infectieux?: boolean; // Problèmes infectieux
+    addictologieType?: 'SEVRAGE' | 'GESTION_ADDICTION' | 'RISQUE_RECHUTE';
+    psychiatrie?: boolean;
+    psychologique?: boolean;
+    medecineGenerale?: boolean;
+    neurologique?: boolean;
+    infectieux?: boolean;
     espaceAmisJeunes?: boolean;
-    echangeMateriel?: boolean; // Échange/approvisionnement de matériels à usage unique
+    echangeMateriel?: boolean;
     rehabilitation?: boolean;
     urgenceMedicale?: boolean;
     urgenceChirurgicale?: boolean;
     depistage?: boolean;
     autre?: boolean;
-    autrePrecision?: string; // Si autre, préciser
+    autrePrecision?: string;
   };
   
-  // Origine de la demande (choix multiples)
+  // Origine de la demande (multiple)
   origineDemande: {
     luiMeme?: boolean;
     famille?: boolean;
     amis?: boolean;
-    celluleEcoute?: boolean; // Cellule d'écoute de médecine scolaire et universitaire
-    autreCentre?: boolean; // Adressé par un autre centre
+    celluleEcoute?: boolean;
+    autreCentre?: boolean;
     structureSociale?: boolean;
     structureJudiciaire?: boolean;
-    jugeEnfance?: boolean; // Le juge de l'enfance
+    jugeEnfance?: boolean;
     autre?: boolean;
-    autrePrecision?: string; // Si autre, préciser
+    autrePrecision?: string;
   };
   
-  // Cause ou circonstance de l'abus
-  causeCirconstance?: string; // (LD: problème social, financier, familial, santé mentale, adolescence)
-  
-  // Consultation antérieure
+  causeCirconstance?: string;
   consultationAnterieure: boolean | null;
-  dateConsultationAnterieure?: string; // mois/année si oui
-  motifConsultationAnterieure?: string; // (LD: Overdose, Tentative de suicide, sevrage, Troubles mentaux, récidives, échec scolaire, trouble de comportement, violence, autres)
-  causeRecidive?: string; // Si motif de récidive
-  causeEchecSevrage?: string; // Si motif de sevrage
+  dateConsultationAnterieure?: string;
+  motifConsultationAnterieure?: string;
+  causeRecidive?: string;
+  causeEchecSevrage?: string;
   
-  // Situation familiale
   situationFamiliale: 'CELIBATAIRE' | 'MARIE' | 'DIVORCE' | 'SEPARE' | 'VEUF' | 'AUTRE';
-  situationFamilialeAutre?: string; // Si autre, préciser
+  situationFamilialeAutre?: string;
   
-  // Logement durant les 30 derniers jours
   logement30Jours: 'SEUL' | 'FAMILLE_ORIGINE' | 'PARTENAIRE' | 'ENFANTS' | 'AMIS' | 'INTERNAT' | 'COLOCATION' | 'FOYER' | 'DETENTION' | 'CENTRE_JEUNESSE' | 'INSTITUTION' | 'AUTRE';
-  logement30JoursAutre?: string; // Si autre, préciser
+  logement30JoursAutre?: string;
   
-  // Nature de logement
   natureLogement: 'STABLE' | 'PRECAIRE';
   
-  // Profession
   profession: 'EMPLOYE' | 'COMPTE_PROPRE' | 'JOURNALIER' | 'SPORTIF' | 'CHOMAGE' | 'ELEVE' | 'ETUDIANT' | 'FORMATION' | 'RETRAITE' | 'SANS_RESSOURCES';
   
-  // Niveau scolaire
   niveauScolaire: 'ANALPHABETE' | 'PRESCOLAIRE' | 'PRIMAIRE' | 'COLLEGE' | 'SECONDAIRE' | 'FORMATION_PROF' | 'UNIVERSITAIRE';
   
-  // Activité sportive
   activiteSportive: boolean | null;
-  activiteSportiveFrequence?: 'REGULIERE' | 'IRREGULIERE'; // Si oui
-  activiteSportiveType?: 'COMPETITION' | 'LOISIR'; // Si oui
-  espacesLoisirs?: boolean; // Espaces de loisirs dans le quartier ou la zone de vie
-  dopage?: boolean | null; // Si de compétition
+  activiteSportiveFrequence?: 'REGULIERE' | 'IRREGULIERE';
+  activiteSportiveType?: 'COMPETITION' | 'LOISIR';
+  espacesLoisirs?: boolean;
+  dopage?: boolean | null;
   
   // Partie 2: Consommation tabac & alcool
   consommationTabac: 'FUMEUR' | 'NON_FUMEUR' | 'EX_FUMEUR';

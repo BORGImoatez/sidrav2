@@ -25,18 +25,19 @@ import { OtpRequest } from '../../models/user.model';
         <div class="otp-form">
           <div class="otp-inputs">
             <input
-              *ngFor="let digit of otpDigits; let i = index"
-              type="text"
-              maxlength="1"
-              class="otp-input"
-              [class.error]="showError && !digit"
-              [value]="otpDigits[i]"
-              (input)="onDigitInput($event, i)"
-              (keydown)="onKeyDown($event, i)"
-              (paste)="onPaste($event)"
-              [disabled]="isLoading"
-              #otpInput
+                *ngFor="let digit of otpDigits; let i = index"
+                type="text"
+                maxlength="1"
+                class="otp-input"
+                [class.error]="showError && !digit"
+                [(ngModel)]="otpDigits[i]"
+                (input)="onDigitInput($event, i)"
+                (keydown)="onKeyDown($event, i)"
+                (paste)="onPaste($event)"
+                [disabled]="isLoading"
+                #otpInput
             >
+
           </div>
 
           <div *ngIf="errorMessage" class="error-banner">
@@ -298,55 +299,63 @@ export class OtpComponent implements OnInit, OnDestroy {
   }
 
   onDigitInput(event: any, index: number): void {
-    const value = event.target.value;
-    
-    // Nettoyer la valeur - ne garder que le dernier chiffre saisi
-    const cleanValue = value.replace(/\D/g, '').slice(-1);
-    
-    // Mettre à jour le champ actuel
-    this.otpDigits[index] = cleanValue;
-    
-    // Mettre à jour la valeur de l'input pour refléter le changement
-    event.target.value = cleanValue;
-    
-    // Si un chiffre valide a été saisi, passer au champ suivant
-    if (cleanValue && index < 5) {
-      const nextInput = event.target.parentElement.children[index + 1] as HTMLInputElement;
-      if (nextInput) {
-        nextInput.focus();
+    const input = event.target as HTMLInputElement;
+    // Ne garder que le dernier chiffre numérique
+    const val = input.value.replace(/\D/g, '').slice(-1);
+
+    if (val) {
+      this.otpDigits[index] = val;
+      // Mettre la valeur propre dans le champ (pas forcément obligatoire avec ngModel, mais pour être sûr)
+      input.value = val;
+
+      // Passer au prochain input
+      if (index < this.otpDigits.length - 1) {
+        const nextInput = input.parentElement?.children[index + 1] as HTMLInputElement;
+        nextInput?.focus();
       }
+    } else {
+      // Si suppression, vider la case dans le tableau
+      this.otpDigits[index] = '';
     }
-    
+
     this.clearMessages();
   }
+  onKeyDown(event: KeyboardEvent, index: number): void {
+    const input = event.target as HTMLInputElement;
 
-  onKeyDown(event: any, index: number): void {
-    // Gérer la touche Backspace
     if (event.key === 'Backspace') {
       event.preventDefault();
-      
-      // Si le champ actuel est vide, aller au champ précédent
-      if (!this.otpDigits[index] && index > 0) {
-        const prevInput = event.target.parentElement.children[index - 1] as HTMLInputElement;
+
+      if (this.otpDigits[index]) {
+        // Vider le champ actuel
+        this.otpDigits[index] = '';
+        input.value = '';
+      } else if (index > 0) {
+        // Passer au champ précédent
+        const prevInput = input.parentElement?.children[index - 1] as HTMLInputElement;
         if (prevInput) {
           this.otpDigits[index - 1] = '';
           prevInput.value = '';
           prevInput.focus();
         }
-      } else {
-        // Sinon, vider le champ actuel
-        this.otpDigits[index] = '';
-        event.target.value = '';
       }
     }
-    
+
+    // Gérer les flèches pour naviguer entre les champs
+    if (event.key === 'ArrowLeft' && index > 0) {
+      const prevInput = input.parentElement?.children[index - 1] as HTMLInputElement;
+      prevInput?.focus();
+    } else if (event.key === 'ArrowRight' && index < 5) {
+      const nextInput = input.parentElement?.children[index + 1] as HTMLInputElement;
+      nextInput?.focus();
+    }
+
     // Empêcher la saisie de caractères non numériques
-    if (!/[0-9]/.test(event.key) && 
+    if (!/[0-9]/.test(event.key) &&
         !['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
       event.preventDefault();
     }
   }
-
   onPaste(event: any): void {
     event.preventDefault();
     const pastedText = event.clipboardData.getData('text').replace(/\D/g, '');
