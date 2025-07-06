@@ -52,29 +52,32 @@ export interface FormulaireData {
   };
   
   causeCirconstance?: string;
-  consultationAnterieure: boolean | null;
+  consultationAnterieure?: boolean | null;
   dateConsultationAnterieure?: string;
   motifConsultationAnterieure?: string;
   causeRecidive?: string;
   causeEchecSevrage?: string;
   
-  situationFamiliale: 'CELIBATAIRE' | 'MARIE' | 'DIVORCE' | 'SEPARE' | 'VEUF' | 'AUTRE';
+  situationFamiliale?: 'CELIBATAIRE' | 'MARIE' | 'DIVORCE' | 'SEPARE' | 'VEUF' | 'AUTRE';
   situationFamilialeAutre?: string;
   
-  logement30Jours: 'SEUL' | 'FAMILLE_ORIGINE' | 'PARTENAIRE' | 'ENFANTS' | 'AMIS' | 'INTERNAT' | 'COLOCATION' | 'FOYER' | 'DETENTION' | 'CENTRE_JEUNESSE' | 'INSTITUTION' | 'AUTRE';
+  logement30Jours?: 'SEUL' | 'FAMILLE_ORIGINE' | 'PARTENAIRE' | 'ENFANTS' | 'AMIS' | 'INTERNAT' | 'COLOCATION' | 'FOYER' | 'DETENTION' | 'CENTRE_JEUNESSE' | 'INSTITUTION' | 'AUTRE';
   logement30JoursAutre?: string;
   
-  natureLogement: 'STABLE' | 'PRECAIRE';
+  natureLogement?: 'STABLE' | 'PRECAIRE';
   
-  profession: 'EMPLOYE' | 'COMPTE_PROPRE' | 'JOURNALIER' | 'SPORTIF' | 'CHOMAGE' | 'ELEVE' | 'ETUDIANT' | 'FORMATION' | 'RETRAITE' | 'SANS_RESSOURCES';
+  profession?: 'EMPLOYE' | 'COMPTE_PROPRE' | 'JOURNALIER' | 'SPORTIF' | 'CHOMAGE' | 'ELEVE' | 'ETUDIANT' | 'FORMATION' | 'RETRAITE' | 'SANS_RESSOURCES';
   
-  niveauScolaire: 'ANALPHABETE' | 'PRESCOLAIRE' | 'PRIMAIRE' | 'COLLEGE' | 'SECONDAIRE' | 'FORMATION_PROF' | 'UNIVERSITAIRE';
+  niveauScolaire?: 'ANALPHABETE' | 'PRESCOLAIRE' | 'PRIMAIRE' | 'COLLEGE' | 'SECONDAIRE' | 'FORMATION_PROF' | 'UNIVERSITAIRE';
   
-  activiteSportive: boolean | null;
+  activiteSportive?: boolean | null;
   activiteSportiveFrequence?: 'REGULIERE' | 'IRREGULIERE';
   activiteSportiveType?: 'COMPETITION' | 'LOISIR';
   espacesLoisirs?: boolean;
   dopage?: boolean | null;
+  
+  // Champ pour gérer le cadre de consultation principal (choix unique)
+  cadreConsultationPrincipal?: string;
   
   // Partie 2: Consommation tabac & alcool
   consommationTabac: 'FUMEUR' | 'NON_FUMEUR' | 'EX_FUMEUR';
