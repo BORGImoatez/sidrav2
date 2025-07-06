@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FormulaireData } from '../../../models/formulaire.model';
+import { FormulaireData } from '../../models/formulaire.model';
 
 @Component({
   selector: 'app-step1',
