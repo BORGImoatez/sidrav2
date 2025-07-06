@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, QueryList, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { OtpRequest } from '../../models/user.model';
 
 @Component({
   selector: 'app-otp',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   template: `
     <div class="otp-container">
       <div class="otp-card card">
@@ -23,22 +23,24 @@ import { OtpRequest } from '../../models/user.model';
         </div>
 
         <div class="otp-form">
-          <div class="otp-inputs">
-            <input
-                *ngFor="let digit of otpDigits; let i = index"
-                type="text"
-                maxlength="1"
-                class="otp-input"
-                [class.error]="showError && !digit"
-                [(ngModel)]="otpDigits[i]"
-                (input)="onDigitInput($event, i)"
-                (keydown)="onKeyDown($event, i)"
-                (paste)="onPaste($event)"
-                [disabled]="isLoading"
-                #otpInput
-            >
-
-          </div>
+          <form [formGroup]="otpForm">
+            <div class="otp-inputs">
+              <ng-container *ngFor="let control of otpControls; let i = index">
+                <input
+                    type="text"
+                    maxlength="1"
+                    class="otp-input"
+                    [formControlName]="'digit' + (i + 1)"
+                    (keydown)="onKeyDown($event, i)"
+                    (input)="onInput(i)"
+                    (paste)="onPaste($event)"
+                    #otpInput
+                    [disabled]="isLoading"
+                    autocomplete="off"
+                >
+              </ng-container>
+            </div>
+          </form>
 
           <div *ngIf="errorMessage" class="error-banner">
             <span>{{ errorMessage }}</span>
@@ -55,10 +57,10 @@ import { OtpRequest } from '../../models/user.model';
           </div>
 
           <button
-            type="button"
-            (click)="verifyOtp()"
-            class="btn btn-primary btn-lg w-full"
-            [disabled]="isLoading || !isOtpComplete() || isBlocked"
+              type="button"
+              (click)="verifyOtp()"
+              class="btn btn-primary btn-lg w-full"
+              [disabled]="isLoading || !isOtpComplete() || isBlocked"
           >
             <span *ngIf="!isLoading">Vérifier</span>
             <span *ngIf="isLoading" class="flex items-center justify-center gap-2">
@@ -69,20 +71,20 @@ import { OtpRequest } from '../../models/user.model';
 
           <div class="otp-actions">
             <button
-              type="button"
-              (click)="resendCode()"
-              class="btn btn-secondary"
-              [disabled]="isLoading || canResendIn > 0"
+                type="button"
+                (click)="resendCode()"
+                class="btn btn-secondary"
+                [disabled]="isLoading || canResendIn > 0"
             >
               <span *ngIf="canResendIn === 0">Renvoyer le code</span>
               <span *ngIf="canResendIn > 0">Renvoyer dans {{ canResendIn }}s</span>
             </button>
 
             <button
-              type="button"
-              (click)="goBack()"
-              class="btn btn-secondary"
-              [disabled]="isLoading"
+                type="button"
+                (click)="goBack()"
+                class="btn btn-secondary"
+                [disabled]="isLoading"
             >
               Retour
             </button>
@@ -170,9 +172,9 @@ import { OtpRequest } from '../../models/user.model';
     }
 
     .success-banner {
-      background-color: var(--success-50);
-      border: 1px solid var(--success-200);
-      color: var(--success-700);
+      background-color: var(--success-500);
+      border: 1px solid var(--success-600);
+      color: var(--success-600);
       padding: var(--spacing-3) var(--spacing-4);
       border-radius: var(--radius-md);
       margin-bottom: var(--spacing-4);
@@ -218,25 +220,33 @@ import { OtpRequest } from '../../models/user.model';
       transition: width 1s linear;
     }
 
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     @media (max-width: 480px) {
       .otp-card {
         padding: var(--spacing-6);
       }
-      
+
       .otp-input {
         width: 45px;
         height: 45px;
         font-size: 16px;
       }
-      
+
       .otp-inputs {
         gap: var(--spacing-2);
       }
     }
   `]
 })
-export class OtpComponent implements OnInit, OnDestroy {
-  otpDigits: string[] = ['', '', '', '', '', ''];
+export class OtpComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+
+  otpForm!: FormGroup;
+  otpControls = Array(6).fill(0);
   userId: number = 0;
   isLoading = false;
   showError = false;
@@ -245,19 +255,22 @@ export class OtpComponent implements OnInit, OnDestroy {
   remainingAttempts: number | null = null;
   blockedUntil: Date | null = null;
   isBlocked = false;
-  
+
   timeRemaining = 300; // 5 minutes
   canResendIn = 0;
-  
+
   private timers: any[] = [];
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
+      private authService: AuthService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.initializeForm();
+
     // Récupérer l'ID utilisateur depuis les paramètres de requête
     this.route.queryParams.subscribe(params => {
       this.userId = +params['userId'];
@@ -269,7 +282,7 @@ export class OtpComponent implements OnInit, OnDestroy {
 
     // Démarrer le timer d'expiration
     this.startExpirationTimer();
-    
+
     // Timer pour les tentatives de renvoi
     this.canResendIn = 30;
     this.startResendTimer();
@@ -282,15 +295,25 @@ export class OtpComponent implements OnInit, OnDestroy {
         this.errorMessage = '';
       }
     }, 1000);
-    
-    this.timers.push(blockTimer);
 
-    // Focus sur le premier input
+    this.timers.push(blockTimer);
+  }
+
+  private initializeForm(): void {
+    const formControls: { [key: string]: FormControl } = {};
+    for (let i = 0; i < 6; i++) {
+      formControls[`digit${i + 1}`] = new FormControl('', [
+        Validators.required,
+        Validators.pattern('[0-9]')
+      ]);
+    }
+    this.otpForm = this.fb.group(formControls);
+  }
+
+  ngAfterViewInit(): void {
+    // Focus sur le premier input après que la vue soit initialisée
     setTimeout(() => {
-      const firstInput = document.querySelector('.otp-input') as HTMLInputElement;
-      if (firstInput) {
-        firstInput.focus();
-      }
+      this.focusInput(0);
     }, 100);
   }
 
@@ -298,87 +321,76 @@ export class OtpComponent implements OnInit, OnDestroy {
     this.timers.forEach(timer => clearInterval(timer));
   }
 
-  onDigitInput(event: any, index: number): void {
-    const input = event.target as HTMLInputElement;
-    // Ne garder que le dernier chiffre numérique
-    const val = input.value.replace(/\D/g, '').slice(-1);
+  onKeyDown(event: KeyboardEvent, index: number): void {
+    const key = event.key;
+    const currentControl = this.otpForm.get(`digit${index + 1}`)!;
 
-    if (val) {
-      this.otpDigits[index] = val;
-      // Mettre la valeur propre dans le champ (pas forcément obligatoire avec ngModel, mais pour être sûr)
-      input.value = val;
+    if (
+        !/^[0-9]$/.test(key) &&
+        !['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'].includes(key)
+    ) {
+      event.preventDefault();
+    }
 
-      // Passer au prochain input
-      if (index < this.otpDigits.length - 1) {
-        const nextInput = input.parentElement?.children[index + 1] as HTMLInputElement;
-        nextInput?.focus();
+    if (key === 'Backspace') {
+      if (!currentControl.value && index > 0) {
+        this.otpInputs.toArray()[index - 1].nativeElement.focus();
       }
-    } else {
-      // Si suppression, vider la case dans le tableau
-      this.otpDigits[index] = '';
+    } else if (key === 'ArrowLeft' && index > 0) {
+      this.otpInputs.toArray()[index - 1].nativeElement.focus();
+    } else if (key === 'ArrowRight' && index < 5) {
+      this.otpInputs.toArray()[index + 1].nativeElement.focus();
     }
 
     this.clearMessages();
   }
-  onKeyDown(event: KeyboardEvent, index: number): void {
-    const input = event.target as HTMLInputElement;
 
-    if (event.key === 'Backspace') {
-      event.preventDefault();
+  onInput(index: number): void {
+    const control = this.otpForm.get(`digit${index + 1}`)!;
+    const value = control.value;
 
-      if (this.otpDigits[index]) {
-        // Vider le champ actuel
-        this.otpDigits[index] = '';
-        input.value = '';
-      } else if (index > 0) {
-        // Passer au champ précédent
-        const prevInput = input.parentElement?.children[index - 1] as HTMLInputElement;
-        if (prevInput) {
-          this.otpDigits[index - 1] = '';
-          prevInput.value = '';
-          prevInput.focus();
-        }
-      }
+    const digit = value.toString().replace(/\D/g, '').charAt(0) || '';
+    control.setValue(digit);
+
+    if (digit && index < 5) {
+      this.otpInputs.toArray()[index + 1].nativeElement.focus();
     }
 
-    // Gérer les flèches pour naviguer entre les champs
-    if (event.key === 'ArrowLeft' && index > 0) {
-      const prevInput = input.parentElement?.children[index - 1] as HTMLInputElement;
-      prevInput?.focus();
-    } else if (event.key === 'ArrowRight' && index < 5) {
-      const nextInput = input.parentElement?.children[index + 1] as HTMLInputElement;
-      nextInput?.focus();
-    }
-
-    // Empêcher la saisie de caractères non numériques
-    if (!/[0-9]/.test(event.key) &&
-        !['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      event.preventDefault();
-    }
+    this.clearMessages();
   }
-  onPaste(event: any): void {
+
+  onPaste(event: ClipboardEvent): void {
     event.preventDefault();
-    const pastedText = event.clipboardData.getData('text').replace(/\D/g, '');
-    
-    if (pastedText.length === 6) {
-      for (let i = 0; i < 6; i++) {
-        this.otpDigits[i] = pastedText[i] || '';
-        const input = event.target.parentElement.children[i] as HTMLInputElement;
-        if (input) {
-          input.value = this.otpDigits[i];
-        }
+    const pastedText = event.clipboardData?.getData('text')?.replace(/\D/g, '') || '';
+
+    for (let i = 0; i < Math.min(6, pastedText.length); i++) {
+      const control = this.otpForm.get(`digit${i + 1}`);
+      if (control) {
+        control.setValue(pastedText[i]);
       }
-      
-      // Focus sur le dernier champ rempli
-      const lastInput = event.target.parentElement.children[5] as HTMLInputElement;
-      if (lastInput) {
-        lastInput.focus();
-      }
+    }
+
+    const focusIndex = Math.min(pastedText.length, 6) - 1;
+    this.otpInputs.toArray()[focusIndex]?.nativeElement.focus();
+
+    this.clearMessages();
+  }
+
+  private focusInput(index: number): void {
+    const inputArray = this.otpInputs?.toArray();
+    if (inputArray && inputArray[index]) {
+      inputArray[index].nativeElement.focus();
     }
   }
 
   isOtpComplete(): boolean {
-    return this.otpDigits.every(digit => digit.length === 1 && /^\d$/.test(digit));
+    return this.otpForm.valid;
+  }
+
+  private getOtpValue(): string {
+    return Array.from({ length: 6 })
+        .map((_, i) => this.otpForm.get(`digit${i + 1}`)?.value || '')
+        .join('');
   }
 
   verifyOtp(): void {
@@ -390,8 +402,8 @@ export class OtpComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     this.clearMessages();
+    const otpCode = this.getOtpValue();
 
-    const otpCode = this.otpDigits.join('');
     const otpRequest: OtpRequest = {
       userId: this.userId,
       code: otpCode
@@ -400,7 +412,7 @@ export class OtpComponent implements OnInit, OnDestroy {
     this.authService.verifyOtp(otpRequest).subscribe({
       next: (response) => {
         this.isLoading = false;
-        
+
         if (response.success) {
           this.successMessage = 'Connexion réussie !';
           setTimeout(() => {
@@ -409,12 +421,12 @@ export class OtpComponent implements OnInit, OnDestroy {
         } else {
           this.errorMessage = response.message;
           this.remainingAttempts = response.remainingAttempts || null;
-          
+
           if (response.blockedUntil) {
-            this.blockedUntil = response.blockedUntil;
+            this.blockedUntil = new Date(response.blockedUntil);
             this.isBlocked = true;
           }
-          
+
           // Réinitialiser les champs en cas d'erreur
           this.resetOtpFields();
         }
@@ -429,20 +441,17 @@ export class OtpComponent implements OnInit, OnDestroy {
   }
 
   private resetOtpFields(): void {
-    this.otpDigits = ['', '', '', '', '', ''];
-    
-    // Réinitialiser les valeurs des inputs
-    setTimeout(() => {
-      const inputs = document.querySelectorAll('.otp-input') as NodeListOf<HTMLInputElement>;
-      inputs.forEach(input => {
-        input.value = '';
-      });
-      
-      // Focus sur le premier input
-      const firstInput = inputs[0];
-      if (firstInput) {
-        firstInput.focus();
+    // Réinitialiser les valeurs du formulaire
+    for (let i = 0; i < 6; i++) {
+      const control = this.otpForm.get(`digit${i + 1}`);
+      if (control) {
+        control.setValue('');
       }
+    }
+
+    // Focus sur le premier input
+    setTimeout(() => {
+      this.focusInput(0);
     }, 100);
   }
 
@@ -455,16 +464,16 @@ export class OtpComponent implements OnInit, OnDestroy {
     this.authService.resendOtp(this.userId).subscribe({
       next: (response) => {
         this.isLoading = false;
-        
+
         if (response.success) {
           this.successMessage = response.message;
           this.canResendIn = 30;
           this.startResendTimer();
-          
+
           // Réinitialiser le timer d'expiration
           this.timeRemaining = 300;
           this.startExpirationTimer();
-          
+
           // Réinitialiser les champs
           this.resetOtpFields();
         } else {
@@ -485,40 +494,42 @@ export class OtpComponent implements OnInit, OnDestroy {
 
   private startExpirationTimer(): void {
     // Nettoyer le timer précédent s'il existe
-    this.timers.forEach(timer => {
+    this.timers.forEach((timer, index) => {
       if (timer.type === 'expiration') {
         clearInterval(timer.id);
+        this.timers.splice(index, 1);
       }
     });
-    
+
     const timer = setInterval(() => {
       this.timeRemaining--;
-      
+
       if (this.timeRemaining <= 0) {
         clearInterval(timer);
         this.errorMessage = 'Le code OTP a expiré. Veuillez en demander un nouveau.';
       }
     }, 1000);
-    
+
     this.timers.push({ id: timer, type: 'expiration' });
   }
 
   private startResendTimer(): void {
     // Nettoyer le timer précédent s'il existe
-    this.timers.forEach(timer => {
+    this.timers.forEach((timer, index) => {
       if (timer.type === 'resend') {
         clearInterval(timer.id);
+        this.timers.splice(index, 1);
       }
     });
-    
+
     const timer = setInterval(() => {
       this.canResendIn--;
-      
+
       if (this.canResendIn <= 0) {
         clearInterval(timer);
       }
     }, 1000);
-    
+
     this.timers.push({ id: timer, type: 'resend' });
   }
 
@@ -536,13 +547,13 @@ export class OtpComponent implements OnInit, OnDestroy {
 
   getBlockedTimeRemaining(): string {
     if (!this.blockedUntil) return '';
-    
+
     const remaining = Math.ceil((this.blockedUntil.getTime() - Date.now()) / 1000);
     if (remaining <= 0) return '';
-    
+
     const minutes = Math.floor(remaining / 60);
     const seconds = remaining % 60;
-    
+
     if (minutes > 0) {
       return `${minutes}m ${seconds}s`;
     }

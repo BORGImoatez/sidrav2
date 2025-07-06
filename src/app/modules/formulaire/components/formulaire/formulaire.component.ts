@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormulaireData, FormulaireStep } from '../../models/formulaire.model';
-import { Step1Component } from '../steps/step1/step1.component.ts';
-import { Step2Component } from '../steps/step2/step2.component.ts';
-import { Step3Component } from '../steps/step3/step3.component.ts';
-import { Step4Component } from '../steps/step4/step4.component.ts';
-import { Step5Component } from '../steps/step5/step5.component.ts';
-import { Step6Component } from '../steps/step6/step6.component.ts';
+import {Step1Component} from "../steps/step1/step1.component";
+import {Step2Component} from "../steps/step2/step2.component";
+import {Step3Component} from "../steps/step3/step3.component";
+import {Step4Component} from "../steps/step4/step4.component";
+import {Step5Component} from "../steps/step5/step5.component";
+import {Step6Component} from "../steps/step6/step6.component";
+
 
 @Component({
   selector: 'app-formulaire',
@@ -17,8 +18,7 @@ import { Step6Component } from '../steps/step6/step6.component.ts';
   imports: [
     CommonModule, 
     FormsModule,
-    DatePipe,
-    Step1Component,
+     Step1Component,
     Step2Component,
     Step3Component,
     Step4Component,

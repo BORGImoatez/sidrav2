@@ -19,21 +19,19 @@ import { LoginRequest } from '../../models/user.model';
           <p class="text-center text-gray-600 mb-8">
             Système d'Information Drogue et Addiction
           </p>
-          
+
           <!-- Logos des partenaires -->
           <div class="partners-logos">
             <div class="logo-placeholder">
-              <span class="text-xs text-gray-500">Ministère<br>de la Santé</span>
+              <img width="50" height="50" src="../../../assets/logo/logoMS.png" alt="">
             </div>
             <div class="logo-placeholder">
-              <span class="text-xs text-gray-500">Ministère<br>des Affaires Sociales</span>
+              <img width="50" height="50" src="../../../assets/logo/logoInsp.jpg" alt="">
             </div>
             <div class="logo-placeholder">
-              <span class="text-xs text-gray-500">ONTT</span>
+              <img width="50" height="50" src="../../../assets/logo/BNS.png" alt="">
             </div>
-            <div class="logo-placeholder">
-              <span class="text-xs text-gray-500">Partenaires<br>Internationaux</span>
-            </div>
+            
           </div>
         </div>
 
@@ -43,15 +41,15 @@ import { LoginRequest } from '../../models/user.model';
               Adresse email
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              [(ngModel)]="loginData.email"
-              class="form-input"
-              [class.error]="showError && !loginData.email"
-              placeholder="exemple@email.com"
-              required
-              [disabled]="isLoading"
+                type="email"
+                id="email"
+                name="email"
+                [(ngModel)]="loginData.email"
+                class="form-input"
+                [class.error]="showError && !loginData.email"
+                placeholder="exemple@email.com"
+                required
+                [disabled]="isLoading"
             >
             <div *ngIf="showError && !loginData.email" class="form-error">
               L'adresse email est requise
@@ -63,15 +61,15 @@ import { LoginRequest } from '../../models/user.model';
               Mot de passe
             </label>
             <input
-              type="password"
-              id="motDePasse"
-              name="motDePasse"
-              [(ngModel)]="loginData.motDePasse"
-              class="form-input"
-              [class.error]="showError && !loginData.motDePasse"
-              placeholder="••••••••"
-              required
-              [disabled]="isLoading"
+                type="password"
+                id="motDePasse"
+                name="motDePasse"
+                [(ngModel)]="loginData.motDePasse"
+                class="form-input"
+                [class.error]="showError && !loginData.motDePasse"
+                placeholder="••••••••"
+                required
+                [disabled]="isLoading"
             >
             <div *ngIf="showError && !loginData.motDePasse" class="form-error">
               Le mot de passe est requis
@@ -89,9 +87,9 @@ import { LoginRequest } from '../../models/user.model';
           </div>
 
           <button
-            type="submit"
-            class="btn btn-primary btn-lg w-full"
-            [disabled]="isLoading || isBlocked"
+              type="submit"
+              class="btn btn-primary btn-lg w-full"
+              [disabled]="isLoading || isBlocked"
           >
             <span *ngIf="!isLoading">Se connecter</span>
             <span *ngIf="isLoading" class="flex items-center justify-center gap-2">
@@ -137,7 +135,7 @@ import { LoginRequest } from '../../models/user.model';
 
     .partners-logos {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: var(--spacing-3);
       margin-bottom: var(--spacing-6);
       padding: var(--spacing-4);
@@ -158,7 +156,7 @@ import { LoginRequest } from '../../models/user.model';
     }
 
     .logo-placeholder:hover {
-      border-color: var(--primary-400);
+      border-color: var(--primary-500);
     }
 
     .login-form {
