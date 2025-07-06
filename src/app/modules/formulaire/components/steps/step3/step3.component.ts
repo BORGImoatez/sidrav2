@@ -12,583 +12,1323 @@ import { FormulaireData } from '../../../models/formulaire.model';
       <div class="card-header">
         <h2 class="step-title">Étape 3 : Consommation de substances psychoactives</h2>
         <p class="step-description">
-          Informations sur la consommation de SPA (hors tabac et alcool)
+          Consommation de substances psychoactives (en dehors de tabac et l'alcool) et autres comportements addictifs
         </p>
       </div>
 
       <div class="card-body">
         <form class="step-form">
-          <!-- Consommation SPA dans l'entourage -->
-          <div class="form-section">
-            <h3 class="section-title">Consommation de SPA dans l'entourage</h3>
-            
-            <div class="form-group">
-              <label class="form-label required">Y a-t-il consommation de SPA dans l'entourage ?</label>
-              <select 
-                class="form-select" 
-                [(ngModel)]="localData.consommationSpaEntourage"
-                name="consommationSpaEntourage"
-                (change)="onFieldChange()"
-                required
-              >
-                <option value="">Sélectionner</option>
-                <option [value]="true">Oui</option>
-                <option [value]="false">Non</option>
-              </select>
+          <!-- Question 19 -->
+          <div class="form-group">
+            <label class="form-label required">19) Consommation de SPA dans l'entourage</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="consommationSpaEntourage"
+                  [value]="true"
+                  [(ngModel)]="localData.consommationSpaEntourage"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">1. Oui</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="consommationSpaEntourage"
+                  [value]="false"
+                  [(ngModel)]="localData.consommationSpaEntourage"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">2. Non</span>
+              </label>
             </div>
-
-            <!-- Si oui, préciser l'entourage -->
-            <div class="form-subsection" *ngIf="localData.consommationSpaEntourage">
-              <h4 class="subsection-title">Dans quel entourage ? (plusieurs choix possibles)</h4>
-              
-              <div class="checkbox-grid">
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.entourageSpa!.membresFamille"
-                    name="membresFamille"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Membres de la famille</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.entourageSpa!.amis"
-                    name="entourageAmis"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Amis</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.entourageSpa!.milieuProfessionnel"
-                    name="milieuProfessionnel"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Milieu professionnel</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.entourageSpa!.milieuSportif"
-                    name="milieuSportif"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Milieu sportif</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.entourageSpa!.milieuScolaire"
-                    name="milieuScolaire"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Milieu scolaire</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.entourageSpa!.autre"
-                      name="entourageAutre"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Autre</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.entourageSpa!.autre">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.entourageSpa!.autrePrecision"
-                      name="entourageAutrePrecision"
-                      placeholder="Préciser"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <!-- Types de SPA dans l'entourage -->
-              <h4 class="subsection-title">Types de SPA consommées dans l'entourage (plusieurs choix possibles)</h4>
-              
-              <div class="spa-types-grid">
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.tabac"
-                    name="entourageTabac"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Tabac</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.alcool"
-                    name="entourageAlcool"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Alcool</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.cannabis"
-                    name="entourageCannabis"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Cannabis</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.opium"
-                    name="entourageOpium"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Opium</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.typeSpaEntourage!.morphiniques"
-                      name="entourageMorphiniques"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Morphiniques</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.typeSpaEntourage!.morphiniques">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.typeSpaEntourage!.morphiniquesPrecision"
-                      name="entourageMorphiniquesPrecision"
-                      placeholder="Préciser le type"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.heroine"
-                    name="entourageHeroine"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Héroïne</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.cocaine"
-                    name="entourageCocaine"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Cocaïne</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.typeSpaEntourage!.hypnotiques"
-                      name="entourageHypnotiques"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Hypnotiques</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.typeSpaEntourage!.hypnotiques">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.typeSpaEntourage!.hypnotiquesPrecision"
-                      name="entourageHypnotiquesPrecision"
-                      placeholder="Préciser le type"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.amphetamines"
-                    name="entourageAmphetamines"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Amphétamines</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.ecstasy"
-                    name="entourageEcstasy"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Ecstasy</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.produitsInhaler"
-                    name="entourageProduitsInhaler"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Produits à inhaler</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.pregabaline"
-                    name="entouragePregabaline"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Prégabaline</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.ketamines"
-                    name="entourageKetamines"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Kétamines</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.typeSpaEntourage!.lsd"
-                    name="entourageLsd"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">LSD</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.typeSpaEntourage!.autre"
-                      name="entourageSpaAutre"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Autre</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.typeSpaEntourage!.autre">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.typeSpaEntourage!.autrePrecision"
-                      name="entourageSpaAutrePrecision"
-                      placeholder="Préciser"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
-              </div>
+            <div *ngIf="showValidationErrors && localData.consommationSpaEntourage === undefined" class="form-error">
+              Ce champ est obligatoire
             </div>
           </div>
 
-          <!-- Consommation personnelle de SPA -->
-          <div class="form-section">
-            <h3 class="section-title">Consommation personnelle de SPA</h3>
+          <!-- Question 20 -->
+          <div class="form-group conditional-field" *ngIf="localData.consommationSpaEntourage === true">
+            <label class="form-label required">20) Si consommation de SPA dans l'entourage oui</label>
             
-            <div class="form-group">
-              <label class="form-label required">Consommez-vous des substances psychoactives ?</label>
-              <select 
-                class="form-select" 
-                [(ngModel)]="localData.consommationSpaPersonnelle"
-                name="consommationSpaPersonnelle"
-                (change)="onFieldChange()"
-                required
-              >
-                <option value="">Sélectionner</option>
-                <option [value]="true">Oui</option>
-                <option [value]="false">Non</option>
-              </select>
+            <div class="sub-question">
+              <label class="form-label">1. Membre(s) de la famille</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMembresFamille"
+                    [value]="true"
+                    [(ngModel)]="localData.entourageSpa!.membresFamille"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMembresFamille"
+                    [value]="false"
+                    [(ngModel)]="localData.entourageSpa!.membresFamille"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
             </div>
 
-            <!-- Si oui, détails de la consommation -->
-            <div class="form-subsection" *ngIf="localData.consommationSpaPersonnelle">
-              <!-- Drogues utilisées actuellement -->
-              <h4 class="subsection-title">Drogues utilisées actuellement (plusieurs choix possibles)</h4>
-              
-              <div class="spa-types-grid">
-                <!-- Même liste que pour l'entourage mais pour usage personnel -->
-                <label class="checkbox-label">
+            <div class="sub-question">
+              <label class="form-label">2. Ami(e)s</label>
+              <div class="radio-options">
+                <label class="radio-option">
                   <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.cannabis"
-                    name="actualCannabis"
+                    type="radio" 
+                    name="entourageAmis"
+                    [value]="true"
+                    [(ngModel)]="localData.entourageSpa!.amis"
                     (change)="onFieldChange()"
                   >
-                  <span class="checkbox-text">Cannabis</span>
+                  <span class="radio-text">1. Oui</span>
                 </label>
-
-                <label class="checkbox-label">
+                <label class="radio-option">
                   <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.opium"
-                    name="actualOpium"
+                    type="radio" 
+                    name="entourageAmis"
+                    [value]="false"
+                    [(ngModel)]="localData.entourageSpa!.amis"
                     (change)="onFieldChange()"
                   >
-                  <span class="checkbox-text">Opium</span>
+                  <span class="radio-text">2. Non</span>
                 </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.droguesActuelles!.morphiniques"
-                      name="actualMorphiniques"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Morphiniques</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.droguesActuelles!.morphiniques">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.droguesActuelles!.morphiniquesPrecision"
-                      name="actualMorphiniquesPrecision"
-                      placeholder="Préciser le type"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.heroine"
-                    name="actualHeroine"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Héroïne</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.cocaine"
-                    name="actualCocaine"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Cocaïne</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.droguesActuelles!.hypnotiques"
-                      name="actualHypnotiques"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Hypnotiques</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.droguesActuelles!.hypnotiques">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.droguesActuelles!.hypnotiquesPrecision"
-                      name="actualHypnotiquesPrecision"
-                      placeholder="Préciser le type"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.amphetamines"
-                    name="actualAmphetamines"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Amphétamines</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.ecstasy"
-                    name="actualEcstasy"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Ecstasy</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.produitsInhaler"
-                    name="actualProduitsInhaler"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Produits à inhaler</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.pregabaline"
-                    name="actualPregabaline"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Prégabaline</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.ketamines"
-                    name="actualKetamines"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Kétamines</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.droguesActuelles!.lsd"
-                    name="actualLsd"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">LSD</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.droguesActuelles!.autre"
-                      name="actualAutre"
-                      (change)="onFieldChange()"
-                    >
-                    <span class="checkbox-text">Autre</span>
-                  </label>
-                  
-                  <div class="sub-options" *ngIf="localData.droguesActuelles!.autre">
-                    <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.droguesActuelles!.autrePrecision"
-                      name="actualAutrePrecision"
-                      placeholder="Préciser"
-                      (input)="onFieldChange()"
-                    >
-                  </div>
-                </div>
               </div>
+            </div>
 
-              <!-- Âge d'initiation -->
-              <div class="form-group">
-                <label class="form-label">Âge d'initiation à la première substance</label>
+            <div class="sub-question">
+              <label class="form-label">3. Milieu professionnel</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMilieuProfessionnel"
+                    [value]="true"
+                    [(ngModel)]="localData.entourageSpa!.milieuProfessionnel"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMilieuProfessionnel"
+                    [value]="false"
+                    [(ngModel)]="localData.entourageSpa!.milieuProfessionnel"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <label class="form-label">4. Milieu sportif</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMilieuSportif"
+                    [value]="true"
+                    [(ngModel)]="localData.entourageSpa!.milieuSportif"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMilieuSportif"
+                    [value]="false"
+                    [(ngModel)]="localData.entourageSpa!.milieuSportif"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <label class="form-label">5. Milieu scolaire et universitaire</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMilieuScolaire"
+                    [value]="true"
+                    [(ngModel)]="localData.entourageSpa!.milieuScolaire"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageMilieuScolaire"
+                    [value]="false"
+                    [(ngModel)]="localData.entourageSpa!.milieuScolaire"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <label class="form-label">6. Autre</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageAutre"
+                    [value]="true"
+                    [(ngModel)]="localData.entourageSpa!.autre"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="entourageAutre"
+                    [value]="false"
+                    [(ngModel)]="localData.entourageSpa!.autre"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+              
+              <div class="nested" *ngIf="localData.entourageSpa!.autre === true">
+                <label class="form-label required">20.a) Si autre, préciser</label>
                 <input 
-                  type="number" 
+                  type="text" 
                   class="form-input"
-                  [(ngModel)]="localData.ageInitiationPremiere"
-                  name="ageInitiationPremiere"
-                  placeholder="Âge en années"
-                  min="1"
-                  max="100"
+                  [class.error]="showValidationErrors && !localData.entourageSpa!.autrePrecision"
+                  [(ngModel)]="localData.entourageSpa!.autrePrecision"
+                  name="entourageAutrePrecision"
+                  placeholder="Préciser"
                   (input)="onFieldChange()"
                 >
+                <div *ngIf="showValidationErrors && !localData.entourageSpa!.autrePrecision" class="form-error">
+                  Ce champ est obligatoire
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Autres comportements addictifs -->
-          <div class="form-section">
-            <h3 class="section-title">Autres comportements addictifs</h3>
+          <!-- Question 21 -->
+          <div class="form-group conditional-field" *ngIf="localData.consommationSpaEntourage === true">
+            <label class="form-label required">21) Type de SPA consommées dans l'entourage</label>
             
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label required">Troubles alimentaires</label>
-                <select 
-                  class="form-select" 
-                  [(ngModel)]="localData.troublesAlimentaires"
+            <div class="spa-list">
+              <div class="spa-item">
+                <label class="form-label">1. Tabac</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageTabac"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.tabac"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageTabac"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.tabac"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">2. Alcool</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageAlcool"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.alcool"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageAlcool"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.alcool"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">3. Cannabis</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageCannabis"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.cannabis"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageCannabis"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.cannabis"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">4. Opium</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageOpium"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.opium"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageOpium"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.opium"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">5. Les morphiniques de synthèse (Subutex…)</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageMorphiniques"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.morphiniques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageMorphiniques"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.morphiniques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.typeSpaEntourage!.morphiniques === true">
+                  <label class="form-label required">5.a) Si oui, préciser la substance</label>
+                  <select 
+                    class="form-select"
+                    [class.error]="showValidationErrors && !localData.typeSpaEntourage!.morphiniquesPrecision"
+                    [(ngModel)]="localData.typeSpaEntourage!.morphiniquesPrecision"
+                    name="entourageMorphiniquesPrecision"
+                    (change)="onFieldChange()"
+                  >
+                    <option value="">Sélectionner</option>
+                    <option value="Subutex">Subutex</option>
+                    <option value="Méthadone">Méthadone</option>
+                    <option value="Tramal">Tramal</option>
+                    <option value="Coalgésic">Coalgésic</option>
+                    <option value="Fentanyl">Fentanyl</option>
+                  </select>
+                  <div *ngIf="showValidationErrors && !localData.typeSpaEntourage!.morphiniquesPrecision" class="form-error">
+                    Ce champ est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">6. Héroïne</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageHeroine"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.heroine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageHeroine"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.heroine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">7. Cocaïne</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageCocaine"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.cocaine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageCocaine"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.cocaine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">8. Hypnotiques & sédatifs</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageHypnotiques"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.hypnotiques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageHypnotiques"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.hypnotiques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.typeSpaEntourage!.hypnotiques === true">
+                  <label class="form-label">Préciser</label>
+                  <input 
+                    type="text" 
+                    class="form-input"
+                    [(ngModel)]="localData.typeSpaEntourage!.hypnotiquesPrecision"
+                    name="entourageHypnotiquesPrecision"
+                    placeholder="Ex: Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
+                    (input)="onFieldChange()"
+                  >
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">9. Amphétamines</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageAmphetamines"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.amphetamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageAmphetamines"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.amphetamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">10. Ecstasy</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageEcstasy"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.ecstasy"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageEcstasy"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.ecstasy"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">11. Produits à inhaler (colle, solvants)</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageProduitsInhaler"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.produitsInhaler"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageProduitsInhaler"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.produitsInhaler"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">12. Prégabaline</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entouragePregabaline"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.pregabaline"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entouragePregabaline"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.pregabaline"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">13. Kétamines</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageKetamines"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.ketamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageKetamines"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.ketamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">14. LSD</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageLsd"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.lsd"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageLsd"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.lsd"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">15. Autre</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageSpaAutre"
+                      [value]="true"
+                      [(ngModel)]="localData.typeSpaEntourage!.autre"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="entourageSpaAutre"
+                      [value]="false"
+                      [(ngModel)]="localData.typeSpaEntourage!.autre"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.typeSpaEntourage!.autre === true">
+                  <label class="form-label required">21.a) Si autre, préciser</label>
+                  <input 
+                    type="text" 
+                    class="form-input"
+                    [class.error]="showValidationErrors && !localData.typeSpaEntourage!.autrePrecision"
+                    [(ngModel)]="localData.typeSpaEntourage!.autrePrecision"
+                    name="entourageSpaAutrePrecision"
+                    placeholder="Préciser"
+                    (input)="onFieldChange()"
+                  >
+                  <div *ngIf="showValidationErrors && !localData.typeSpaEntourage!.autrePrecision" class="form-error">
+                    Ce champ est obligatoire
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 22 -->
+          <div class="form-group">
+            <label class="form-label required">22) Consommez-vous des SPA en dehors de l'alcool et tabac</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="consommationSpaPersonnelle"
+                  [value]="true"
+                  [(ngModel)]="localData.consommationSpaPersonnelle"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">1. Oui</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="consommationSpaPersonnelle"
+                  [value]="false"
+                  [(ngModel)]="localData.consommationSpaPersonnelle"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">2. Non</span>
+              </label>
+            </div>
+            <div *ngIf="showValidationErrors && localData.consommationSpaPersonnelle === undefined" class="form-error">
+              Ce champ est obligatoire
+            </div>
+          </div>
+
+          <!-- Question 23 -->
+          <div class="form-group conditional-field" *ngIf="localData.consommationSpaPersonnelle === true">
+            <label class="form-label required">23) Quelle(s) est/sont la/les drogue(s) utilisée(s) actuellement chez le patient</label>
+            
+            <div class="spa-list">
+              <div class="spa-item">
+                <label class="form-label">1. Cannabis</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualCannabis"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.cannabis"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualCannabis"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.cannabis"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">2. Opium</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualOpium"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.opium"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualOpium"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.opium"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">3. Les morphiniques de synthèse (Subutex…)</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualMorphiniques"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.morphiniques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualMorphiniques"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.morphiniques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.droguesActuelles!.morphiniques === true">
+                  <label class="form-label required">3.a) Si oui, préciser la substance</label>
+                  <select 
+                    class="form-select"
+                    [class.error]="showValidationErrors && !localData.droguesActuelles!.morphiniquesPrecision"
+                    [(ngModel)]="localData.droguesActuelles!.morphiniquesPrecision"
+                    name="actualMorphiniquesPrecision"
+                    (change)="onFieldChange()"
+                  >
+                    <option value="">Sélectionner</option>
+                    <option value="Subutex">Subutex</option>
+                    <option value="Méthadone">Méthadone</option>
+                    <option value="Tramal">Tramal</option>
+                    <option value="Coalgésic">Coalgésic</option>
+                    <option value="Fentanyl">Fentanyl</option>
+                  </select>
+                  <div *ngIf="showValidationErrors && !localData.droguesActuelles!.morphiniquesPrecision" class="form-error">
+                    Ce champ est obligatoire
+                  </div>
+                </div>
+              </div>
+
+              <!-- Répéter pour les autres substances... -->
+              <div class="spa-item">
+                <label class="form-label">4. Héroïne</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualHeroine"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.heroine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualHeroine"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.heroine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">5. Cocaïne</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualCocaine"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.cocaine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualCocaine"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.cocaine"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">6. Hypnotiques & sédatifs</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualHypnotiques"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.hypnotiques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualHypnotiques"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.hypnotiques"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.droguesActuelles!.hypnotiques === true">
+                  <label class="form-label">Préciser</label>
+                  <input 
+                    type="text" 
+                    class="form-input"
+                    [(ngModel)]="localData.droguesActuelles!.hypnotiquesPrecision"
+                    name="actualHypnotiquesPrecision"
+                    placeholder="Ex: Temesta, Lexomil, Lysanxia, Tranxene, Artane, Parkisol..."
+                    (input)="onFieldChange()"
+                  >
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">7. Amphétamines</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualAmphetamines"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.amphetamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualAmphetamines"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.amphetamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">8. Ecstasy</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualEcstasy"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.ecstasy"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualEcstasy"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.ecstasy"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">9. Produits à inhaler (colle, solvants)</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualProduitsInhaler"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.produitsInhaler"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualProduitsInhaler"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.produitsInhaler"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">10. Prégabaline</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualPregabaline"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.pregabaline"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualPregabaline"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.pregabaline"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">11. Kétamines</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualKetamines"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.ketamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualKetamines"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.ketamines"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">12. LSD</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualLsd"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.lsd"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualLsd"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.lsd"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="spa-item">
+                <label class="form-label">13. Autre</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualAutre"
+                      [value]="true"
+                      [(ngModel)]="localData.droguesActuelles!.autre"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="actualAutre"
+                      [value]="false"
+                      [(ngModel)]="localData.droguesActuelles!.autre"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.droguesActuelles!.autre === true">
+                  <label class="form-label required">23.a) Si autre, préciser</label>
+                  <input 
+                    type="text" 
+                    class="form-input"
+                    [class.error]="showValidationErrors && !localData.droguesActuelles!.autrePrecision"
+                    [(ngModel)]="localData.droguesActuelles!.autrePrecision"
+                    name="actualAutrePrecision"
+                    placeholder="Préciser"
+                    (input)="onFieldChange()"
+                  >
+                  <div *ngIf="showValidationErrors && !localData.droguesActuelles!.autrePrecision" class="form-error">
+                    Ce champ est obligatoire
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 24 -->
+          <div class="form-group conditional-field" *ngIf="localData.consommationSpaPersonnelle === true">
+            <label class="form-label">24) Quelle est la substance d'initiation de consommation chez le patient</label>
+            
+            <div class="spa-list">
+              <!-- Répéter la même structure que pour la question 23 mais avec substanceInitiation -->
+              <div class="spa-item">
+                <label class="form-label">1. Cannabis</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="initiationCannabis"
+                      [value]="true"
+                      [(ngModel)]="localData.substanceInitiation!.cannabis"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="initiationCannabis"
+                      [value]="false"
+                      [(ngModel)]="localData.substanceInitiation!.cannabis"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Continuer avec les autres substances... -->
+              <!-- Pour économiser l'espace, je vais juste montrer quelques exemples -->
+              
+              <div class="spa-item">
+                <label class="form-label">13. Autre</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="initiationAutre"
+                      [value]="true"
+                      [(ngModel)]="localData.substanceInitiation!.autre"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="initiationAutre"
+                      [value]="false"
+                      [(ngModel)]="localData.substanceInitiation!.autre"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+                
+                <div class="nested" *ngIf="localData.substanceInitiation!.autre === true">
+                  <label class="form-label required">24.13.a) Si autre, préciser</label>
+                  <input 
+                    type="text" 
+                    class="form-input"
+                    [class.error]="showValidationErrors && !localData.substanceInitiation!.autrePrecision"
+                    [(ngModel)]="localData.substanceInitiation!.autrePrecision"
+                    name="initiationAutrePrecision"
+                    placeholder="Préciser"
+                    (input)="onFieldChange()"
+                  >
+                  <div *ngIf="showValidationErrors && !localData.substanceInitiation!.autrePrecision" class="form-error">
+                    Ce champ est obligatoire
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 24.B -->
+            <div class="form-group nested">
+              <label class="form-label">24.B) Âge d'initiation à la consommation de la première substance</label>
+              <input 
+                type="number" 
+                class="form-input"
+                [(ngModel)]="localData.ageInitiationPremiere"
+                name="ageInitiationPremiere"
+                placeholder="Âge en années"
+                min="1"
+                max="100"
+                (input)="onFieldChange()"
+              >
+            </div>
+          </div>
+
+          <!-- Question 25 -->
+          <div class="form-group conditional-field" *ngIf="localData.consommationSpaPersonnelle === true">
+            <label class="form-label">25) (en cas de poly-consommation) Quelle est la substance principale de consommation chez le patient (la plus consommée)</label>
+            
+            <!-- Même structure que les questions précédentes pour substancePrincipale -->
+            
+            <!-- Question 25.B -->
+            <div class="form-group nested">
+              <label class="form-label">25.B) Âge d'initiation de consommation de la substance principale</label>
+              <input 
+                type="number" 
+                class="form-input"
+                [(ngModel)]="localData.ageInitiationPrincipale"
+                name="ageInitiationPrincipale"
+                placeholder="Âge en années"
+                min="1"
+                max="100"
+                (input)="onFieldChange()"
+              >
+            </div>
+          </div>
+
+          <!-- Question 26 -->
+          <div class="form-group">
+            <label class="form-label required">26) Antécédents de troubles des comportements alimentaires (boulimie)</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
                   name="troublesAlimentaires"
+                  [value]="true"
+                  [(ngModel)]="localData.troublesAlimentaires"
                   (change)="onFieldChange()"
-                  required
                 >
-                  <option value="">Sélectionner</option>
-                  <option [value]="true">Oui</option>
-                  <option [value]="false">Non</option>
-                </select>
-              </div>
+                <span class="radio-text">1. Oui</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="troublesAlimentaires"
+                  [value]="false"
+                  [(ngModel)]="localData.troublesAlimentaires"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">2. Non</span>
+              </label>
+            </div>
+            <div *ngIf="showValidationErrors && localData.troublesAlimentaires === undefined" class="form-error">
+              Ce champ est obligatoire
+            </div>
+          </div>
 
-              <div class="form-group">
-                <label class="form-label required">Addiction aux jeux</label>
-                <select 
-                  class="form-select" 
-                  [(ngModel)]="localData.addictionJeux"
+          <!-- Question 26.1 -->
+          <div class="form-group">
+            <label class="form-label required">26.1) Addiction aux jeux pathologiques</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
                   name="addictionJeux"
+                  [value]="true"
+                  [(ngModel)]="localData.addictionJeux"
                   (change)="onFieldChange()"
-                  required
                 >
-                  <option value="">Sélectionner</option>
-                  <option [value]="true">Oui</option>
-                  <option [value]="false">Non</option>
-                </select>
-              </div>
+                <span class="radio-text">1. Oui</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="addictionJeux"
+                  [value]="false"
+                  [(ngModel)]="localData.addictionJeux"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">2. Non</span>
+              </label>
+            </div>
+            <div *ngIf="showValidationErrors && localData.addictionJeux === undefined" class="form-error">
+              Ce champ est obligatoire
+            </div>
+          </div>
 
-              <div class="form-group">
-                <label class="form-label required">Addiction aux écrans</label>
-                <select 
-                  class="form-select" 
-                  [(ngModel)]="localData.addictionEcrans"
+          <!-- Question 26.2 -->
+          <div class="form-group">
+            <label class="form-label required">26.2) Addiction aux écrans</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
                   name="addictionEcrans"
+                  [value]="true"
+                  [(ngModel)]="localData.addictionEcrans"
                   (change)="onFieldChange()"
-                  required
                 >
-                  <option value="">Sélectionner</option>
-                  <option [value]="true">Oui</option>
-                  <option [value]="false">Non</option>
-                </select>
-              </div>
+                <span class="radio-text">1. Oui</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="addictionEcrans"
+                  [value]="false"
+                  [(ngModel)]="localData.addictionEcrans"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">2. Non</span>
+              </label>
+            </div>
+            <div *ngIf="showValidationErrors && localData.addictionEcrans === undefined" class="form-error">
+              Ce champ est obligatoire
+            </div>
+          </div>
 
-              <div class="form-group">
-                <label class="form-label required">Comportements sexuels compulsifs</label>
-                <select 
-                  class="form-select" 
-                  [(ngModel)]="localData.comportementsSexuels"
+          <!-- Question 26.3 -->
+          <div class="form-group">
+            <label class="form-label required">26.3) Comportements sexuels addictifs</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
                   name="comportementsSexuels"
+                  [value]="true"
+                  [(ngModel)]="localData.comportementsSexuels"
                   (change)="onFieldChange()"
-                  required
                 >
-                  <option value="">Sélectionner</option>
-                  <option [value]="true">Oui</option>
-                  <option [value]="false">Non</option>
-                </select>
-              </div>
+                <span class="radio-text">1. Oui</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  name="comportementsSexuels"
+                  [value]="false"
+                  [(ngModel)]="localData.comportementsSexuels"
+                  (change)="onFieldChange()"
+                >
+                <span class="radio-text">2. Non</span>
+              </label>
+            </div>
+            <div *ngIf="showValidationErrors && localData.comportementsSexuels === undefined" class="form-error">
+              Ce champ est obligatoire
             </div>
           </div>
         </form>
@@ -616,17 +1356,6 @@ import { FormulaireData } from '../../../models/formulaire.model';
       margin-bottom: var(--spacing-8);
     }
 
-    .form-section:last-child {
-      margin-bottom: 0;
-    }
-
-    .form-subsection {
-      margin-top: var(--spacing-6);
-      padding: var(--spacing-6);
-      background-color: var(--gray-50);
-      border-radius: var(--radius-md);
-    }
-
     .section-title {
       font-size: 18px;
       font-weight: 600;
@@ -636,75 +1365,102 @@ import { FormulaireData } from '../../../models/formulaire.model';
       border-bottom: 2px solid var(--primary-200);
     }
 
-    .subsection-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--gray-800);
-      margin: 0 0 var(--spacing-4) 0;
+    .form-group {
+      margin-bottom: var(--spacing-6);
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .conditional-field {
+      margin-left: var(--spacing-6);
+      padding-left: var(--spacing-4);
+      border-left: 3px solid var(--primary-200);
+      background-color: var(--gray-50);
+      padding: var(--spacing-4);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .nested {
+      margin-left: var(--spacing-6);
+      padding-left: var(--spacing-4);
+      border-left: 2px solid var(--primary-300);
+      background-color: var(--primary-50);
+      padding: var(--spacing-3);
+      border-radius: var(--radius-md);
+      margin-top: var(--spacing-3);
+    }
+
+    .sub-question {
+      margin-bottom: var(--spacing-4);
+      padding: var(--spacing-3);
+      background-color: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+    }
+
+    .spa-list {
+      display: flex;
+      flex-direction: column;
       gap: var(--spacing-4);
     }
 
-    .checkbox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--spacing-3);
+    .spa-item {
+      padding: var(--spacing-4);
+      background-color: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
     }
 
-    .spa-types-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: var(--spacing-3);
-    }
-
-    .checkbox-group {
+    .radio-options {
       display: flex;
-      flex-direction: column;
-      gap: var(--spacing-2);
+      gap: var(--spacing-6);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-2);
     }
 
-    .checkbox-label {
+    .radio-option {
       display: flex;
       align-items: center;
-      gap: var(--spacing-3);
+      gap: var(--spacing-2);
       cursor: pointer;
-      padding: var(--spacing-3);
-      border-radius: var(--radius-md);
-      transition: background-color 0.2s ease-in-out;
     }
 
-    .checkbox-label:hover {
-      background-color: var(--gray-100);
-    }
-
-    .checkbox-label input[type="checkbox"] {
+    .radio-option input[type="radio"] {
       width: 16px;
       height: 16px;
       accent-color: var(--primary-600);
     }
 
-    .checkbox-text {
+    .radio-text {
       font-weight: 500;
       color: var(--gray-700);
     }
 
-    .sub-options {
-      margin-left: var(--spacing-6);
+    .form-input.error,
+    .form-select.error {
+      border-color: var(--error-500);
+      background-color: var(--error-50);
+    }
+
+    .form-error {
       margin-top: var(--spacing-2);
+      font-size: 12px;
+      color: var(--error-500);
+      font-weight: 500;
     }
 
     @media (max-width: 768px) {
-      .form-grid {
-        grid-template-columns: 1fr;
+      .conditional-field {
+        margin-left: var(--spacing-3);
+        padding-left: var(--spacing-3);
       }
       
-      .checkbox-grid,
-      .spa-types-grid {
-        grid-template-columns: 1fr;
+      .nested {
+        margin-left: var(--spacing-3);
+      }
+      
+      .radio-options {
+        flex-direction: column;
+        gap: var(--spacing-3);
       }
     }
   `]
@@ -715,6 +1471,7 @@ export class Step3Component implements OnInit, OnChanges {
   @Output() validationChange = new EventEmitter<boolean>();
 
   localData: Partial<FormulaireData> = {};
+  showValidationErrors = false;
 
   ngOnInit(): void {
     this.initializeData();
@@ -741,6 +1498,10 @@ export class Step3Component implements OnInit, OnChanges {
     this.validateStep();
   }
 
+  showValidationErrors(): void {
+    this.showValidationErrors = true;
+  }
+
   private validateStep(): void {
     const required = [
       'consommationSpaEntourage',
@@ -751,22 +1512,61 @@ export class Step3Component implements OnInit, OnChanges {
       'comportementsSexuels'
     ];
 
-    // If SPA consumption in entourage, at least one entourage type should be selected
-    if (this.localData.consommationSpaEntourage) {
+    // Validation conditionnelle pour l'entourage
+    if (this.localData.consommationSpaEntourage === true) {
+      // Au moins un type d'entourage doit être sélectionné
       const entourageSelected = Object.values(this.localData.entourageSpa || {}).some(value => value === true);
+      if (!entourageSelected) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      // Si "autre" est sélectionné, la précision est obligatoire
+      if (this.localData.entourageSpa?.autre === true && !this.localData.entourageSpa?.autrePrecision) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      // Au moins un type de SPA dans l'entourage doit être sélectionné
       const typeSpaSelected = Object.values(this.localData.typeSpaEntourage || {}).some(value => value === true);
-      
-      if (!entourageSelected || !typeSpaSelected) {
+      if (!typeSpaSelected) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      // Validations conditionnelles pour les précisions
+      if (this.localData.typeSpaEntourage?.morphiniques === true && !this.localData.typeSpaEntourage?.morphiniquesPrecision) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      if (this.localData.typeSpaEntourage?.autre === true && !this.localData.typeSpaEntourage?.autrePrecision) {
         this.validationChange.emit(false);
         return;
       }
     }
 
-    // If personal SPA consumption, at least one drug should be selected
-    if (this.localData.consommationSpaPersonnelle) {
+    // Validation conditionnelle pour la consommation personnelle
+    if (this.localData.consommationSpaPersonnelle === true) {
+      // Au moins une drogue actuelle doit être sélectionnée
       const drogueSelected = Object.values(this.localData.droguesActuelles || {}).some(value => value === true);
-      
       if (!drogueSelected) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      // Validations conditionnelles pour les précisions
+      if (this.localData.droguesActuelles?.morphiniques === true && !this.localData.droguesActuelles?.morphiniquesPrecision) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      if (this.localData.droguesActuelles?.autre === true && !this.localData.droguesActuelles?.autrePrecision) {
+        this.validationChange.emit(false);
+        return;
+      }
+
+      if (this.localData.substanceInitiation?.autre === true && !this.localData.substanceInitiation?.autrePrecision) {
         this.validationChange.emit(false);
         return;
       }
