@@ -21,37 +21,41 @@ import { FormulaireData } from '../../../models/formulaire.model';
           <div class="form-section">
             <h3 class="section-title">Décès liés aux SPA dans l'entourage</h3>
             
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Nombre de décès dus aux SPA dans l'entourage</label>
-                <input 
-                  type="number" 
-                  class="form-input"
-                  [(ngModel)]="localData.nombreDecesSpaDansEntourage"
-                  name="nombreDecesSpaDansEntourage"
-                  placeholder="Nombre de décès"
-                  min="0"
-                  (input)="onFieldChange()"
-                >
-                <div class="field-help">
-                  Indiquez le nombre de personnes de votre entourage décédées à cause de la consommation de substances psychoactives
-                </div>
+            <!-- Question 39 -->
+            <div class="form-group">
+              <label class="form-label">39) Nombre de décès induit par les SPA dans l'entourage</label>
+              <input 
+                type="number" 
+                class="form-input number-input"
+                [(ngModel)]="localData.nombreDecesSpaDansEntourage"
+                name="nombreDecesSpaDansEntourage"
+                placeholder="Nombre de décès"
+                min="0"
+                max="99"
+                (input)="onFieldChange()"
+              >
+              <div class="field-help">
+                Indiquez le nombre de personnes de votre entourage décédées à cause de la consommation de substances psychoactives
               </div>
+            </div>
 
-              <div class="form-group" *ngIf="localData.nombreDecesSpaDansEntourage && localData.nombreDecesSpaDansEntourage > 0">
-                <label class="form-label required">Causes des décès liés aux SPA</label>
-                <textarea 
-                  class="form-input"
-                  [(ngModel)]="localData.causesDecesSpaDansEntourage"
-                  name="causesDecesSpaDansEntourage"
-                  placeholder="Décrivez les causes des décès (overdose, complications médicales, accidents, etc.)"
-                  rows="4"
-                  (input)="onFieldChange()"
-                  required
-                ></textarea>
-                <div class="field-help">
-                  Précisez les circonstances et causes des décès (par exemple : overdose, complications médicales, accidents sous influence, etc.)
-                </div>
+            <!-- Question 39.a - Affiché seulement si nombre >= 1 -->
+            <div class="conditional-field" *ngIf="localData.nombreDecesSpaDansEntourage && localData.nombreDecesSpaDansEntourage >= 1">
+              <label class="form-label required">39.a) Causes</label>
+              <textarea 
+                class="form-input"
+                [class.error]="showValidationErrors && (!localData.causesDecesSpaDansEntourage || localData.causesDecesSpaDansEntourage.trim() === '')"
+                [(ngModel)]="localData.causesDecesSpaDansEntourage"
+                name="causesDecesSpaDansEntourage"
+                placeholder="Décrivez les causes des décès (overdose, complications médicales, accidents, etc.)"
+                rows="6"
+                (input)="onFieldChange()"
+              ></textarea>
+              <div *ngIf="showValidationErrors && (!localData.causesDecesSpaDansEntourage || localData.causesDecesSpaDansEntourage.trim() === '')" class="form-error">
+                Ce champ est obligatoire lorsque le nombre de décès est supérieur à 0
+              </div>
+              <div class="field-help">
+                Précisez les circonstances et causes des décès (par exemple : overdose, complications médicales, accidents sous influence, etc.)
               </div>
             </div>
 
@@ -143,15 +147,51 @@ import { FormulaireData } from '../../../models/formulaire.model';
       border-bottom: 2px solid var(--primary-200);
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--spacing-6);
+    .form-group {
+      margin-bottom: var(--spacing-6);
+    }
+
+    .conditional-field {
+      margin-left: var(--spacing-6);
+      padding-left: var(--spacing-4);
+      border-left: 3px solid var(--primary-200);
+      background-color: var(--gray-50);
+      padding: var(--spacing-4);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-4);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .number-input {
+      max-width: 150px;
     }
 
     .form-input[rows] {
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
+    }
+
+    .form-input.error {
+      border-color: var(--error-500);
+      background-color: var(--error-50);
+    }
+
+    .form-error {
+      margin-top: var(--spacing-2);
+      font-size: 12px;
+      color: var(--error-500);
+      font-weight: 500;
     }
 
     .field-help {
@@ -263,6 +303,11 @@ import { FormulaireData } from '../../../models/formulaire.model';
     }
 
     @media (max-width: 768px) {
+      .conditional-field {
+        margin-left: var(--spacing-3);
+        padding-left: var(--spacing-3);
+      }
+      
       .info-box {
         flex-direction: column;
         text-align: center;
@@ -280,6 +325,7 @@ export class Step6Component implements OnInit, OnChanges {
   @Output() validationChange = new EventEmitter<boolean>();
 
   localData: Partial<FormulaireData> = {};
+  showValidationErrors = false;
 
   ngOnInit(): void {
     this.initializeData();
@@ -295,23 +341,32 @@ export class Step6Component implements OnInit, OnChanges {
   }
 
   onFieldChange(): void {
+    // Si le nombre de décès devient 0 ou undefined, effacer les causes
+    if (!this.localData.nombreDecesSpaDansEntourage || this.localData.nombreDecesSpaDansEntourage < 1) {
+      this.localData.causesDecesSpaDansEntourage = undefined;
+    }
+    
     this.dataChange.emit(this.localData);
     this.validateStep();
+  }
+
+  showValidationErrors(): void {
+    this.showValidationErrors = true;
   }
 
   private validateStep(): void {
     let isValid = true;
 
-    // If there are deaths reported, causes must be specified
+    // Si le nombre de décès est >= 1, les causes sont obligatoires
     if (this.localData.nombreDecesSpaDansEntourage && 
-        this.localData.nombreDecesSpaDansEntourage > 0 && 
+        this.localData.nombreDecesSpaDansEntourage >= 1 && 
         (!this.localData.causesDecesSpaDansEntourage || 
          this.localData.causesDecesSpaDansEntourage.trim() === '')) {
       isValid = false;
     }
 
-    // This step is generally valid as most fields are optional
-    // The main validation is the conditional requirement above
+    // Cette étape est généralement valide car les champs sont optionnels
+    // sauf si des décès sont déclarés
     this.validationChange.emit(isValid);
   }
 }
