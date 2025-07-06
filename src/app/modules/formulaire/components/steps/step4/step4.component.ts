@@ -10,7 +10,7 @@ import { FormulaireData } from '../../../models/formulaire.model';
   template: `
     <div class="step-container card">
       <div class="card-header">
-        <h2 class="step-title">Étape 4 : Comportements liés à la consommation et tests de dépistage</h2>
+        <h2 class="step-title">Étape 4 : Comportements liés à la consommation des SPA et tests de dépistage VIH, VHC et VHB</h2>
         <p class="step-description">
           Informations sur les modes de consommation et les tests de dépistage
         </p>
@@ -18,373 +18,799 @@ import { FormulaireData } from '../../../models/formulaire.model';
 
       <div class="card-body">
         <form class="step-form">
-          <!-- Voie d'administration -->
-          <div class="form-section" *ngIf="localData.consommationSpaPersonnelle">
+          <!-- Question 27 - Voie d'administration -->
+          <div class="form-section">
             <h3 class="section-title">Voie d'administration habituelle (substance principale)</h3>
             
-            <div class="checkbox-grid">
-              <label class="checkbox-label">
-                <input 
-                  type="checkbox" 
-                  [(ngModel)]="localData.voieAdministration!.injectee"
-                  name="injectee"
-                  (change)="onFieldChange()"
-                >
-                <span class="checkbox-text">Injectée</span>
-              </label>
-
-              <label class="checkbox-label">
-                <input 
-                  type="checkbox" 
-                  [(ngModel)]="localData.voieAdministration!.fumee"
-                  name="fumee"
-                  (change)="onFieldChange()"
-                >
-                <span class="checkbox-text">Fumée</span>
-              </label>
-
-              <label class="checkbox-label">
-                <input 
-                  type="checkbox" 
-                  [(ngModel)]="localData.voieAdministration!.ingeree"
-                  name="ingeree"
-                  (change)="onFieldChange()"
-                >
-                <span class="checkbox-text">Ingérée</span>
-              </label>
-
-              <label class="checkbox-label">
-                <input 
-                  type="checkbox" 
-                  [(ngModel)]="localData.voieAdministration!.sniffee"
-                  name="sniffee"
-                  (change)="onFieldChange()"
-                >
-                <span class="checkbox-text">Sniffée</span>
-              </label>
-
-              <label class="checkbox-label">
-                <input 
-                  type="checkbox" 
-                  [(ngModel)]="localData.voieAdministration!.inhalee"
-                  name="inhalee"
-                  (change)="onFieldChange()"
-                >
-                <span class="checkbox-text">Inhalée</span>
-              </label>
-
-              <div class="checkbox-group">
-                <label class="checkbox-label">
+            <!-- Question 27.1 -->
+            <div class="form-group">
+              <label class="form-label">27.1) Injectée</label>
+              <div class="radio-options">
+                <label class="radio-option">
                   <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.voieAdministration!.autre"
-                    name="voieAutre"
+                    type="radio" 
+                    name="voieInjectee"
+                    [value]="true"
+                    [(ngModel)]="localData.voieAdministration!.injectee"
                     (change)="onFieldChange()"
                   >
-                  <span class="checkbox-text">Autre</span>
+                  <span class="radio-text">1. Oui</span>
                 </label>
-                
-                <div class="sub-options" *ngIf="localData.voieAdministration!.autre">
+                <label class="radio-option">
                   <input 
-                    type="text" 
-                    class="form-input"
-                    [(ngModel)]="localData.voieAdministration!.autrePrecision"
-                    name="voieAutrePrecision"
-                    placeholder="Préciser"
-                    (input)="onFieldChange()"
+                    type="radio" 
+                    name="voieInjectee"
+                    [value]="false"
+                    [(ngModel)]="localData.voieAdministration!.injectee"
+                    (change)="onFieldChange()"
                   >
-                </div>
+                  <span class="radio-text">2. Non</span>
+                </label>
               </div>
             </div>
 
-            <!-- Fréquence de consommation -->
+            <!-- Question 27.2 -->
             <div class="form-group">
-              <label class="form-label">Fréquence de consommation de la substance principale</label>
-              <select 
-                class="form-select" 
-                [(ngModel)]="localData.frequenceSubstancePrincipale"
-                name="frequenceSubstancePrincipale"
-                (change)="onFieldChange()"
-              >
-                <option value="">Sélectionner</option>
-                <option value="DEUX_FOIS_PLUS_PAR_JOUR">Deux fois ou plus par jour</option>
-                <option value="UNE_FOIS_PAR_JOUR">Une fois par jour</option>
-                <option value="DEUX_TROIS_JOURS_SEMAINE">2-3 jours par semaine</option>
-                <option value="UNE_FOIS_SEMAINE">Une fois par semaine</option>
-                <option value="OCCASIONNEL_FESTIF">Occasionnel/festif</option>
-              </select>
+              <label class="form-label">27.2) Fumée</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieFumee"
+                    [value]="true"
+                    [(ngModel)]="localData.voieAdministration!.fumee"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieFumee"
+                    [value]="false"
+                    [(ngModel)]="localData.voieAdministration!.fumee"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
             </div>
 
-            <!-- Partage de seringues -->
-            <div class="form-group" *ngIf="localData.voieAdministration!.injectee">
-              <label class="form-label">Notion de partage de seringues</label>
-              <select 
-                class="form-select" 
-                [(ngModel)]="localData.partageSeringues"
-                name="partageSeringues"
-                (change)="onFieldChange()"
-              >
-                <option value="">Sélectionner</option>
-                <option value="JAMAIS_PARTAGE">Jamais partagé</option>
-                <option value="INFERIEUR_1_MOIS">Inférieur à 1 mois</option>
-                <option value="ENTRE_1_3_MOIS">Entre 1 et 3 mois</option>
-                <option value="ENTRE_3_6_MOIS">Entre 3 et 6 mois</option>
-                <option value="ENTRE_6_12_MOIS">Entre 6 et 12 mois</option>
-                <option value="DOUZE_MOIS_PLUS">12 mois et plus</option>
-              </select>
+            <!-- Question 27.3 -->
+            <div class="form-group">
+              <label class="form-label">27.3) Ingérée/bue</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieIngeree"
+                    [value]="true"
+                    [(ngModel)]="localData.voieAdministration!.ingeree"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieIngeree"
+                    [value]="false"
+                    [(ngModel)]="localData.voieAdministration!.ingeree"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 27.4 -->
+            <div class="form-group">
+              <label class="form-label">27.4) Sniffée</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieSniffee"
+                    [value]="true"
+                    [(ngModel)]="localData.voieAdministration!.sniffee"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieSniffee"
+                    [value]="false"
+                    [(ngModel)]="localData.voieAdministration!.sniffee"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 27.5 -->
+            <div class="form-group">
+              <label class="form-label">27.5) Inhalée</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieInhalee"
+                    [value]="true"
+                    [(ngModel)]="localData.voieAdministration!.inhalee"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieInhalee"
+                    [value]="false"
+                    [(ngModel)]="localData.voieAdministration!.inhalee"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Question 27.6 -->
+            <div class="form-group">
+              <label class="form-label">27.6) Autre</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieAutre"
+                    [value]="true"
+                    [(ngModel)]="localData.voieAdministration!.autre"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="voieAutre"
+                    [value]="false"
+                    [(ngModel)]="localData.voieAdministration!.autre"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+
+              <!-- Question 27.a -->
+              <div class="conditional-field" *ngIf="localData.voieAdministration!.autre === true">
+                <label class="form-label required">27.a) Si autre, préciser</label>
+                <input 
+                  type="text" 
+                  class="form-input"
+                  [class.error]="showValidationErrors && !localData.voieAdministration!.autrePrecision"
+                  [(ngModel)]="localData.voieAdministration!.autrePrecision"
+                  name="voieAutrePrecision"
+                  placeholder="Préciser la voie d'administration"
+                  (input)="onFieldChange()"
+                >
+                <div *ngIf="showValidationErrors && !localData.voieAdministration!.autrePrecision" class="form-error">
+                  Ce champ est obligatoire
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Tests de dépistage -->
+          <!-- Question 28 - Fréquence de consommation -->
+          <div class="form-section">
+            <h3 class="section-title">Fréquence de consommation de la substance principale</h3>
+            
+            <div class="form-group">
+              <label class="form-label">28) Fréquence de consommation de la substance principale</label>
+              <div class="checkbox-options">
+                <label class="checkbox-option" [class.selected]="localData.frequenceSubstancePrincipale === 'DEUX_FOIS_PLUS_PAR_JOUR'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.frequenceSubstancePrincipale === 'DEUX_FOIS_PLUS_PAR_JOUR'"
+                    (change)="selectFrequenceSubstance('DEUX_FOIS_PLUS_PAR_JOUR')"
+                  >
+                  <span class="checkbox-text">1. 2 fois (/doses) ou plus par jour</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.frequenceSubstancePrincipale === 'UNE_FOIS_PAR_JOUR'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.frequenceSubstancePrincipale === 'UNE_FOIS_PAR_JOUR'"
+                    (change)="selectFrequenceSubstance('UNE_FOIS_PAR_JOUR')"
+                  >
+                  <span class="checkbox-text">2. Une fois (dose) par jour</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.frequenceSubstancePrincipale === 'DEUX_TROIS_JOURS_SEMAINE'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.frequenceSubstancePrincipale === 'DEUX_TROIS_JOURS_SEMAINE'"
+                    (change)="selectFrequenceSubstance('DEUX_TROIS_JOURS_SEMAINE')"
+                  >
+                  <span class="checkbox-text">3. 2 à 3 jours par semaine</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.frequenceSubstancePrincipale === 'UNE_FOIS_SEMAINE'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.frequenceSubstancePrincipale === 'UNE_FOIS_SEMAINE'"
+                    (change)="selectFrequenceSubstance('UNE_FOIS_SEMAINE')"
+                  >
+                  <span class="checkbox-text">4. Une fois par semaine</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.frequenceSubstancePrincipale === 'OCCASIONNEL_FESTIF'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.frequenceSubstancePrincipale === 'OCCASIONNEL_FESTIF'"
+                    (change)="selectFrequenceSubstance('OCCASIONNEL_FESTIF')"
+                  >
+                  <span class="checkbox-text">5. Occasionnellement (usage festif)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 29 - Partage de seringues -->
+          <div class="form-section">
+            <h3 class="section-title">Notion de partage de seringues</h3>
+            
+            <div class="form-group">
+              <label class="form-label">29) Notion de partage de seringues pendant la période précédente ?</label>
+              <div class="checkbox-options">
+                <label class="checkbox-option" [class.selected]="localData.partageSeringues === 'JAMAIS_PARTAGE'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.partageSeringues === 'JAMAIS_PARTAGE'"
+                    (change)="selectPartageSeringues('JAMAIS_PARTAGE')"
+                  >
+                  <span class="checkbox-text">1. N'a jamais partagé de seringue</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.partageSeringues === 'INFERIEUR_1_MOIS'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.partageSeringues === 'INFERIEUR_1_MOIS'"
+                    (change)="selectPartageSeringues('INFERIEUR_1_MOIS')"
+                  >
+                  <span class="checkbox-text">2. Inférieur à un mois</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.partageSeringues === 'ENTRE_1_3_MOIS'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.partageSeringues === 'ENTRE_1_3_MOIS'"
+                    (change)="selectPartageSeringues('ENTRE_1_3_MOIS')"
+                  >
+                  <span class="checkbox-text">3. Entre 1 mois et 3 mois</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.partageSeringues === 'ENTRE_3_6_MOIS'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.partageSeringues === 'ENTRE_3_6_MOIS'"
+                    (change)="selectPartageSeringues('ENTRE_3_6_MOIS')"
+                  >
+                  <span class="checkbox-text">4. Entre 3 mois et 6 mois</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.partageSeringues === 'ENTRE_6_12_MOIS'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.partageSeringues === 'ENTRE_6_12_MOIS'"
+                    (change)="selectPartageSeringues('ENTRE_6_12_MOIS')"
+                  >
+                  <span class="checkbox-text">5. Entre 6 mois et 12 mois</span>
+                </label>
+                <label class="checkbox-option" [class.selected]="localData.partageSeringues === 'DOUZE_MOIS_PLUS'">
+                  <input 
+                    type="checkbox" 
+                    [checked]="localData.partageSeringues === 'DOUZE_MOIS_PLUS'"
+                    (change)="selectPartageSeringues('DOUZE_MOIS_PLUS')"
+                  >
+                  <span class="checkbox-text">6. 12 mois ou plus</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 30 - Tests de dépistage -->
           <div class="form-section">
             <h3 class="section-title">Tests de dépistage</h3>
             
-            <div class="test-grid">
-              <!-- Test VIH -->
-              <div class="test-group">
-                <h4 class="test-title">Test VIH</h4>
-                <div class="form-group">
-                  <label class="form-label">Test réalisé</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testVih!.realise"
-                    name="testVihRealise"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option [value]="true">Oui</option>
-                    <option [value]="false">Non</option>
-                  </select>
-                </div>
-                
-                <div class="form-group" *ngIf="localData.testVih!.realise">
-                  <label class="form-label">Période du dernier test</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testVih!.periode"
-                    name="testVihPeriode"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option value="3_MOIS">Moins de 3 mois</option>
-                    <option value="6_MOIS">3 à 6 mois</option>
-                    <option value="12_MOIS_PLUS">Plus de 6 mois</option>
-                  </select>
+            <!-- Test VIH -->
+            <div class="form-group">
+              <h4 class="test-title">Test VIH</h4>
+              
+              <!-- Question 30.a.1 -->
+              <div class="form-group">
+                <label class="form-label">30.a.1) Test réalisé</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testVihRealise"
+                      [value]="true"
+                      [(ngModel)]="localData.testVih!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testVihRealise"
+                      [value]="false"
+                      [(ngModel)]="localData.testVih!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
                 </div>
               </div>
 
-              <!-- Test VHC -->
-              <div class="test-group">
-                <h4 class="test-title">Test VHC (Hépatite C)</h4>
-                <div class="form-group">
-                  <label class="form-label">Test réalisé</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testVhc!.realise"
-                    name="testVhcRealise"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option [value]="true">Oui</option>
-                    <option [value]="false">Non</option>
-                  </select>
+              <!-- Question 30.a.2 -->
+              <div class="conditional-field" *ngIf="localData.testVih!.realise === true">
+                <label class="form-label required">30.a.2) Si oui, date du test</label>
+                <div class="checkbox-options">
+                  <label class="checkbox-option" [class.selected]="localData.testVih!.periode === '3_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVih!.periode === '3_MOIS'"
+                      (change)="selectPeriodeTestVih('3_MOIS')"
+                    >
+                    <span class="checkbox-text">1. 3 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testVih!.periode === '6_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVih!.periode === '6_MOIS'"
+                      (change)="selectPeriodeTestVih('6_MOIS')"
+                    >
+                    <span class="checkbox-text">2. 6 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testVih!.periode === '12_MOIS_PLUS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVih!.periode === '12_MOIS_PLUS'"
+                      (change)="selectPeriodeTestVih('12_MOIS_PLUS')"
+                    >
+                    <span class="checkbox-text">3. 12 mois ou plus</span>
+                  </label>
                 </div>
-                
-                <div class="form-group" *ngIf="localData.testVhc!.realise">
-                  <label class="form-label">Période du dernier test</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testVhc!.periode"
-                    name="testVhcPeriode"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option value="3_MOIS">Moins de 3 mois</option>
-                    <option value="6_MOIS">3 à 6 mois</option>
-                    <option value="12_MOIS_PLUS">Plus de 6 mois</option>
-                  </select>
+                <div *ngIf="showValidationErrors && !localData.testVih!.periode" class="form-error">
+                  Ce champ est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <!-- Test VHC -->
+            <div class="form-group">
+              <h4 class="test-title">Test VHC</h4>
+              
+              <!-- Question 30.b.1 -->
+              <div class="form-group">
+                <label class="form-label">30.b.1) Test réalisé</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testVhcRealise"
+                      [value]="true"
+                      [(ngModel)]="localData.testVhc!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testVhcRealise"
+                      [value]="false"
+                      [(ngModel)]="localData.testVhc!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
                 </div>
               </div>
 
-              <!-- Test VHB -->
-              <div class="test-group">
-                <h4 class="test-title">Test VHB (Hépatite B)</h4>
-                <div class="form-group">
-                  <label class="form-label">Test réalisé</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testVhb!.realise"
-                    name="testVhbRealise"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option [value]="true">Oui</option>
-                    <option [value]="false">Non</option>
-                  </select>
+              <!-- Question 30.b.2 -->
+              <div class="conditional-field" *ngIf="localData.testVhc!.realise === true">
+                <label class="form-label required">30.b.2) Si oui, date du test</label>
+                <div class="checkbox-options">
+                  <label class="checkbox-option" [class.selected]="localData.testVhc!.periode === '3_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVhc!.periode === '3_MOIS'"
+                      (change)="selectPeriodeTestVhc('3_MOIS')"
+                    >
+                    <span class="checkbox-text">1. 3 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testVhc!.periode === '6_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVhc!.periode === '6_MOIS'"
+                      (change)="selectPeriodeTestVhc('6_MOIS')"
+                    >
+                    <span class="checkbox-text">2. 6 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testVhc!.periode === '12_MOIS_PLUS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVhc!.periode === '12_MOIS_PLUS'"
+                      (change)="selectPeriodeTestVhc('12_MOIS_PLUS')"
+                    >
+                    <span class="checkbox-text">3. 12 mois ou plus</span>
+                  </label>
                 </div>
-                
-                <div class="form-group" *ngIf="localData.testVhb!.realise">
-                  <label class="form-label">Période du dernier test</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testVhb!.periode"
-                    name="testVhbPeriode"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option value="3_MOIS">Moins de 3 mois</option>
-                    <option value="6_MOIS">3 à 6 mois</option>
-                    <option value="12_MOIS_PLUS">Plus de 6 mois</option>
-                  </select>
+                <div *ngIf="showValidationErrors && !localData.testVhc!.periode" class="form-error">
+                  Ce champ est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <!-- Test VHB -->
+            <div class="form-group">
+              <h4 class="test-title">Test VHB</h4>
+              
+              <!-- Question 30.c.1 -->
+              <div class="form-group">
+                <label class="form-label">30.c.1) Test réalisé</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testVhbRealise"
+                      [value]="true"
+                      [(ngModel)]="localData.testVhb!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testVhbRealise"
+                      [value]="false"
+                      [(ngModel)]="localData.testVhb!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
                 </div>
               </div>
 
-              <!-- Test Syphilis -->
-              <div class="test-group">
-                <h4 class="test-title">Test Syphilis</h4>
-                <div class="form-group">
-                  <label class="form-label">Test réalisé</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testSyphilis!.realise"
-                    name="testSyphilisRealise"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option [value]="true">Oui</option>
-                    <option [value]="false">Non</option>
-                  </select>
+              <!-- Question 30.c.2 -->
+              <div class="conditional-field" *ngIf="localData.testVhb!.realise === true">
+                <label class="form-label required">30.c.2) Si oui, date du test</label>
+                <div class="checkbox-options">
+                  <label class="checkbox-option" [class.selected]="localData.testVhb!.periode === '3_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVhb!.periode === '3_MOIS'"
+                      (change)="selectPeriodeTestVhb('3_MOIS')"
+                    >
+                    <span class="checkbox-text">1. 3 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testVhb!.periode === '6_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVhb!.periode === '6_MOIS'"
+                      (change)="selectPeriodeTestVhb('6_MOIS')"
+                    >
+                    <span class="checkbox-text">2. 6 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testVhb!.periode === '12_MOIS_PLUS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testVhb!.periode === '12_MOIS_PLUS'"
+                      (change)="selectPeriodeTestVhb('12_MOIS_PLUS')"
+                    >
+                    <span class="checkbox-text">3. 12 mois ou plus</span>
+                  </label>
                 </div>
-                
-                <div class="form-group" *ngIf="localData.testSyphilis!.realise">
-                  <label class="form-label">Période du dernier test</label>
-                  <select 
-                    class="form-select" 
-                    [(ngModel)]="localData.testSyphilis!.periode"
-                    name="testSyphilisPeriode"
-                    (change)="onFieldChange()"
-                  >
-                    <option value="">Sélectionner</option>
-                    <option value="3_MOIS">Moins de 3 mois</option>
-                    <option value="6_MOIS">3 à 6 mois</option>
-                    <option value="12_MOIS_PLUS">Plus de 6 mois</option>
-                  </select>
+                <div *ngIf="showValidationErrors && !localData.testVhb!.periode" class="form-error">
+                  Ce champ est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <!-- Test Syphilis -->
+            <div class="form-group">
+              <h4 class="test-title">Test du Syphilis (il est déjà pratiqué aux CCDAG)</h4>
+              
+              <!-- Question 30.d.1 -->
+              <div class="form-group">
+                <label class="form-label">30.d.1) Test réalisé</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testSyphilisRealise"
+                      [value]="true"
+                      [(ngModel)]="localData.testSyphilis!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="testSyphilisRealise"
+                      [value]="false"
+                      [(ngModel)]="localData.testSyphilis!.realise"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Question 30.d.2 -->
+              <div class="conditional-field" *ngIf="localData.testSyphilis!.realise === true">
+                <label class="form-label required">30.d.2) Si oui, date du test</label>
+                <div class="checkbox-options">
+                  <label class="checkbox-option" [class.selected]="localData.testSyphilis!.periode === '3_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testSyphilis!.periode === '3_MOIS'"
+                      (change)="selectPeriodeTestSyphilis('3_MOIS')"
+                    >
+                    <span class="checkbox-text">1. 3 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testSyphilis!.periode === '6_MOIS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testSyphilis!.periode === '6_MOIS'"
+                      (change)="selectPeriodeTestSyphilis('6_MOIS')"
+                    >
+                    <span class="checkbox-text">2. 6 mois</span>
+                  </label>
+                  <label class="checkbox-option" [class.selected]="localData.testSyphilis!.periode === '12_MOIS_PLUS'">
+                    <input 
+                      type="checkbox" 
+                      [checked]="localData.testSyphilis!.periode === '12_MOIS_PLUS'"
+                      (change)="selectPeriodeTestSyphilis('12_MOIS_PLUS')"
+                    >
+                    <span class="checkbox-text">3. 12 mois ou plus</span>
+                  </label>
+                </div>
+                <div *ngIf="showValidationErrors && !localData.testSyphilis!.periode" class="form-error">
+                  Ce champ est obligatoire
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Accompagnement sevrage -->
+          <!-- Question 31 - Accompagnement sevrage -->
           <div class="form-section">
-            <h3 class="section-title">Accompagnement et sevrage</h3>
+            <h3 class="section-title">Accompagnement pour le sevrage</h3>
             
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Accompagnement pour le sevrage</label>
-                <select 
-                  class="form-select" 
-                  [(ngModel)]="localData.accompagnementSevrage"
-                  name="accompagnementSevrage"
-                  (change)="onFieldChange()"
-                >
-                  <option value="">Sélectionner</option>
-                  <option [value]="true">Oui</option>
-                  <option [value]="false">Non</option>
-                </select>
-              </div>
-
-              <div class="form-group" *ngIf="localData.accompagnementSevrage === false">
-                <label class="form-label">Raison de l'absence d'accompagnement</label>
-                <textarea 
-                  class="form-input"
-                  [(ngModel)]="localData.accompagnementSevrageNonRaison"
-                  name="accompagnementSevrageNonRaison"
-                  placeholder="Préciser les raisons"
-                  rows="3"
-                  (input)="onFieldChange()"
-                ></textarea>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Tentative de sevrage</label>
-                <select 
-                  class="form-select" 
-                  [(ngModel)]="localData.tentativeSevrage"
-                  name="tentativeSevrage"
-                  (change)="onFieldChange()"
-                >
-                  <option value="">Sélectionner</option>
-                  <option [value]="true">Oui</option>
-                  <option [value]="false">Non</option>
-                </select>
+            <div class="form-group">
+              <label class="form-label">31) Est-ce que vous souhaitez avoir un accompagnement en vue d'un sevrage ?</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="accompagnementSevrage"
+                    [value]="true"
+                    [(ngModel)]="localData.accompagnementSevrage"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="accompagnementSevrage"
+                    [value]="false"
+                    [(ngModel)]="localData.accompagnementSevrage"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
               </div>
             </div>
 
-            <!-- Détails tentative de sevrage -->
-            <div class="form-subsection" *ngIf="localData.tentativeSevrage">
-              <h4 class="subsection-title">Modalités de la tentative de sevrage (plusieurs choix possibles)</h4>
+            <!-- Question 32a -->
+            <div class="conditional-field" *ngIf="localData.accompagnementSevrage === false">
+              <label class="form-label required">32.a) Si non, pourquoi</label>
+              <textarea 
+                class="form-input"
+                [class.error]="showValidationErrors && !localData.accompagnementSevrageNonRaison"
+                [(ngModel)]="localData.accompagnementSevrageNonRaison"
+                name="accompagnementSevrageNonRaison"
+                placeholder="Préciser les raisons"
+                rows="3"
+                (input)="onFieldChange()"
+              ></textarea>
+              <div *ngIf="showValidationErrors && !localData.accompagnementSevrageNonRaison" class="form-error">
+                Ce champ est obligatoire
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 33 - Tentative de sevrage -->
+          <div class="form-section">
+            <h3 class="section-title">Tentative de sevrage</h3>
+            
+            <div class="form-group">
+              <label class="form-label">33) Est-ce que vous avez déjà tenté le sevrage ?</label>
+              <div class="radio-options">
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="tentativeSevrage"
+                    [value]="true"
+                    [(ngModel)]="localData.tentativeSevrage"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">1. Oui</span>
+                </label>
+                <label class="radio-option">
+                  <input 
+                    type="radio" 
+                    name="tentativeSevrage"
+                    [value]="false"
+                    [(ngModel)]="localData.tentativeSevrage"
+                    (change)="onFieldChange()"
+                  >
+                  <span class="radio-text">2. Non</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Si oui, modalités -->
+            <div class="conditional-field" *ngIf="localData.tentativeSevrage === true">
+              <h4 class="subsection-title">Si oui, modalités de la tentative de sevrage</h4>
               
-              <div class="checkbox-grid">
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.tentativeSevrageDetails!.toutSeul"
-                    name="toutSeul"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Tout seul</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.tentativeSevrageDetails!.soutienFamille"
-                    name="soutienFamille"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Avec soutien de la famille</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.tentativeSevrageDetails!.soutienAmi"
-                    name="soutienAmi"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Avec soutien d'un ami</span>
-                </label>
-
-                <label class="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    [(ngModel)]="localData.tentativeSevrageDetails!.soutienScolaire"
-                    name="soutienScolaire"
-                    (change)="onFieldChange()"
-                  >
-                  <span class="checkbox-text">Avec soutien scolaire</span>
-                </label>
-
-                <div class="checkbox-group">
-                  <label class="checkbox-label">
+              <!-- Question 33.1 -->
+              <div class="form-group">
+                <label class="form-label">33.1) Tout seul</label>
+                <div class="radio-options">
+                  <label class="radio-option">
                     <input 
-                      type="checkbox" 
-                      [(ngModel)]="localData.tentativeSevrageDetails!.structureSante"
-                      name="structureSante"
+                      type="radio" 
+                      name="toutSeul"
+                      [value]="true"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.toutSeul"
                       (change)="onFieldChange()"
                     >
-                    <span class="checkbox-text">Structure de santé</span>
+                    <span class="radio-text">1. Oui</span>
                   </label>
-                  
-                  <div class="sub-options" *ngIf="localData.tentativeSevrageDetails!.structureSante">
+                  <label class="radio-option">
                     <input 
-                      type="text" 
-                      class="form-input"
-                      [(ngModel)]="localData.tentativeSevrageDetails!.structureSantePrecision"
-                      name="structureSantePrecision"
-                      placeholder="Préciser la structure"
-                      (input)="onFieldChange()"
+                      type="radio" 
+                      name="toutSeul"
+                      [value]="false"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.toutSeul"
+                      (change)="onFieldChange()"
                     >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Question 33.2 -->
+              <div class="form-group">
+                <label class="form-label">33.2) Avec le soutien de la famille</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="soutienFamille"
+                      [value]="true"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.soutienFamille"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="soutienFamille"
+                      [value]="false"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.soutienFamille"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Question 33.3 -->
+              <div class="form-group">
+                <label class="form-label">33.3) Avec le soutien d'un ami</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="soutienAmi"
+                      [value]="true"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.soutienAmi"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="soutienAmi"
+                      [value]="false"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.soutienAmi"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Question 33.4 -->
+              <div class="form-group">
+                <label class="form-label">33.4) Avec un soutien scolaire</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="soutienScolaire"
+                      [value]="true"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.soutienScolaire"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="soutienScolaire"
+                      [value]="false"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.soutienScolaire"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Question 33.5 -->
+              <div class="form-group">
+                <label class="form-label">33.5) Dans une structure de santé</label>
+                <div class="radio-options">
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="structureSante"
+                      [value]="true"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.structureSante"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">1. Oui</span>
+                  </label>
+                  <label class="radio-option">
+                    <input 
+                      type="radio" 
+                      name="structureSante"
+                      [value]="false"
+                      [(ngModel)]="localData.tentativeSevrageDetails!.structureSante"
+                      (change)="onFieldChange()"
+                    >
+                    <span class="radio-text">2. Non</span>
+                  </label>
+                </div>
+
+                <!-- Question 33.a -->
+                <div class="conditional-field nested" *ngIf="localData.tentativeSevrageDetails!.structureSante === true">
+                  <label class="form-label required">33.a) Si 33.5 oui, laquelle</label>
+                  <textarea 
+                    class="form-input"
+                    [class.error]="showValidationErrors && !localData.tentativeSevrageDetails!.structureSantePrecision"
+                    [(ngModel)]="localData.tentativeSevrageDetails!.structureSantePrecision"
+                    name="structureSantePrecision"
+                    placeholder="Préciser la structure de santé"
+                    rows="3"
+                    (input)="onFieldChange()"
+                  ></textarea>
+                  <div *ngIf="showValidationErrors && !localData.tentativeSevrageDetails!.structureSantePrecision" class="form-error">
+                    Ce champ est obligatoire
                   </div>
                 </div>
               </div>
@@ -419,13 +845,6 @@ import { FormulaireData } from '../../../models/formulaire.model';
       margin-bottom: 0;
     }
 
-    .form-subsection {
-      margin-top: var(--spacing-6);
-      padding: var(--spacing-6);
-      background-color: var(--gray-50);
-      border-radius: var(--radius-md);
-    }
-
     .section-title {
       font-size: 18px;
       font-weight: 600;
@@ -451,52 +870,53 @@ import { FormulaireData } from '../../../models/formulaire.model';
       border-bottom: 1px solid var(--gray-300);
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--spacing-4);
+    .form-group {
+      margin-bottom: var(--spacing-6);
     }
 
-    .test-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-6);
-    }
-
-    .test-group {
-      padding: var(--spacing-4);
+    .conditional-field {
+      margin-left: var(--spacing-6);
+      padding-left: var(--spacing-4);
+      border-left: 3px solid var(--primary-200);
       background-color: var(--gray-50);
+      padding: var(--spacing-4);
       border-radius: var(--radius-md);
-      border: 1px solid var(--gray-200);
+      margin-bottom: var(--spacing-4);
     }
 
-    .checkbox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    .conditional-field.nested {
+      margin-left: var(--spacing-8);
+      border-left-color: var(--primary-300);
+      background-color: var(--primary-50);
+    }
+
+    .checkbox-options {
+      display: flex;
+      flex-direction: column;
       gap: var(--spacing-3);
     }
 
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-2);
-    }
-
-    .checkbox-label {
+    .checkbox-option {
       display: flex;
       align-items: center;
       gap: var(--spacing-3);
       cursor: pointer;
       padding: var(--spacing-3);
       border-radius: var(--radius-md);
-      transition: background-color 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      border: 1px solid transparent;
     }
 
-    .checkbox-label:hover {
+    .checkbox-option:hover {
       background-color: var(--gray-100);
     }
 
-    .checkbox-label input[type="checkbox"] {
+    .checkbox-option.selected {
+      background-color: var(--primary-50);
+      border-color: var(--primary-300);
+    }
+
+    .checkbox-option input[type="checkbox"] {
       width: 16px;
       height: 16px;
       accent-color: var(--primary-600);
@@ -507,19 +927,60 @@ import { FormulaireData } from '../../../models/formulaire.model';
       color: var(--gray-700);
     }
 
-    .sub-options {
-      margin-left: var(--spacing-6);
+    .radio-options {
+      display: flex;
+      gap: var(--spacing-6);
+      flex-wrap: wrap;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary-600);
+    }
+
+    .radio-text {
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+
+    .form-input.error {
+      border-color: var(--error-500);
+      background-color: var(--error-50);
+    }
+
+    .form-error {
       margin-top: var(--spacing-2);
+      font-size: 12px;
+      color: var(--error-500);
+      font-weight: 500;
+    }
+
+    .form-input[rows] {
+      resize: vertical;
+      min-height: 80px;
     }
 
     @media (max-width: 768px) {
-      .form-grid,
-      .test-grid {
-        grid-template-columns: 1fr;
+      .conditional-field {
+        margin-left: var(--spacing-3);
+        padding-left: var(--spacing-3);
       }
       
-      .checkbox-grid {
-        grid-template-columns: 1fr;
+      .conditional-field.nested {
+        margin-left: var(--spacing-4);
+      }
+      
+      .radio-options {
+        flex-direction: column;
+        gap: var(--spacing-3);
       }
     }
   `]
@@ -530,6 +991,7 @@ export class Step4Component implements OnInit, OnChanges {
   @Output() validationChange = new EventEmitter<boolean>();
 
   localData: Partial<FormulaireData> = {};
+  showValidationErrors = false;
 
   ngOnInit(): void {
     this.initializeData();
@@ -557,37 +1019,76 @@ export class Step4Component implements OnInit, OnChanges {
     this.validateStep();
   }
 
-  private validateStep(): void {
-    // This step has mostly optional fields, so validation is more flexible
-    // We only require that if certain options are selected, their sub-fields are filled
+  selectFrequenceSubstance(frequence: string): void {
+    this.localData.frequenceSubstancePrincipale = frequence as any;
+    this.onFieldChange();
+  }
 
+  selectPartageSeringues(partage: string): void {
+    this.localData.partageSeringues = partage as any;
+    this.onFieldChange();
+  }
+
+  selectPeriodeTestVih(periode: string): void {
+    this.localData.testVih!.periode = periode as any;
+    this.onFieldChange();
+  }
+
+  selectPeriodeTestVhc(periode: string): void {
+    this.localData.testVhc!.periode = periode as any;
+    this.onFieldChange();
+  }
+
+  selectPeriodeTestVhb(periode: string): void {
+    this.localData.testVhb!.periode = periode as any;
+    this.onFieldChange();
+  }
+
+  selectPeriodeTestSyphilis(periode: string): void {
+    this.localData.testSyphilis!.periode = periode as any;
+    this.onFieldChange();
+  }
+
+  showValidationErrors(): void {
+    this.showValidationErrors = true;
+  }
+
+  private validateStep(): void {
     let isValid = true;
 
-    // If injection is selected, partage de seringues should be answered
-    if (this.localData.voieAdministration?.injectee && !this.localData.partageSeringues) {
-      // This is optional, so we don't invalidate
-    }
-
-    // If tests are marked as done, period should be specified
-    if (this.localData.testVih?.realise && !this.localData.testVih?.periode) {
-      isValid = false;
-    }
-    if (this.localData.testVhc?.realise && !this.localData.testVhc?.periode) {
-      isValid = false;
-    }
-    if (this.localData.testVhb?.realise && !this.localData.testVhb?.periode) {
-      isValid = false;
-    }
-    if (this.localData.testSyphilis?.realise && !this.localData.testSyphilis?.periode) {
+    // Validation pour "autre" voie d'administration
+    if (this.localData.voieAdministration?.autre === true && 
+        (!this.localData.voieAdministration?.autrePrecision || 
+         this.localData.voieAdministration?.autrePrecision.trim() === '')) {
       isValid = false;
     }
 
-    // If tentative sevrage is true, at least one modality should be selected
-    if (this.localData.tentativeSevrage) {
-      const modalitySelected = Object.values(this.localData.tentativeSevrageDetails || {}).some(value => value === true);
-      if (!modalitySelected) {
-        isValid = false;
-      }
+    // Validation pour les tests de dépistage
+    if (this.localData.testVih?.realise === true && !this.localData.testVih?.periode) {
+      isValid = false;
+    }
+    if (this.localData.testVhc?.realise === true && !this.localData.testVhc?.periode) {
+      isValid = false;
+    }
+    if (this.localData.testVhb?.realise === true && !this.localData.testVhb?.periode) {
+      isValid = false;
+    }
+    if (this.localData.testSyphilis?.realise === true && !this.localData.testSyphilis?.periode) {
+      isValid = false;
+    }
+
+    // Validation pour accompagnement sevrage
+    if (this.localData.accompagnementSevrage === false && 
+        (!this.localData.accompagnementSevrageNonRaison || 
+         this.localData.accompagnementSevrageNonRaison.trim() === '')) {
+      isValid = false;
+    }
+
+    // Validation pour structure de santé
+    if (this.localData.tentativeSevrageDetails?.structureSante === true && 
+        (!this.localData.tentativeSevrageDetails?.structureSantePrecision || 
+         this.localData.tentativeSevrageDetails?.structureSantePrecision.trim() === '')) {
+      isValid = false;
     }
 
     this.validationChange.emit(isValid);
