@@ -207,9 +207,11 @@ Les comptes suivants sont créés automatiquement :
 
 | Email | Mot de passe | Rôle | Téléphone |
 |-------|--------------|------|-----------|
-| admin@sidra.tn | admin123 | SUPER_ADMIN | +21612345678 |
+| admin@sidra.tn | Insp2025 | SUPER_ADMIN | 9518515 |
 | ahmed.bouali@nicolle.tn | admin123 | ADMIN_STRUCTURE | +21687654321 |
 | fatma.trabelsi@nicolle.tn | user123 | UTILISATEUR | +21698765432 |
+
+⚠️ **Note importante** : Le compte SUPER_ADMIN est créé automatiquement au premier démarrage de l'application s'il n'existe aucun utilisateur avec ce rôle.
 
 ## Sécurité
 
