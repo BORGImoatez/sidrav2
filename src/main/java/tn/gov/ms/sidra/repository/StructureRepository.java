@@ -32,6 +32,8 @@ public interface StructureRepository extends JpaRepository<Structure, Long> {
     boolean existsByNomAndActifTrueAndIdNot(String nom, Long id);
 
     List<Structure> findByType(TypeStructure type);
+    
+    List<Structure> findByNomContainingIgnoreCase(String nom);
 
     @Query("SELECT COUNT(s) FROM Structure s WHERE s.actif = true")
     long countActiveStructures();

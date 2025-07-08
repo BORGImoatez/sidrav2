@@ -47,7 +47,18 @@ export class UserService {
   }
 
   createUser(userData: Partial<User>): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, userData, { 
+    // Préparer les données pour l'API backend
+    const createRequest = {
+      nom: userData.nom,
+      prenom: userData.prenom,
+      email: userData.email,
+      telephone: userData.telephone,
+      role: userData.role,
+      structureId: userData.structureId,
+      motDePasse: userData.motDePasse || 'MotDePasseTemporaire123!'
+    };
+    
+    return this.http.post<User>(`${this.apiUrl}/users`, createRequest, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
       catchError(error => {
@@ -58,7 +69,17 @@ export class UserService {
   }
 
   updateUser(id: number, userData: Partial<User>): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users/${id}`, userData, { 
+    // Préparer les données pour l'API backend (sans mot de passe pour la modification)
+    const updateRequest = {
+      nom: userData.nom,
+      prenom: userData.prenom,
+      email: userData.email,
+      telephone: userData.telephone,
+      role: userData.role,
+      structureId: userData.structureId
+    };
+    
+    return this.http.put<User>(`${this.apiUrl}/users/${id}`, updateRequest, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
       catchError(error => {
@@ -171,7 +192,7 @@ export class UserService {
 
   // Statistiques pour le dashboard
   getStatistics(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/statistics`, { 
+    return this.http.get<any>(`${this.apiUrl}/users/statistics`, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
       catchError(error => {

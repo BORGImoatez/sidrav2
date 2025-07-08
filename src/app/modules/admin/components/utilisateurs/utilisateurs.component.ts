@@ -253,10 +253,11 @@ import { User, UserRole, Structure, TypeStructure } from '../../../../models/use
                   <option value="SUPER_ADMIN" *ngIf="isSuperAdmin()">Super Administrateur</option>
                   <option value="ADMIN_STRUCTURE">Administrateur Structure</option>
                   <option value="UTILISATEUR">Utilisateur</option>
+                  <option value="EXTERNE" *ngIf="isSuperAdmin()">Utilisateur Externe</option>
                 </select>
               </div>
 
-              <div class="form-group" *ngIf="currentUser.role !== 'SUPER_ADMIN'">
+              <div class="form-group" *ngIf="currentUser.role && currentUser.role !== 'SUPER_ADMIN'">
                 <label class="form-label required">Structure</label>
                 <select
                   class="form-select"
@@ -270,6 +271,19 @@ import { User, UserRole, Structure, TypeStructure } from '../../../../models/use
                     {{ structure.nom }} ({{ getTypeLabel(structure.type) }})
                   </option>
                 </select>
+              </div>
+              
+              <div class="form-group" *ngIf="!isEditMode">
+                <label class="form-label required">Mot de passe</label>
+                <input
+                  type="password"
+                  class="form-input"
+                  [(ngModel)]="currentUser.motDePasse"
+                  name="motDePasse"
+                  required
+                  [disabled]="isSaving"
+                  placeholder="Mot de passe initial"
+                >
               </div>
             </div>
 
@@ -813,7 +827,7 @@ export class UtilisateursComponent implements OnInit {
   onRoleChange(): void {
     if (this.currentUser.role === UserRole.SUPER_ADMIN) {
       this.currentUser.structureId = undefined;
-    } else if (!this.isSuperAdmin() && !this.currentUser.structureId) {
+    } else if (!this.isSuperAdmin() && !this.isEditMode && !this.currentUser.structureId) {
       this.currentUser.structureId = this.getCurrentUserStructureId();
     }
   }
@@ -822,6 +836,18 @@ export class UtilisateursComponent implements OnInit {
     this.isSaving = true;
     this.errorMessage = '';
 
+    // Validation côté client
+    if (this.currentUser.role !== UserRole.SUPER_ADMIN && !this.currentUser.structureId) {
+      this.errorMessage = 'Une structure est obligatoire pour ce rôle';
+      this.isSaving = false;
+      return;
+    }
+
+    if (!this.isEditMode && !this.currentUser.motDePasse) {
+      this.errorMessage = 'Le mot de passe est obligatoire';
+      this.isSaving = false;
+      return;
+    }
     const operation = this.isEditMode 
       ? this.userService.updateUser(this.currentUser.id!, this.currentUser)
       : this.userService.createUser(this.currentUser);
@@ -907,6 +933,8 @@ export class UtilisateursComponent implements OnInit {
         return 'Admin Structure';
       case UserRole.UTILISATEUR:
         return 'Utilisateur';
+      case UserRole.EXTERNE:
+        return 'Externe';
       default:
         return role;
     }
@@ -920,6 +948,8 @@ export class UtilisateursComponent implements OnInit {
         return 'admin-structure';
       case UserRole.UTILISATEUR:
         return 'utilisateur';
+      case UserRole.EXTERNE:
+        return 'externe';
       default:
         return '';
     }

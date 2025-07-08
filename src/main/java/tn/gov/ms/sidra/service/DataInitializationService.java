@@ -142,8 +142,49 @@ public class DataInitializationService implements CommandLineRunner {
             } catch (Exception e) {
                 log.error("❌ Erreur lors de la création du SUPER_ADMIN par défaut: {}", e.getMessage(), e);
             }
+            
+            // Créer un utilisateur EXTERNE pour les tests
+            createDefaultExterneUser();
         } else {
             log.info("✅ Un utilisateur SUPER_ADMIN existe déjà. Aucune action nécessaire.");
+        }
+    }
+    
+    /**
+     * Crée un utilisateur EXTERNE par défaut pour les tests
+     */
+    private void createDefaultExterneUser() {
+        log.info("Création d'un utilisateur EXTERNE par défaut...");
+        
+        // Récupérer une structure par défaut
+        Structure defaultStructure = structureRepository.findByNomContainingIgnoreCase("Charles Nicolle")
+                .stream()
+                .findFirst()
+                .orElse(null);
+        
+        if (defaultStructure != null) {
+            User externeUser = new User();
+            externeUser.setNom("Externe");
+            externeUser.setPrenom("Utilisateur");
+            externeUser.setEmail("externe@sidra.tn");
+            externeUser.setTelephone("12345678");
+            externeUser.setMotDePasse(passwordEncoder.encode("123456"));
+            externeUser.setRole(UserRole.EXTERNE);
+            externeUser.setStructure(defaultStructure);
+            externeUser.setActif(true);
+            externeUser.setDateCreation(LocalDateTime.now());
+            externeUser.setTentativesConnexion(0);
+            
+            try {
+                userRepository.save(externeUser);
+                log.info("✅ Utilisateur EXTERNE créé avec succès:");
+                log.info("   📧 Email: {}", externeUser.getEmail());
+                log.info("   📱 Téléphone: {}", externeUser.getTelephone());
+                log.info("   🔑 Mot de passe: 123456");
+                log.info("   👤 Rôle: {}", externeUser.getRole());
+            } catch (Exception e) {
+                log.error("❌ Erreur lors de la création de l'utilisateur EXTERNE: {}", e.getMessage(), e);
+            }
         }
     }
 }
