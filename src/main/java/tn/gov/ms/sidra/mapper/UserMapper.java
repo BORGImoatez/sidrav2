@@ -7,7 +7,7 @@ import tn.gov.ms.sidra.dto.user.UserDto;
 import tn.gov.ms.sidra.entity.Structure;
 import tn.gov.ms.sidra.entity.User;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface UserMapper {
 
     @Mapping(source = "structure.id", target = "structureId")
