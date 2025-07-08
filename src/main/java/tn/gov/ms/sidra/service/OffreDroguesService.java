@@ -158,6 +158,13 @@ public class OffreDroguesService {
         if (currentUser.getRole() == UserRole.EXTERNE) {
             offresDrogues = offreDroguesRepository.findByUtilisateurAndDateSaisieBetween(
                     currentUser, startDate, endDate);
+        } else if (currentUser.getRole() == UserRole.ADMIN_STRUCTURE) {
+            // Filtrer par structure pour les admin structure
+            offresDrogues = offreDroguesRepository.findByDateSaisieBetween(startDate, endDate)
+                .stream()
+                .filter(o -> o.getStructure() != null && 
+                        o.getStructure().getId().equals(currentUser.getStructure().getId()))
+                .collect(Collectors.toList());
         } else {
             offresDrogues = offreDroguesRepository.findByDateSaisieBetween(startDate, endDate);
         }

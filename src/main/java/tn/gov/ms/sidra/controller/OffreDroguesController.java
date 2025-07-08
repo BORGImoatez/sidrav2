@@ -32,7 +32,7 @@ public class OffreDroguesController {
      * Récupère toutes les données d'offre de drogues selon les permissions
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN_STRUCTURE', 'EXTERNE')")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN_STRUCTURE', 'UTILISATEUR', 'EXTERNE')")
     public ResponseEntity<List<OffreDroguesListDto>> getAllOffresDrogues(
             @AuthenticationPrincipal User currentUser,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -56,7 +56,7 @@ public class OffreDroguesController {
      * Récupère une donnée d'offre de drogues par son ID
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN_STRUCTURE', 'EXTERNE')")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN_STRUCTURE', 'UTILISATEUR', 'EXTERNE')")
     public ResponseEntity<OffreDroguesDto> getOffreDroguesById(@PathVariable Long id,
                                                               @AuthenticationPrincipal User currentUser) {
         log.info("Récupération de la donnée d'offre de drogues avec l'ID: {} par l'utilisateur: {}", 

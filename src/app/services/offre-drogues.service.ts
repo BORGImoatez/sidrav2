@@ -1,24 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { OffreDrogues, OffreDroguesListItem } from '../models/offre-drogues.model';
-import { environment } from '../environments/environment';
-import { AuthService } from './auth.service';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class OffreDroguesService {
-  
-  private apiUrl = environment.apiUrl || 'http://localhost:8080/api';
-
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) {}
-
-  getOffresDrogues(): Observable<OffreDroguesListItem[]> {
     return this.http.get<OffreDroguesListItem[]>(`${this.apiUrl}/offre-drogues`, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
@@ -27,9 +8,9 @@ export class OffreDroguesService {
         return throwError(() => error);
       })
     );
-  }
-
-  getOffreDroguesById(id: number): Observable<OffreDrogues | null> {
+  private apiUrl = environment.apiUrl || 'http://localhost:8080/api';
+    return this.http.get<number>(`${this.apiUrl}/offre-drogues/statistics`, { 
+      headers: this.authService.getAuthHeaders() 
     return this.http.get<OffreDrogues>(`${this.apiUrl}/offre-drogues/${id}`, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
@@ -38,9 +19,9 @@ export class OffreDroguesService {
         return throwError(() => error);
       })
     );
-  }
 
-  createOffreDrogues(data: Partial<OffreDrogues>): Observable<OffreDrogues> {
+  private mapToCreateRequest(data: Partial<OffreDrogues>): any {
+    return {
     // Préparer les données pour l'API backend
     const createRequest = this.mapToCreateRequest(data);
     
@@ -52,9 +33,9 @@ export class OffreDroguesService {
         return throwError(() => error);
       })
     );
-  }
-
-  updateOffreDrogues(id: number, data: Partial<OffreDrogues>): Observable<OffreDrogues> {
+      tunisienneNombre: data.caracteristiquesSociodemographiques?.nationalite?.tunisienne?.nombre,
+      tunisiennePourcentage: data.caracteristiquesSociodemographiques?.nationalite?.tunisienne?.pourcentage,
+      maghrebineNombre: data.caracteristiquesSociodemographiques?.nationalite?.maghrebine?.nombre,
     // Préparer les données pour l'API backend
     const updateRequest = this.mapToUpdateRequest(data);
     
@@ -66,9 +47,9 @@ export class OffreDroguesService {
         return throwError(() => error);
       })
     );
-  }
-
-  deleteOffreDrogues(id: number): Observable<boolean> {
+      // Niveau socioéconomique
+      carteIndigentNombre: data.caracteristiquesSociodemographiques?.niveauSocioeconomique?.carteIndigent?.nombre,
+      carteIndigentPourcentage: data.caracteristiquesSociodemographiques?.niveauSocioeconomique?.carteIndigent?.pourcentage,
     return this.http.delete<boolean>(`${this.apiUrl}/offre-drogues/${id}`, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
@@ -161,5 +142,5 @@ export class OffreDroguesService {
 
   private mapToUpdateRequest(data: Partial<OffreDrogues>): any {
     return this.mapToCreateRequest(data); // Même structure pour la mise à jour
-  }
+  ) {}
 }
