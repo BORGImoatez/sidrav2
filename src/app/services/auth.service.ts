@@ -19,7 +19,7 @@ export class AuthService {
       id: 1,
       nom: 'Admin',
       prenom: 'Super',
-      telephone: '21612345678',
+      telephone: '9518515',
       email: 'admin@sidra.tn',
       role: UserRole.SUPER_ADMIN,
       actif: true,
@@ -127,10 +127,11 @@ export class AuthService {
           return;
         }
 
-        // Vérifier les identifiants (pour la démo, mot de passe = "123456")
+        // Vérifier les identifiants (pour la démo, mot de passe = "Insp2025" pour admin, "123456" pour les autres)
         const user = this.mockUsers.find(u => u.email === email && u.actif);
         
-        if (!user || motDePasse !== '123456') {
+        const expectedPassword = user?.role === UserRole.SUPER_ADMIN ? 'Insp2025' : '123456';
+        if (!user || motDePasse !== expectedPassword) {
           this.handleFailedLogin(email);
           const currentAttempts = this.loginAttempts.get(email);
           
