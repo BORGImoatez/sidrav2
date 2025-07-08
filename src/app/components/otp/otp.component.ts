@@ -433,7 +433,20 @@ export class OtpComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+        
+        // Gérer les erreurs de réponse du serveur
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+          this.remainingAttempts = error.error.remainingAttempts || null;
+          
+          if (error.error.blockedUntil) {
+            this.blockedUntil = new Date(error.error.blockedUntil);
+            this.isBlocked = true;
+          }
+        } else {
+          this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+        }
+        
         console.error('Erreur de vérification OTP:', error);
         this.resetOtpFields();
       }
@@ -477,12 +490,18 @@ export class OtpComponent implements OnInit, OnDestroy, AfterViewInit {
           // Réinitialiser les champs
           this.resetOtpFields();
         } else {
-          this.errorMessage = response.message;
+          this.errorMessage = response.message || 'Erreur lors du renvoi du code.';
         }
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = 'Erreur lors du renvoi du code.';
+        
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+        } else {
+          this.errorMessage = 'Erreur lors du renvoi du code.';
+        }
+        
         console.error('Erreur de renvoi OTP:', error);
       }
     });

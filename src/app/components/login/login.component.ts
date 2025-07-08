@@ -104,7 +104,7 @@ import { LoginRequest } from '../../models/user.model';
             Pour toute assistance technique, contactez votre administrateur
           </p>
           <p class="text-xs text-gray-400 text-center mt-2">
-            Demo: Utilisez le mot de passe "123456" pour tous les comptes
+            Demo: admin@sidra.tn / Insp2025 | externe@sidra.tn / 123456
           </p>
         </div>
       </div>
@@ -271,7 +271,20 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+        
+        // Gérer les erreurs de réponse du serveur
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+          this.remainingAttempts = error.error.remainingAttempts || null;
+          
+          if (error.error.blockedUntil) {
+            this.blockedUntil = new Date(error.error.blockedUntil);
+            this.isBlocked = true;
+          }
+        } else {
+          this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+        }
+        
         console.error('Erreur de connexion:', error);
       }
     });
