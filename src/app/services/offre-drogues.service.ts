@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
   private apiUrl = environment.apiUrl || 'http://localhost:8080/api';
     return this.http.get<number>(`${this.apiUrl}/offre-drogues/statistics`, { 
       headers: this.authService.getAuthHeaders() 
+    });
     return this.http.get<OffreDrogues>(`${this.apiUrl}/offre-drogues/${id}`, { 
       headers: this.authService.getAuthHeaders() 
     }).pipe(
@@ -142,5 +143,5 @@ import { HttpClient } from '@angular/common/http';
 
   private mapToUpdateRequest(data: Partial<OffreDrogues>): any {
     return this.mapToCreateRequest(data); // Même structure pour la mise à jour
-  ) {}
+  }
 }
