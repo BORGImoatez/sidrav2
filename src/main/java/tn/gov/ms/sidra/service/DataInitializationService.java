@@ -6,8 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tn.gov.ms.sidra.entity.Gouvernorat;
+import tn.gov.ms.sidra.entity.Structure;
+import tn.gov.ms.sidra.entity.TypeStructure;
 import tn.gov.ms.sidra.entity.User;
 import tn.gov.ms.sidra.entity.UserRole;
+import tn.gov.ms.sidra.repository.GouvernoratRepository;
+import tn.gov.ms.sidra.repository.StructureRepository;
 import tn.gov.ms.sidra.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -18,12 +23,87 @@ import java.time.LocalDateTime;
 public class DataInitializationService implements CommandLineRunner {
 
     private final UserRepository userRepository;
+    private final GouvernoratRepository gouvernoratRepository;
+    private final StructureRepository structureRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        initializeGouvernorats();
+        initializeStructures();
         initializeDefaultSuperAdmin();
+    }
+
+    /**
+     * Initialise les gouvernorats de la Tunisie
+     */
+    private void initializeGouvernorats() {
+        log.info("Initialisation des gouvernorats...");
+        
+        if (gouvernoratRepository.count() == 0) {
+            String[][] gouvernoratsData = {
+                {"Tunis", "TUN"}, {"Ariana", "ARI"}, {"Ben Arous", "BEN"}, {"Manouba", "MAN"},
+                {"Nabeul", "NAB"}, {"Zaghouan", "ZAG"}, {"Bizerte", "BIZ"}, {"Béja", "BEJ"},
+                {"Jendouba", "JEN"}, {"Kef", "KEF"}, {"Siliana", "SIL"}, {"Sousse", "SOU"},
+                {"Monastir", "MON"}, {"Mahdia", "MAH"}, {"Sfax", "SFX"}, {"Kairouan", "KAI"},
+                {"Kasserine", "KAS"}, {"Sidi Bouzid", "SID"}, {"Gabès", "GAB"}, {"Médenine", "MED"},
+                {"Tataouine", "TAT"}, {"Gafsa", "GAF"}, {"Tozeur", "TOZ"}, {"Kébili", "KEB"}
+            };
+            
+            for (String[] data : gouvernoratsData) {
+                Gouvernorat gouvernorat = new Gouvernorat();
+                gouvernorat.setNom(data[0]);
+                gouvernorat.setCodeIso3(data[1]);
+                gouvernoratRepository.save(gouvernorat);
+            }
+            
+            log.info("✅ {} gouvernorats initialisés", gouvernoratsData.length);
+        } else {
+            log.info("✅ Gouvernorats déjà initialisés");
+        }
+    }
+    
+    /**
+     * Initialise quelques structures par défaut
+     */
+    private void initializeStructures() {
+        log.info("Initialisation des structures par défaut...");
+        
+        if (structureRepository.count() == 0) {
+            Gouvernorat tunis = gouvernoratRepository.findByNom("Tunis").orElse(null);
+            Gouvernorat sfax = gouvernoratRepository.findByNom("Sfax").orElse(null);
+            
+            if (tunis != null) {
+                // Structures publiques
+                createStructure("Hôpital Charles Nicolle", TypeStructure.PUBLIQUE, tunis, "Ministère de la Santé");
+                createStructure("Hôpital La Rabta", TypeStructure.PUBLIQUE, tunis, "Ministère de la Santé");
+                
+                // Structure privée
+                createStructure("Clinique Avicenne", TypeStructure.PRIVEE, tunis, "Secteur Privé");
+                
+                // ONG
+                createStructure("Association Tunisienne de Lutte contre les Drogues", TypeStructure.ONG, tunis, "ATLD");
+            }
+            
+            if (sfax != null) {
+                createStructure("Hôpital Habib Bourguiba", TypeStructure.PUBLIQUE, sfax, "Ministère de la Santé");
+            }
+            
+            log.info("✅ Structures par défaut initialisées");
+        } else {
+            log.info("✅ Structures déjà initialisées");
+        }
+    }
+    
+    private void createStructure(String nom, TypeStructure type, Gouvernorat gouvernorat, String secteur) {
+        Structure structure = new Structure();
+        structure.setNom(nom);
+        structure.setType(type);
+        structure.setGouvernorat(gouvernorat);
+        structure.setSecteur(secteur);
+        structure.setActif(true);
+        structureRepository.save(structure);
     }
 
     /**

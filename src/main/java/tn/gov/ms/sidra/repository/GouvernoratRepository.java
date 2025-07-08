@@ -16,4 +16,6 @@ public interface GouvernoratRepository extends JpaRepository<Gouvernorat, Long> 
     boolean existsByNom(String nom);
 
     boolean existsByCodeIso3(String codeIso3);
+    
+    List<Gouvernorat> findAllByOrderByNomAsc();
 }

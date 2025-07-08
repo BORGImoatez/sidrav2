@@ -124,9 +124,42 @@ export class UserService {
     );
   }
 
+  updateStructure(id: number, structureData: Partial<Structure>): Observable<Structure> {
+    return this.http.put<Structure>(`${this.apiUrl}/structures/${id}`, structureData, { 
+      headers: this.authService.getAuthHeaders() 
+    }).pipe(
+      catchError(error => {
+        console.error('Erreur lors de la modification de la structure:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteStructure(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiUrl}/structures/${id}`, { 
+      headers: this.authService.getAuthHeaders() 
+    }).pipe(
+      catchError(error => {
+        console.error('Erreur lors de la suppression de la structure:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  toggleStructureStatus(id: number): Observable<Structure> {
+    return this.http.patch<Structure>(`${this.apiUrl}/structures/${id}/toggle-status`, {}, { 
+      headers: this.authService.getAuthHeaders() 
+    }).pipe(
+      catchError(error => {
+        console.error('Erreur lors du changement de statut de la structure:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
   // Données de référence
   getGouvernorats(): Observable<Gouvernorat[]> {
-    return this.http.get<Gouvernorat[]>(`${this.apiUrl}/gouvernorats`, { 
+    return this.http.get<Gouvernorat[]>(`${this.apiUrl}/gouvernorats`, {
       headers: this.authService.getAuthHeaders() 
     }).pipe(
       catchError(error => {
