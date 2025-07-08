@@ -58,10 +58,23 @@ import { User, UserRole } from '../../models/user.model';
               routerLink="/mes-formulaires" 
               routerLinkActive="active"
               class="nav-item"
+              *ngIf="!isExterne()"
               [title]="isSidebarCollapsed ? 'Mes formulaires' : ''"
             >
               <span class="nav-icon">📋</span>
               <span class="nav-label" *ngIf="!isSidebarCollapsed">Mes formulaires</span>
+            </a>
+
+            <a 
+              routerLink="/offre-drogues" 
+              routerLinkActive="active"
+              class="nav-item"
+              [title]="isSidebarCollapsed ? 'Indicateurs offre de drogues' : ''"
+            >
+              <span class="nav-icon">📊</span>
+              <span class="nav-label" *ngIf="!isSidebarCollapsed">
+                {{ isExterne() ? 'Mes indicateurs' : 'Offre de drogues' }}
+              </span>
             </a>
           </div>
 
@@ -547,6 +560,10 @@ export class LayoutComponent implements OnInit {
 
   isSuperAdmin(): boolean {
     return this.authService.hasRole(UserRole.SUPER_ADMIN);
+  }
+
+  isExterne(): boolean {
+    return this.authService.hasRole(UserRole.EXTERNE);
   }
 
   getUserInitials(): string {

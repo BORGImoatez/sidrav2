@@ -65,6 +65,26 @@ export class AuthService {
       actif: true,
       dateCreation: new Date(),
       derniereConnexion: new Date()
+    },
+    {
+      id: 4,
+      nom: 'Externe',
+      prenom: 'Utilisateur',
+      telephone: '21655443322',
+      email: 'externe@sidra.tn',
+      role: UserRole.EXTERNE,
+      structureId: 2,
+      structure: {
+        id: 2,
+        nom: 'Structure Externe',
+        type: TypeStructure.ONG,
+        gouvernoratId: 1,
+        secteur: 'Externe',
+        actif: true
+      },
+      actif: true,
+      dateCreation: new Date(),
+      derniereConnexion: new Date()
     }
   ];
 

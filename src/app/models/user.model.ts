@@ -40,7 +40,8 @@ export interface Delegation {
 export enum UserRole {
   SUPER_ADMIN = 'SUPER_ADMIN',
   ADMIN_STRUCTURE = 'ADMIN_STRUCTURE',
-  UTILISATEUR = 'UTILISATEUR'
+  UTILISATEUR = 'UTILISATEUR',
+  EXTERNE = 'EXTERNE'
 }
 
 export enum TypeStructure {

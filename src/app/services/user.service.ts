@@ -126,6 +126,18 @@ export class UserService {
       actif: true,
       dateCreation: new Date('2024-02-15'),
       derniereConnexion: new Date('2024-12-08')
+    },
+    {
+      id: 5,
+      nom: 'Externe',
+      prenom: 'Utilisateur',
+      telephone: '21655443322',
+      email: 'externe@sidra.tn',
+      role: UserRole.EXTERNE,
+      structureId: 2,
+      actif: true,
+      dateCreation: new Date('2024-03-01'),
+      derniereConnexion: new Date('2024-12-12')
     }
   ];
 

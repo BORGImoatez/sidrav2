@@ -34,6 +34,10 @@ export const routes: Routes = [
         loadChildren: () => import('./modules/mes-formulaires/mes-formulaires.routes').then(m => m.routes)
       },
       {
+        path: 'offre-drogues',
+        loadChildren: () => import('./modules/offre-drogues/offre-drogues.routes').then(m => m.routes)
+      },
+      {
         path: 'admin',
         canActivate: [AdminGuard],
         loadChildren: () => import('./modules/admin/admin.routes').then(m => m.routes)
