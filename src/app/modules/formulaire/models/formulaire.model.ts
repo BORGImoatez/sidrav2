@@ -17,7 +17,7 @@ export interface FormulaireData {
   gouvernoratResidence?: string;
   delegationResidence?: string;
   paysResidence?: string;
-  
+
   // Cadre de consultation (multiple)
   cadreConsultation: {
     addictologie?: boolean;
@@ -36,7 +36,7 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   // Origine de la demande (multiple)
   origineDemande: {
     luiMeme?: boolean;
@@ -50,35 +50,35 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   causeCirconstance?: string;
   consultationAnterieure?: boolean | null;
   dateConsultationAnterieure?: string;
   motifConsultationAnterieure?: string;
   causeRecidive?: string;
   causeEchecSevrage?: string;
-  
+
   situationFamiliale?: 'CELIBATAIRE' | 'MARIE' | 'DIVORCE' | 'SEPARE' | 'VEUF' | 'AUTRE';
   situationFamilialeAutre?: string;
-  
+
   logement30Jours?: 'SEUL' | 'FAMILLE_ORIGINE' | 'PARTENAIRE' | 'ENFANTS' | 'AMIS' | 'INTERNAT' | 'COLOCATION' | 'FOYER' | 'DETENTION' | 'CENTRE_JEUNESSE' | 'INSTITUTION' | 'AUTRE';
   logement30JoursAutre?: string;
-  
+
   natureLogement?: 'STABLE' | 'PRECAIRE';
-  
+
   profession?: 'EMPLOYE' | 'COMPTE_PROPRE' | 'JOURNALIER' | 'SPORTIF' | 'CHOMAGE' | 'ELEVE' | 'ETUDIANT' | 'FORMATION' | 'RETRAITE' | 'SANS_RESSOURCES';
-  
+
   niveauScolaire?: 'ANALPHABETE' | 'PRESCOLAIRE' | 'PRIMAIRE' | 'COLLEGE' | 'SECONDAIRE' | 'FORMATION_PROF' | 'UNIVERSITAIRE';
-  
+
   activiteSportive?: boolean | null;
   activiteSportiveFrequence?: 'REGULIERE' | 'IRREGULIERE';
   activiteSportiveType?: 'COMPETITION' | 'LOISIR';
   espacesLoisirs?: boolean;
   dopage?: boolean | null;
-  
+
   // Champ pour gérer le cadre de consultation principal (choix unique)
   cadreConsultationPrincipal?: string;
-  
+
   // Partie 2: Consommation tabac & alcool
   consommationTabac: 'FUMEUR' | 'NON_FUMEUR' | 'EX_FUMEUR';
   agePremiereConsommationTabac?: number;
@@ -89,7 +89,7 @@ export interface FormulaireData {
   ageArretTabac?: number;
   soinsSevrageTabac?: 'OUI_SATISFAIT' | 'OUI_NON_SATISFAIT' | 'NON';
   sevrageAssiste?: boolean;
-  
+
   consommationAlcool: boolean;
   agePremiereConsommationAlcool?: number;
   consommationAlcool30Jours?: boolean;
@@ -105,7 +105,7 @@ export interface FormulaireData {
 
   // Partie 3: Consommation de substances psychoactives
   consommationSpaEntourage: boolean | null;
-  
+
   // Si consommation SPA dans l'entourage
   entourageSpa?: {
     membresFamille?: boolean;
@@ -116,7 +116,7 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   // Types de SPA consommées dans l'entourage
   typeSpaEntourage?: {
     tabac?: boolean;
@@ -138,10 +138,10 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   // Consommation personnelle de SPA
   consommationSpaPersonnelle: boolean | null;
-  
+
   // Drogues utilisées actuellement
   droguesActuelles?: {
     cannabis?: boolean;
@@ -161,7 +161,7 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   // Substance d'initiation
   substanceInitiation?: {
     cannabis?: boolean;
@@ -181,9 +181,9 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   ageInitiationPremiere?: number;
-  
+
   // Substance principale (en cas de poly-consommation)
   substancePrincipale?: {
     cannabis?: boolean;
@@ -203,9 +203,9 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   ageInitiationPrincipale?: number;
-  
+
   // Autres comportements addictifs
   troublesAlimentaires: boolean | null;
   addictionJeux: boolean | null;
@@ -223,38 +223,38 @@ export interface FormulaireData {
     autre?: boolean;
     autrePrecision?: string;
   };
-  
+
   // Fréquence de consommation de la substance principale
   frequenceSubstancePrincipale?: 'DEUX_FOIS_PLUS_PAR_JOUR' | 'UNE_FOIS_PAR_JOUR' | 'DEUX_TROIS_JOURS_SEMAINE' | 'UNE_FOIS_SEMAINE' | 'OCCASIONNEL_FESTIF';
-  
+
   // Notion de partage de seringues
   partageSeringues?: 'JAMAIS_PARTAGE' | 'INFERIEUR_1_MOIS' | 'ENTRE_1_3_MOIS' | 'ENTRE_3_6_MOIS' | 'ENTRE_6_12_MOIS' | 'DOUZE_MOIS_PLUS';
-  
+
   // Tests de dépistage
   testVih?: {
     realise?: boolean;
     periode?: '3_MOIS' | '6_MOIS' | '12_MOIS_PLUS';
   };
-  
+
   testVhc?: {
     realise?: boolean;
     periode?: '3_MOIS' | '6_MOIS' | '12_MOIS_PLUS';
   };
-  
+
   testVhb?: {
     realise?: boolean;
     periode?: '3_MOIS' | '6_MOIS' | '12_MOIS_PLUS';
   };
-  
+
   testSyphilis?: {
     realise?: boolean;
     periode?: '3_MOIS' | '6_MOIS' | '12_MOIS_PLUS';
   };
-  
+
   // Accompagnement sevrage
   accompagnementSevrage?: boolean;
   accompagnementSevrageNonRaison?: string;
-  
+
   // Tentative de sevrage
   tentativeSevrage?: boolean;
   tentativeSevrageDetails?: {
@@ -270,19 +270,19 @@ export interface FormulaireData {
   // Comorbidités psychiatriques personnelles
   comorbiditePsychiatriquePersonnelle?: boolean;
   comorbiditePsychiatriquePersonnellePrecision?: string;
-  
+
   // Comorbidités somatiques personnelles
   comorbiditeSomatiquePersonnelle?: boolean;
   comorbiditeSomatiquePersonnellePrecision?: string;
-  
+
   // Comorbidités psychiatriques des partenaires
   comorbiditePsychiatriquePartenaire?: boolean;
   comorbiditePsychiatriquePartenairePrecision?: string;
-  
+
   // Comorbidités somatiques des partenaires
   comorbiditeSomatiquePartenaire?: boolean;
   comorbiditeSomatiquePartenairePrecision?: string;
-  
+
   // Antécédents pénitentiaires
   nombreCondamnations?: number;
   dureeDetentionJours?: number;

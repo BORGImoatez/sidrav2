@@ -80,7 +80,6 @@ import {Step6Component} from "../steps/step6/step6.component";
         <!-- Step 1: Informations structure/centre & usager SPA -->
         <app-step1 
           *ngIf="currentStep === 1"
-          #step1Component
           [data]="formulaireData"
           (dataChange)="onStepDataChange($event)"
           (validationChange)="onStepValidationChange(1, $event)"
@@ -580,21 +579,7 @@ export class FormulaireComponent implements OnInit {
       }
       
       this.currentStep++;
-    } else {
-      // Show validation errors for current step
-      this.showCurrentStepErrors();
     }
-  }
-
-  private showCurrentStepErrors(): void {
-    // Trigger validation display for the current step
-    if (this.currentStep === 1) {
-      const step1 = document.querySelector('app-step1') as any;
-      if (step1 && step1.showValidationErrors) {
-        step1.showValidationErrors();
-      }
-    }
-    // Add similar logic for other steps as needed
   }
 
   previousStep(): void {

@@ -21,28 +21,28 @@ import { FormulaireData } from '../../../models/formulaire.model';
           <!-- Section Comorbidités personnelles -->
           <div class="form-section">
             <h3 class="section-title">Comorbidités personnelles</h3>
-            
+
             <!-- Question 34 -->
             <div class="form-group">
               <label class="form-label">34) Comorbidités Psychiatriques personnelles</label>
               <div class="radio-options">
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditePsychiatriquePersonnelle"
-                    [value]="true"
-                    [(ngModel)]="localData.comorbiditePsychiatriquePersonnelle"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditePsychiatriquePersonnelle"
+                      [value]="true"
+                      [(ngModel)]="localData.comorbiditePsychiatriquePersonnelle"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">1. Oui</span>
                 </label>
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditePsychiatriquePersonnelle"
-                    [value]="false"
-                    [(ngModel)]="localData.comorbiditePsychiatriquePersonnelle"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditePsychiatriquePersonnelle"
+                      [value]="false"
+                      [(ngModel)]="localData.comorbiditePsychiatriquePersonnelle"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">2. Non</span>
                 </label>
@@ -52,14 +52,14 @@ import { FormulaireData } from '../../../models/formulaire.model';
             <!-- Question 34.a -->
             <div class="conditional-field" *ngIf="localData.comorbiditePsychiatriquePersonnelle === true">
               <label class="form-label required">34.a) Si oui, préciser</label>
-              <textarea 
-                class="form-input"
-                [class.error]="showValidationErrors && !localData.comorbiditePsychiatriquePersonnellePrecision"
-                [(ngModel)]="localData.comorbiditePsychiatriquePersonnellePrecision"
-                name="comorbiditePsychiatriquePersonnellePrecision"
-                placeholder="Préciser les comorbidités psychiatriques personnelles"
-                rows="3"
-                (input)="onFieldChange()"
+              <textarea
+                  class="form-input"
+                  [class.error]="showValidationErrors && !localData.comorbiditePsychiatriquePersonnellePrecision"
+                  [(ngModel)]="localData.comorbiditePsychiatriquePersonnellePrecision"
+                  name="comorbiditePsychiatriquePersonnellePrecision"
+                  placeholder="Préciser les comorbidités psychiatriques personnelles"
+                  rows="3"
+                  (input)="onFieldChange()"
               ></textarea>
               <div *ngIf="showValidationErrors && !localData.comorbiditePsychiatriquePersonnellePrecision" class="form-error">
                 Ce champ est obligatoire
@@ -71,22 +71,22 @@ import { FormulaireData } from '../../../models/formulaire.model';
               <label class="form-label">35) Comorbidités somatiques personnelles</label>
               <div class="radio-options">
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditeSomatiquePersonnelle"
-                    [value]="true"
-                    [(ngModel)]="localData.comorbiditeSomatiquePersonnelle"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditeSomatiquePersonnelle"
+                      [value]="true"
+                      [(ngModel)]="localData.comorbiditeSomatiquePersonnelle"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">1. Oui</span>
                 </label>
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditeSomatiquePersonnelle"
-                    [value]="false"
-                    [(ngModel)]="localData.comorbiditeSomatiquePersonnelle"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditeSomatiquePersonnelle"
+                      [value]="false"
+                      [(ngModel)]="localData.comorbiditeSomatiquePersonnelle"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">2. Non</span>
                 </label>
@@ -96,14 +96,14 @@ import { FormulaireData } from '../../../models/formulaire.model';
             <!-- Question 35.a -->
             <div class="conditional-field" *ngIf="localData.comorbiditeSomatiquePersonnelle === true">
               <label class="form-label required">35.a) Si oui, préciser</label>
-              <textarea 
-                class="form-input"
-                [class.error]="showValidationErrors && !localData.comorbiditeSomatiquePersonnellePrecision"
-                [(ngModel)]="localData.comorbiditeSomatiquePersonnellePrecision"
-                name="comorbiditeSomatiquePersonnellePrecision"
-                placeholder="Préciser les comorbidités somatiques personnelles"
-                rows="3"
-                (input)="onFieldChange()"
+              <textarea
+                  class="form-input"
+                  [class.error]="showValidationErrors && !localData.comorbiditeSomatiquePersonnellePrecision"
+                  [(ngModel)]="localData.comorbiditeSomatiquePersonnellePrecision"
+                  name="comorbiditeSomatiquePersonnellePrecision"
+                  placeholder="Préciser les comorbidités somatiques personnelles"
+                  rows="3"
+                  (input)="onFieldChange()"
               ></textarea>
               <div *ngIf="showValidationErrors && !localData.comorbiditeSomatiquePersonnellePrecision" class="form-error">
                 Ce champ est obligatoire
@@ -114,28 +114,28 @@ import { FormulaireData } from '../../../models/formulaire.model';
           <!-- Section Comorbidités des partenaires -->
           <div class="form-section">
             <h3 class="section-title">Comorbidités des partenaires</h3>
-            
+
             <!-- Question 36 -->
             <div class="form-group">
               <label class="form-label">36) Comorbidités Psychiatriques des partenaires</label>
               <div class="radio-options">
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditePsychiatriquePartenaire"
-                    [value]="true"
-                    [(ngModel)]="localData.comorbiditePsychiatriquePartenaire"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditePsychiatriquePartenaire"
+                      [value]="true"
+                      [(ngModel)]="localData.comorbiditePsychiatriquePartenaire"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">1. Oui</span>
                 </label>
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditePsychiatriquePartenaire"
-                    [value]="false"
-                    [(ngModel)]="localData.comorbiditePsychiatriquePartenaire"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditePsychiatriquePartenaire"
+                      [value]="false"
+                      [(ngModel)]="localData.comorbiditePsychiatriquePartenaire"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">2. Non</span>
                 </label>
@@ -145,14 +145,14 @@ import { FormulaireData } from '../../../models/formulaire.model';
             <!-- Question 36.a -->
             <div class="conditional-field" *ngIf="localData.comorbiditePsychiatriquePartenaire === true">
               <label class="form-label required">36.a) Si oui, préciser</label>
-              <textarea 
-                class="form-input"
-                [class.error]="showValidationErrors && !localData.comorbiditePsychiatriquePartenairePrecision"
-                [(ngModel)]="localData.comorbiditePsychiatriquePartenairePrecision"
-                name="comorbiditePsychiatriquePartenairePrecision"
-                placeholder="Préciser les comorbidités psychiatriques des partenaires"
-                rows="3"
-                (input)="onFieldChange()"
+              <textarea
+                  class="form-input"
+                  [class.error]="showValidationErrors && !localData.comorbiditePsychiatriquePartenairePrecision"
+                  [(ngModel)]="localData.comorbiditePsychiatriquePartenairePrecision"
+                  name="comorbiditePsychiatriquePartenairePrecision"
+                  placeholder="Préciser les comorbidités psychiatriques des partenaires"
+                  rows="3"
+                  (input)="onFieldChange()"
               ></textarea>
               <div *ngIf="showValidationErrors && !localData.comorbiditePsychiatriquePartenairePrecision" class="form-error">
                 Ce champ est obligatoire
@@ -164,22 +164,22 @@ import { FormulaireData } from '../../../models/formulaire.model';
               <label class="form-label">37) Comorbidités somatiques des partenaires</label>
               <div class="radio-options">
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditeSomatiquePartenaire"
-                    [value]="true"
-                    [(ngModel)]="localData.comorbiditeSomatiquePartenaire"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditeSomatiquePartenaire"
+                      [value]="true"
+                      [(ngModel)]="localData.comorbiditeSomatiquePartenaire"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">1. Oui</span>
                 </label>
                 <label class="radio-option">
-                  <input 
-                    type="radio" 
-                    name="comorbiditeSomatiquePartenaire"
-                    [value]="false"
-                    [(ngModel)]="localData.comorbiditeSomatiquePartenaire"
-                    (change)="onFieldChange()"
+                  <input
+                      type="radio"
+                      name="comorbiditeSomatiquePartenaire"
+                      [value]="false"
+                      [(ngModel)]="localData.comorbiditeSomatiquePartenaire"
+                      (change)="onFieldChange()"
                   >
                   <span class="radio-text">2. Non</span>
                 </label>
@@ -189,14 +189,14 @@ import { FormulaireData } from '../../../models/formulaire.model';
             <!-- Question 37.a -->
             <div class="conditional-field" *ngIf="localData.comorbiditeSomatiquePartenaire === true">
               <label class="form-label required">37.a) Si oui, préciser</label>
-              <textarea 
-                class="form-input"
-                [class.error]="showValidationErrors && !localData.comorbiditeSomatiquePartenairePrecision"
-                [(ngModel)]="localData.comorbiditeSomatiquePartenairePrecision"
-                name="comorbiditeSomatiquePartenairePrecision"
-                placeholder="Préciser les comorbidités somatiques des partenaires"
-                rows="3"
-                (input)="onFieldChange()"
+              <textarea
+                  class="form-input"
+                  [class.error]="showValidationErrors && !localData.comorbiditeSomatiquePartenairePrecision"
+                  [(ngModel)]="localData.comorbiditeSomatiquePartenairePrecision"
+                  name="comorbiditeSomatiquePartenairePrecision"
+                  placeholder="Préciser les comorbidités somatiques des partenaires"
+                  rows="3"
+                  (input)="onFieldChange()"
               ></textarea>
               <div *ngIf="showValidationErrors && !localData.comorbiditeSomatiquePartenairePrecision" class="form-error">
                 Ce champ est obligatoire
@@ -207,19 +207,19 @@ import { FormulaireData } from '../../../models/formulaire.model';
           <!-- Section Antécédents pénitentiaires -->
           <div class="form-section">
             <h3 class="section-title">Antécédents pénitentiaires</h3>
-            
+
             <!-- Question 38.a -->
             <div class="form-group">
               <label class="form-label">38.a) Nombre de condamnations</label>
-              <input 
-                type="number" 
-                class="form-input number-input"
-                [(ngModel)]="localData.nombreCondamnations"
-                name="nombreCondamnations"
-                placeholder="Nombre de condamnations"
-                min="0"
-                max="99"
-                (input)="onFieldChange()"
+              <input
+                  type="number"
+                  class="form-input number-input"
+                  [(ngModel)]="localData.nombreCondamnations"
+                  name="nombreCondamnations"
+                  placeholder="Nombre de condamnations"
+                  min="0"
+                  max="99"
+                  (input)="onFieldChange()"
               >
               <div class="field-help">
                 Saisir le nombre total de condamnations (format: 2 chiffres maximum)
@@ -232,41 +232,41 @@ import { FormulaireData } from '../../../models/formulaire.model';
               <div class="duration-inputs">
                 <div class="duration-group">
                   <label class="duration-label">Jours</label>
-                  <input 
-                    type="number" 
-                    class="form-input duration-input"
-                    [(ngModel)]="localData.dureeDetentionJours"
-                    name="dureeDetentionJours"
-                    placeholder="00"
-                    min="0"
-                    max="99"
-                    (input)="onFieldChange()"
+                  <input
+                      type="number"
+                      class="form-input duration-input"
+                      [(ngModel)]="localData.dureeDetentionJours"
+                      name="dureeDetentionJours"
+                      placeholder="00"
+                      min="0"
+                      max="99"
+                      (input)="onFieldChange()"
                   >
                 </div>
                 <div class="duration-group">
                   <label class="duration-label">Mois</label>
-                  <input 
-                    type="number" 
-                    class="form-input duration-input"
-                    [(ngModel)]="localData.dureeDetentionMois"
-                    name="dureeDetentionMois"
-                    placeholder="00"
-                    min="0"
-                    max="99"
-                    (input)="onFieldChange()"
+                  <input
+                      type="number"
+                      class="form-input duration-input"
+                      [(ngModel)]="localData.dureeDetentionMois"
+                      name="dureeDetentionMois"
+                      placeholder="00"
+                      min="0"
+                      max="99"
+                      (input)="onFieldChange()"
                   >
                 </div>
                 <div class="duration-group">
                   <label class="duration-label">Années</label>
-                  <input 
-                    type="number" 
-                    class="form-input duration-input"
-                    [(ngModel)]="localData.dureeDetentionAnnees"
-                    name="dureeDetentionAnnees"
-                    placeholder="00"
-                    min="0"
-                    max="99"
-                    (input)="onFieldChange()"
+                  <input
+                      type="number"
+                      class="form-input duration-input"
+                      [(ngModel)]="localData.dureeDetentionAnnees"
+                      name="dureeDetentionAnnees"
+                      placeholder="00"
+                      min="0"
+                      max="99"
+                      (input)="onFieldChange()"
                   >
                 </div>
               </div>
@@ -280,7 +280,7 @@ import { FormulaireData } from '../../../models/formulaire.model';
               <div class="info-content">
                 <h4 class="info-title">Information</h4>
                 <p class="info-text">
-                  Les informations sur les antécédents pénitentiaires sont facultatives. 
+                  Les informations sur les antécédents pénitentiaires sont facultatives.
                   Renseignez uniquement les données disponibles et pertinentes pour le suivi médical.
                 </p>
               </div>
@@ -453,22 +453,22 @@ import { FormulaireData } from '../../../models/formulaire.model';
         margin-left: var(--spacing-3);
         padding-left: var(--spacing-3);
       }
-      
+
       .radio-options {
         flex-direction: column;
         gap: var(--spacing-3);
       }
-      
+
       .duration-inputs {
         flex-direction: column;
         align-items: stretch;
       }
-      
+
       .duration-input {
         width: 100%;
         text-align: left;
       }
-      
+
       .info-box {
         flex-direction: column;
         text-align: center;
@@ -502,38 +502,36 @@ export class Step5Component implements OnInit, OnChanges {
     this.validateStep();
   }
 
-  showValidationErrors(): void {
-    this.showValidationErrors = true;
-  }
+
 
   private validateStep(): void {
     let isValid = true;
 
     // Validation pour comorbidités psychiatriques personnelles
-    if (this.localData.comorbiditePsychiatriquePersonnelle === true && 
-        (!this.localData.comorbiditePsychiatriquePersonnellePrecision || 
-         this.localData.comorbiditePsychiatriquePersonnellePrecision.trim() === '')) {
+    if (this.localData.comorbiditePsychiatriquePersonnelle === true &&
+        (!this.localData.comorbiditePsychiatriquePersonnellePrecision ||
+            this.localData.comorbiditePsychiatriquePersonnellePrecision.trim() === '')) {
       isValid = false;
     }
 
     // Validation pour comorbidités somatiques personnelles
-    if (this.localData.comorbiditeSomatiquePersonnelle === true && 
-        (!this.localData.comorbiditeSomatiquePersonnellePrecision || 
-         this.localData.comorbiditeSomatiquePersonnellePrecision.trim() === '')) {
+    if (this.localData.comorbiditeSomatiquePersonnelle === true &&
+        (!this.localData.comorbiditeSomatiquePersonnellePrecision ||
+            this.localData.comorbiditeSomatiquePersonnellePrecision.trim() === '')) {
       isValid = false;
     }
 
     // Validation pour comorbidités psychiatriques des partenaires
-    if (this.localData.comorbiditePsychiatriquePartenaire === true && 
-        (!this.localData.comorbiditePsychiatriquePartenairePrecision || 
-         this.localData.comorbiditePsychiatriquePartenairePrecision.trim() === '')) {
+    if (this.localData.comorbiditePsychiatriquePartenaire === true &&
+        (!this.localData.comorbiditePsychiatriquePartenairePrecision ||
+            this.localData.comorbiditePsychiatriquePartenairePrecision.trim() === '')) {
       isValid = false;
     }
 
     // Validation pour comorbidités somatiques des partenaires
-    if (this.localData.comorbiditeSomatiquePartenaire === true && 
-        (!this.localData.comorbiditeSomatiquePartenairePrecision || 
-         this.localData.comorbiditeSomatiquePartenairePrecision.trim() === '')) {
+    if (this.localData.comorbiditeSomatiquePartenaire === true &&
+        (!this.localData.comorbiditeSomatiquePartenairePrecision ||
+            this.localData.comorbiditeSomatiquePartenairePrecision.trim() === '')) {
       isValid = false;
     }
 

@@ -20,19 +20,19 @@ import { FormulaireData } from '../../../models/formulaire.model';
         <form class="step-form">
           <div class="form-section">
             <h3 class="section-title">Décès liés aux SPA dans l'entourage</h3>
-            
+
             <!-- Question 39 -->
             <div class="form-group">
               <label class="form-label">39) Nombre de décès induit par les SPA dans l'entourage</label>
-              <input 
-                type="number" 
-                class="form-input number-input"
-                [(ngModel)]="localData.nombreDecesSpaDansEntourage"
-                name="nombreDecesSpaDansEntourage"
-                placeholder="Nombre de décès"
-                min="0"
-                max="99"
-                (input)="onFieldChange()"
+              <input
+                  type="number"
+                  class="form-input number-input"
+                  [(ngModel)]="localData.nombreDecesSpaDansEntourage"
+                  name="nombreDecesSpaDansEntourage"
+                  placeholder="Nombre de décès"
+                  min="0"
+                  max="99"
+                  (input)="onFieldChange()"
               >
               <div class="field-help">
                 Indiquez le nombre de personnes de votre entourage décédées à cause de la consommation de substances psychoactives
@@ -42,14 +42,14 @@ import { FormulaireData } from '../../../models/formulaire.model';
             <!-- Question 39.a - Affiché seulement si nombre >= 1 -->
             <div class="conditional-field" *ngIf="localData.nombreDecesSpaDansEntourage && localData.nombreDecesSpaDansEntourage >= 1">
               <label class="form-label required">39.a) Causes</label>
-              <textarea 
-                class="form-input"
-                [class.error]="showValidationErrors && (!localData.causesDecesSpaDansEntourage || localData.causesDecesSpaDansEntourage.trim() === '')"
-                [(ngModel)]="localData.causesDecesSpaDansEntourage"
-                name="causesDecesSpaDansEntourage"
-                placeholder="Décrivez les causes des décès (overdose, complications médicales, accidents, etc.)"
-                rows="6"
-                (input)="onFieldChange()"
+              <textarea
+                  class="form-input"
+                  [class.error]="showValidationErrors && (!localData.causesDecesSpaDansEntourage || localData.causesDecesSpaDansEntourage.trim() === '')"
+                  [(ngModel)]="localData.causesDecesSpaDansEntourage"
+                  name="causesDecesSpaDansEntourage"
+                  placeholder="Décrivez les causes des décès (overdose, complications médicales, accidents, etc.)"
+                  rows="6"
+                  (input)="onFieldChange()"
               ></textarea>
               <div *ngIf="showValidationErrors && (!localData.causesDecesSpaDansEntourage || localData.causesDecesSpaDansEntourage.trim() === '')" class="form-error">
                 Ce champ est obligatoire lorsque le nombre de décès est supérieur à 0
@@ -64,8 +64,8 @@ import { FormulaireData } from '../../../models/formulaire.model';
               <div class="info-content">
                 <h4 class="info-title">Information importante</h4>
                 <p class="info-text">
-                  Ces informations sont importantes pour comprendre l'impact des substances psychoactives 
-                  sur l'entourage et adapter la prise en charge. Toutes les données sont confidentielles 
+                  Ces informations sont importantes pour comprendre l'impact des substances psychoactives
+                  sur l'entourage et adapter la prise en charge. Toutes les données sont confidentielles
                   et utilisées uniquement à des fins médicales et statistiques.
                 </p>
               </div>
@@ -74,10 +74,10 @@ import { FormulaireData } from '../../../models/formulaire.model';
             <div class="completion-summary">
               <h4 class="summary-title">Récapitulatif du formulaire</h4>
               <p class="summary-text">
-                Vous avez terminé la saisie de toutes les sections du formulaire SIDRA. 
+                Vous avez terminé la saisie de toutes les sections du formulaire SIDRA.
                 Vérifiez que toutes les informations sont correctes avant de valider.
               </p>
-              
+
               <div class="summary-sections">
                 <div class="summary-item">
                   <span class="summary-icon">✅</span>
@@ -107,7 +107,7 @@ import { FormulaireData } from '../../../models/formulaire.model';
 
               <div class="final-note">
                 <p>
-                  <strong>Prochaine étape :</strong> Cliquez sur "Valider le formulaire" pour enregistrer 
+                  <strong>Prochaine étape :</strong> Cliquez sur "Valider le formulaire" pour enregistrer
                   définitivement les données et générer l'IUN (Identifiant Unique National).
                 </p>
               </div>
@@ -206,8 +206,8 @@ import { FormulaireData } from '../../../models/formulaire.model';
       align-items: flex-start;
       gap: var(--spacing-4);
       padding: var(--spacing-4);
-      background-color: var(--warning-50);
-      border: 1px solid var(--warning-200);
+      background-color: var(--error-50);
+      border: 1px solid var(--error-200);
       border-radius: var(--radius-md);
       margin-top: var(--spacing-6);
     }
@@ -224,13 +224,13 @@ import { FormulaireData } from '../../../models/formulaire.model';
     .info-title {
       font-size: 16px;
       font-weight: 600;
-      color: var(--warning-800);
+      color: var(--error-700);
       margin: 0 0 var(--spacing-2) 0;
     }
 
     .info-text {
       font-size: 14px;
-      color: var(--warning-700);
+      color: var(--error-700);
       margin: 0;
       line-height: 1.5;
     }
@@ -238,8 +238,8 @@ import { FormulaireData } from '../../../models/formulaire.model';
     .completion-summary {
       margin-top: var(--spacing-8);
       padding: var(--spacing-6);
-      background: linear-gradient(135deg, var(--success-50), var(--primary-50));
-      border: 1px solid var(--success-200);
+      background: linear-gradient(135deg, var(--success-500), var(--primary-50));
+      border: 1px solid var(--success-500);
       border-radius: var(--radius-lg);
     }
 
@@ -270,7 +270,7 @@ import { FormulaireData } from '../../../models/formulaire.model';
       padding: var(--spacing-3);
       background-color: white;
       border-radius: var(--radius-md);
-      border: 1px solid var(--success-200);
+      border: 1px solid var(--success-500);
     }
 
     .summary-icon {
@@ -299,7 +299,7 @@ import { FormulaireData } from '../../../models/formulaire.model';
     }
 
     .final-note strong {
-      color: var(--primary-900);
+      color: var(--primary-800);
     }
 
     @media (max-width: 768px) {
@@ -307,12 +307,12 @@ import { FormulaireData } from '../../../models/formulaire.model';
         margin-left: var(--spacing-3);
         padding-left: var(--spacing-3);
       }
-      
+
       .info-box {
         flex-direction: column;
         text-align: center;
       }
-      
+
       .completion-summary {
         padding: var(--spacing-4);
       }
@@ -345,23 +345,21 @@ export class Step6Component implements OnInit, OnChanges {
     if (!this.localData.nombreDecesSpaDansEntourage || this.localData.nombreDecesSpaDansEntourage < 1) {
       this.localData.causesDecesSpaDansEntourage = undefined;
     }
-    
+
     this.dataChange.emit(this.localData);
     this.validateStep();
   }
 
-  showValidationErrors(): void {
-    this.showValidationErrors = true;
-  }
+
 
   private validateStep(): void {
     let isValid = true;
 
     // Si le nombre de décès est >= 1, les causes sont obligatoires
-    if (this.localData.nombreDecesSpaDansEntourage && 
-        this.localData.nombreDecesSpaDansEntourage >= 1 && 
-        (!this.localData.causesDecesSpaDansEntourage || 
-         this.localData.causesDecesSpaDansEntourage.trim() === '')) {
+    if (this.localData.nombreDecesSpaDansEntourage &&
+        this.localData.nombreDecesSpaDansEntourage >= 1 &&
+        (!this.localData.causesDecesSpaDansEntourage ||
+            this.localData.causesDecesSpaDansEntourage.trim() === '')) {
       isValid = false;
     }
 
