@@ -2,6 +2,8 @@ package tn.gov.ms.sidra.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Structure {
 
     @Id
@@ -30,6 +33,7 @@ public class Structure {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gouvernorat_id", nullable = false)
+    @JsonIgnoreProperties({"structures", "delegations"})
     private Gouvernorat gouvernorat;
 
     @Column(nullable = false)
@@ -46,6 +50,7 @@ public class Structure {
     private LocalDateTime dateCreation;
 
     @OneToMany(mappedBy = "structure", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"structure"})
     private List<User> utilisateurs;
 
     @PrePersist

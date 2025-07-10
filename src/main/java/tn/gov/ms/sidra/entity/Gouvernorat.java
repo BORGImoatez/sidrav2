@@ -2,6 +2,7 @@ package tn.gov.ms.sidra.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Gouvernorat {
 
     @Id
@@ -28,8 +30,10 @@ public class Gouvernorat {
     private String codeIso3;
 
     @OneToMany(mappedBy = "gouvernorat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"gouvernorat"})
     private List<Structure> structures;
 
     @OneToMany(mappedBy = "gouvernorat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"gouvernorat"})
     private List<Delegation> delegations;
 }

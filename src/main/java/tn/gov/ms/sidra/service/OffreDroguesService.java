@@ -61,7 +61,7 @@ public class OffreDroguesService {
         log.info("Récupération de la donnée d'offre de drogues avec l'ID: {} par l'utilisateur: {}", 
                 id, currentUser.getEmail());
 
-        OffreDrogues offreDrogues = offreDroguesRepository.findById(id)
+        OffreDrogues offreDrogues = offreDroguesRepository.findByIdWithDetails(id)
                 .orElseThrow(() -> new BusinessException("Données non trouvées avec l'ID: " + id));
 
         // Vérifier les permissions

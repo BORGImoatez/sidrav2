@@ -14,10 +14,14 @@ import java.util.Optional;
 @Repository
 public interface OffreDroguesRepository extends JpaRepository<OffreDrogues, Long> {
 
+    @Query("SELECT o FROM OffreDrogues o LEFT JOIN FETCH o.structure s LEFT JOIN FETCH s.gouvernorat LEFT JOIN FETCH o.utilisateur WHERE o.id = :id")
+    Optional<OffreDrogues> findByIdWithDetails(@Param("id") Long id);
+
     List<OffreDrogues> findByUtilisateurOrderByDateSaisieDesc(User utilisateur);
 
     List<OffreDrogues> findByStructureIdOrderByDateSaisieDesc(Long structureId);
 
+    @Query("SELECT o FROM OffreDrogues o LEFT JOIN FETCH o.structure s LEFT JOIN FETCH s.gouvernorat LEFT JOIN FETCH o.utilisateur ORDER BY o.dateSaisie DESC")
     List<OffreDrogues> findAllByOrderByDateSaisieDesc();
 
     Optional<OffreDrogues> findByIdAndUtilisateur(Long id, User utilisateur);
