@@ -89,7 +89,7 @@ public class AuthService {
 
         try {
             // Rechercher l'utilisateur
-            User user = userRepository.findById(request.getUserId())
+            User user = userRepository.findByIdWithStructure(request.getUserId())
                     .orElseThrow(() -> new BusinessException("Utilisateur non trouvé"));
 
             // Vérifier le code OTP
@@ -130,7 +130,7 @@ public class AuthService {
         log.info("Demande de renvoi de code OTP pour l'utilisateur ID: {}", userId);
 
         try {
-            User user = userRepository.findById(userId)
+            User user = userRepository.findByIdWithStructure(userId)
                     .orElseThrow(() -> new BusinessException("Utilisateur non trouvé"));
 
             // Générer et envoyer un nouveau code OTP

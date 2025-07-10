@@ -41,4 +41,6 @@ public interface StructureRepository extends JpaRepository<Structure, Long> {
     @Query("SELECT COUNT(s) FROM Structure s WHERE s.type = :type")
     long countStructuresByType(@Param("type") TypeStructure type);
 
+    @Query("SELECT s FROM Structure s LEFT JOIN FETCH s.gouvernorat WHERE s.id = :id")
+    Optional<Structure> findByIdWithGouvernorat(@Param("id") Long id);
 }

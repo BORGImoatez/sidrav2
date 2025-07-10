@@ -31,6 +31,7 @@ public class StructureService {
     /**
      * Récupère toutes les structures actives
      */
+    @Transactional(readOnly = true)
     public List<StructureDto> getAllStructures() {
         log.info("Récupération de toutes les structures actives");
         
@@ -53,10 +54,11 @@ public class StructureService {
     /**
      * Récupère une structure par son ID
      */
+    @Transactional(readOnly = true)
     public StructureDto getStructureById(Long id) {
         log.info("Récupération de la structure avec l'ID: {}", id);
         
-        Structure structure = structureRepository.findByIdAndActifTrue(id)
+        Structure structure = structureRepository.findByIdWithGouvernorat(id)
                 .orElseThrow(() -> new BusinessException("Structure non trouvée avec l'ID: " + id));
         
         return structureMapper.toDto(structure);

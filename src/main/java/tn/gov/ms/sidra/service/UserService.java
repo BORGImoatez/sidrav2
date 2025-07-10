@@ -34,6 +34,7 @@ public class UserService {
     /**
      * Récupère tous les utilisateurs ou filtrés par structure
      */
+    @Transactional(readOnly = true)
     public List<UserDto> getUsers(Long structureId) {
         log.info("Récupération des utilisateurs - structureId: {}", structureId);
         
@@ -52,10 +53,11 @@ public class UserService {
     /**
      * Récupère un utilisateur par son ID
      */
+    @Transactional(readOnly = true)
     public UserDto getUserById(Long id) {
         log.info("Récupération de l'utilisateur avec l'ID: {}", id);
         
-        User user = userRepository.findById(id)
+        User user = userRepository.findByIdWithStructure(id)
                 .orElseThrow(() -> new BusinessException("Utilisateur non trouvé avec l'ID: " + id));
         
         return userMapper.toDto(user);

@@ -25,11 +25,13 @@ import java.util.stream.Collectors;
 public class OffreDroguesService {
 
     private final OffreDroguesRepository offreDroguesRepository;
+    private final StructureRepository structureRepository;
     private final OffreDroguesMapper offreDroguesMapper;
 
     /**
      * Récupère toutes les données d'offre de drogues selon le rôle de l'utilisateur
      */
+    @Transactional(readOnly = true)
     public List<OffreDroguesListDto> getAllOffresDrogues(User currentUser) {
         log.info("Récupération des données d'offre de drogues pour l'utilisateur: {}", currentUser.getEmail());
 
@@ -57,6 +59,7 @@ public class OffreDroguesService {
     /**
      * Récupère une donnée d'offre de drogues par son ID
      */
+    @Transactional(readOnly = true)
     public OffreDroguesDto getOffreDroguesById(Long id, User currentUser) {
         log.info("Récupération de la donnée d'offre de drogues avec l'ID: {} par l'utilisateur: {}", 
                 id, currentUser.getEmail());
@@ -91,12 +94,19 @@ public class OffreDroguesService {
         // Créer l'entité
         OffreDrogues offreDrogues = offreDroguesMapper.toEntity(request);
         offreDrogues.setUtilisateur(currentUser);
-        offreDrogues.setStructure(currentUser.getStructure());
+        
+        // Charger explicitement la structure pour éviter LazyInitializationException
+        if (currentUser.getStructure() != null) {
+            offreDrogues.setStructure(structureRepository.findById(currentUser.getStructure().getId())
+                .orElse(null));
+        }
 
         OffreDrogues savedOffreDrogues = offreDroguesRepository.save(offreDrogues);
         log.info("Données d'offre de drogues créées avec succès avec l'ID: {}", savedOffreDrogues.getId());
 
-        return offreDroguesMapper.toDto(savedOffreDrogues);
+        // Recharger l'entité avec toutes les relations pour éviter LazyInitializationException
+        return offreDroguesMapper.toDto(offreDroguesRepository.findByIdWithDetails(savedOffreDrogues.getId())
+                .orElseThrow(() -> new BusinessException("Erreur lors de la récupération des données créées")));
     }
 
     /**
@@ -107,7 +117,7 @@ public class OffreDroguesService {
         log.info("Mise à jour de la donnée d'offre de drogues avec l'ID: {} par l'utilisateur: {}", 
                 id, currentUser.getEmail());
 
-        OffreDrogues existingOffreDrogues = offreDroguesRepository.findById(id)
+        OffreDrogues existingOffreDrogues = offreDroguesRepository.findByIdWithDetails(id)
                 .orElseThrow(() -> new BusinessException("Données non trouvées avec l'ID: " + id));
 
         // Vérifier les permissions de modification
@@ -125,7 +135,9 @@ public class OffreDroguesService {
         OffreDrogues updatedOffreDrogues = offreDroguesRepository.save(existingOffreDrogues);
         log.info("Données d'offre de drogues mises à jour avec succès: {}", updatedOffreDrogues.getId());
 
-        return offreDroguesMapper.toDto(updatedOffreDrogues);
+        // Recharger l'entité avec toutes les relations pour éviter LazyInitializationException
+        return offreDroguesMapper.toDto(offreDroguesRepository.findByIdWithDetails(updatedOffreDrogues.getId())
+                .orElseThrow(() -> new BusinessException("Erreur lors de la récupération des données mises à jour")));
     }
 
     /**
@@ -136,7 +148,7 @@ public class OffreDroguesService {
         log.info("Suppression de la donnée d'offre de drogues avec l'ID: {} par l'utilisateur: {}", 
                 id, currentUser.getEmail());
 
-        OffreDrogues offreDrogues = offreDroguesRepository.findById(id)
+        OffreDrogues offreDrogues = offreDroguesRepository.findByIdWithDetails(id)
                 .orElseThrow(() -> new BusinessException("Données non trouvées avec l'ID: " + id));
 
         // Vérifier les permissions de suppression
@@ -149,6 +161,7 @@ public class OffreDroguesService {
     /**
      * Récupère les données d'offre de drogues par période
      */
+    @Transactional(readOnly = true)
     public List<OffreDroguesListDto> getOffresDroguesByPeriod(LocalDate startDate, LocalDate endDate, User currentUser) {
         log.info("Récupération des données d'offre de drogues pour la période {} - {} par l'utilisateur: {}", 
                 startDate, endDate, currentUser.getEmail());
